@@ -1,0 +1,34 @@
+#logo {
+    max-width: 155px !important;
+    max-height: 155px !important;
+}
+
+nav {
+    background-color: #92d14f;
+}
+
+/* #menu-icon {
+    color: #fff !important;
+} */
+
+.dropdown-content {
+    width: auto !important;
+    background-color: #92d14f;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #fff;
+}
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover {
+    background-color: #83bc47;
+}
+
+.sidenav {
+    background: linear-gradient(to bottom,#83bc47, #92d14f);
+    width: 250px;
+}
+
+.sidenav li > a, .sidenav li > a > .mdi {
+    color: #fff;
+}
