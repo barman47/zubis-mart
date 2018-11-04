@@ -1,0 +1,48 @@
+.sub-header {
+    text-align: center;
+    color: #fa9609;
+    font-weight: lighter;
+}
+
+.card-container {
+    padding: 0 25px;
+}
+
+.card .card-content .card-title, .card .card-reveal .card-title {
+    color: #a7b018 !important;
+}
+
+.card .card-reveal .card-title .close-card:hover {
+    color: #fa9609;
+}
+
+.card .card-content .card-title .option-icon, .card .card-reveal .card-title .close-card {
+    color: #555;
+}
+
+.price {
+    color: #555;
+    cursor: default;
+    font-size: 18px !important;
+    font-style: unset !important;
+    font-weight: bold;
+}
+
+.parallax-container {
+    margin: 30px 0;
+}
+
+#about {
+    background-color: #fff;
+    padding: 25px 50px;
+    box-shadow: 5px 2px 5px #c5c5c5;
+}
+
+#top-arrow {
+    background-color: #a7b018;
+}
+
+#top-arrow:hover {
+    background-color: #959e00;
+    color: #fa9609;
+}

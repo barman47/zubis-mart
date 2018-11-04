@@ -1,5 +1,5 @@
 body {
-    background-color: #f5f5f5 !important;
+    background-color: #efefef !important;
 }
 
 #logo {
@@ -12,10 +12,6 @@ body {
 nav {
     background-color: #a7b018;
 }
-
-/* #menu-icon {
-    color: #fff !important;
-} */
 
 .dropdown-content {
     width: auto !important;
@@ -39,10 +35,43 @@ nav {
     color: #fff;
 }
 
-/* .slider .indicators .indicator-item {
-    background-color: #fec001;
-} */
 .slider .indicators .indicator-item.active {
     /* background-color: #83bc47; */
     background-color: #fa9609;
+}
+
+.page-footer {
+    background-color: transparent;
+    color: #333 !important;
+}
+
+#footerLink li{
+    display: inline-block;
+}
+
+.footerLinks {
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.footerLinks a {
+    color: #a7b018;
+    text-align: center;
+}
+
+.footerLinks a:hover {
+    color: #fa9609;
+}
+
+.footer-copyright {
+    background-color: #fff !important;
+    border-top: 2px solid #e5e5e5;
+    color: #333 !important;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .card-item {
+        flex-basis: 100% !important;
+    }
 }
