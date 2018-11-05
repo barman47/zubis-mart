@@ -10,6 +10,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const moment = require('moment');
 
+const users = require('./routes/users');
+
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
 // const config = require('./config/database')
@@ -78,6 +80,8 @@ app.use(expressValidator({
 //     res.locals.failure_message = req.flash('failure');
 //     next();
 // });
+
+app.use('/users', users);
 
 app.get('/', (req, res) => {
     res.render('index', {

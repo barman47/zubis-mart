@@ -1,0 +1,57 @@
+<div id="logoContainer">
+    <img id="signupFormLogo" class="center-align" src="/img/transparent-logo.png" alt="Zubis Mart Logo">
+</div>
+<div>
+    <form action="" id="signupForm">
+        <h4 id="loginFormHeader" class="center">Create An Account</h4>
+        <div class="row">
+            <div class="col s12 l6 input-field">
+                <i class="mdi mdi-alphabetical prefix"></i>
+                <input type="text" name="firstName" id="firstName" class="validate" autofocus>
+                <label for="firstName">Enter First Name</label>
+                <span class="helper-text" data-error="Invalid First Name!" data-success="Okay"></span>
+            </div>
+            <div class="col s12 l6 input-field">
+                <i class="mdi mdi-alphabetical prefix"></i>
+                <input type="text" name="lastName" id="lastName" class="validate">
+                <label for="lastName">Enter Last Name</label>
+               <span class="helper-text" data-error="Invalid Last Name!" data-success="Okay"></span>
+           </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="mdi mdi-email-outline prefix"></i>
+                <input type="email" name="email" id="email" class="validate">
+                <label for="email">Enter Email Address</label>
+                <span class="helper-text" data-error="Invalid Email Address!" data-success="Okay"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="mdi mdi-phone prefix"></i>
+                <input type="text" name="phone" id="phone" class="validate">
+                <label for="phone">Enter Phone Number</label>
+                <span class="helper-text" data-error="Invalid Phone Number!" data-success="Okay"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="mdi mdi-lock-outline prefix"></i>
+                <input type="password" name="password" id="password" class="validate">
+                <label for="password">Enter Password</label>
+                <span class="helper-text" data-error="Invalid Password!" data-success="Okay"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <button type="submit" class="btn waves-effect waves-light" id="signupButton">Create Account</button>
+            </div>
+        </div>
+        <div id="signupFormFooterRow" class="row">
+            <div id="signupFormFooter" class="col s12 input-field">
+                <p class="center">Already have an account?</p>
+                <a href="#loginModal" class="modal-trigger button btn waves-effect waves-light" id="login">Login</a>
+            </div>
+        </div>
+    </form>
+</div>
