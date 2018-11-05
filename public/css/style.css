@@ -26,6 +26,27 @@ nav {
     background-color: #969e16;
 }
 
+.modal .progress {
+    top: -7px;
+}
+
+form .progress {
+    top: -13px;
+}
+
+.progress {
+    background-color: rgba(150, 158, 22, .50);
+    visibility: hidden;
+}
+
+.progress .indeterminate {
+    background-color: #969e16;
+}
+
+#loginModal {
+    border-radius: 10px;
+}
+
 .modal h4, #loginFormHeader {
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 10px;
@@ -36,6 +57,8 @@ nav {
 #modal-close:hover {
     color: #fa9609;
 }
+
+input.valid
 
 .input-field .prefix {
     color: #c5c5c5;
@@ -63,8 +86,10 @@ nav {
 }
 
 .input-field input.invalid {
-    border-bottom: 1px solid #fa9609 !important;
-    box-shadow: 0 1px 0 0 #fa9609 !important;
+    border-bottom: 1px solid #f44336 !important;
+    box-shadow: 0 1px 0 0 #f44336 !important;
+    /* border-bottom: 1px solid #fa9609 !important;
+    box-shadow: 0 1px 0 0 #fa9609 !important; */
 }
 
 #login-button, button, #signupButton {
@@ -116,7 +141,7 @@ nav {
 
 #signupForm {
     background-color: #fff;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     box-shadow: 0px 0px 10px #c5c5c5;
     margin: 35px auto 0 auto;
     padding: 5px 0 0 0;
@@ -181,6 +206,16 @@ nav {
     text-align: center;
 }
 
+/* @media (min-width: 768px) {
+    #loginModal {
+        width: 
+    }
+
+    #signupForm {
+        border-radius: 5px;
+        width: 85%;
+    }
+} */
 @media (max-width: 768px) {
     .card-item {
         flex-basis: 100% !important;

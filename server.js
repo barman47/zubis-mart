@@ -1,37 +1,37 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const favicon = require('express-favicon');
+// const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
-//const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
-const moment = require('moment');
+// const moment = require('moment');
 
 const users = require('./routes/users');
 
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
-// const config = require('./config/database')
+const config = require('./config/database')
 const app = express();
 
 const PORT = process.env.PORT || 6400;
 
-// mongoose.connect(config.database, {
-//     useNewUrlParser: true
-// });
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
 
-// const conn = mongoose.connection;
+const conn = mongoose.connection;
 
-// conn.once('open', () => {
-//     console.log('Database Connection Established Successfully.');
-// });
+conn.once('open', () => {
+    console.log('Database Connection Established Successfully.');
+});
 
-// conn.on('error', (err) => {
-//     console.log('Unable to Connect to Database. ' + err);
-// });
+conn.on('error', (err) => {
+    console.log('Unable to Connect to Database. ' + err);
+});
 
 // app.use(favicon(publicPath + '/img/favicon.png'));
 app.use(express.static(publicPath));
@@ -71,15 +71,15 @@ app.use(expressValidator({
     }
 }));
 
-// require('./config/passport')(passport);
+require('./config/passport')(passport);
 
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use((req, res, next) => {
-//     res.locals.success_message = req.flash('success');
-//     res.locals.failure_message = req.flash('failure');
-//     next();
-// });
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.success_message = req.flash('success');
+    res.locals.failure_message = req.flash('failure');
+    next();
+});
 
 app.use('/users', users);
 

@@ -3,13 +3,13 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.modal').modal();
 
-    window.onscroll = function() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById('top').style.display = 'block';
-        } else {
-            document.getElementById('top').style.display = 'none';	
-        }
-    };
+    // window.onscroll = function() {
+    //     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    //         document.getElementById('top').style.display = 'block';
+    //     } else {
+    //         document.getElementById('top').style.display = 'none';	
+    //     }
+    // };
 
     $('#top').on('click', function (event) {
         if (this.hash !== '') {
@@ -39,7 +39,7 @@ $(document).ready(function () {
         // });
         $('main').load(url, function() {
             $('#navbar').css('display', 'none');
-            $('footer').css('display', 'none');
+            $('footer').css('visibility', 'hidden');
             $('.modal').modal('close');
         });
     });
