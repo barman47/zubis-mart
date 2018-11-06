@@ -114,6 +114,11 @@ $(document).ready(function () {
             }).done(function (msg, status, jqXHR) {
                 signupLoader.style.visibility = 'hidden';
                 console.log(status);
+                $('#signupForm :input').prop('disabled', false);
+                $('#main-section').css('display', 'block');
+                $('#topButton').css('display', 'block');
+                $('#navbar').css('display', 'block');
+                $('footer').css('visibility', 'visible');
                 M.toast({ html: 'Registration Successful' });
             }).fail(function (jqXHR, textStatus) {
                 signupLoader.style.visibility = 'hidden';
