@@ -5,6 +5,8 @@ $(document).ready(function () {
     $('.parallax').parallax();
 
     const signupForm = document.signupForm;
+    const loginForm = document.loginForm;
+
     const inputs = [
         signupForm.firstName,
         signupForm.lastName,
@@ -13,11 +15,15 @@ $(document).ready(function () {
         signupForm.password,
     ];
 
+    const loginEmail = loginForm.loginEmail;
+    const loginPassword = loginForm.loginPassword;
+
     const emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
     const phoneRegExp = /^\d{11}$/;
     const passwordRegExp = /^[\w@-]{8,20}$/;
 
     const signupLoader = document.querySelector('#signupLoader');
+    const loginLoader = document.querySelector('#loginLoader');
 
     function isEmpty(element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -27,7 +33,49 @@ $(document).ready(function () {
         }
     }
 
-    function submitsignupForm (event) {
+    function submitLoginForm (event) {
+        event.preventDefault();
+        if (isEmpty(loginEmail)) {
+            loginEmail.classList.add('invalid');
+            loginEmail.focus();
+        } else if (isEmpty(loginPassword)) {
+            loginPassword.classList.add('invalid');
+            loginPassword.focus();
+        } else {
+            loginLoader.style.visibility = 'visible';
+            $('#loginForm :input').prop('disabled', true);
+            $.ajax({
+                method: 'POST',
+                url: '/users/login',
+                dataType: 'json',
+                data: {
+                    loginEmail: loginEmail.value,
+                    loginPassword: loginPassword.value
+                },
+                statusCode: {
+                    404: function (msg, status, jqXHR) {
+                        console.log(status);
+                        console.log(jqXHR);
+                    }
+                }
+            }).done(function (msg, status, jqXHR) {
+                loginLoader.style.visibility = 'hidden';
+                const id = msg.id;
+                const url = `/users/dashboard/${id}`;
+                window.location.href = url;
+                M.toast({ html: 'User Logged In' });
+            }).fail(function (jqXHR, textStatus) {
+                loginLoader.style.visibility = 'hidden';
+                M.toast({ html: 'Login Failed!' });
+                console.log('textStatus', textStatus);
+                $('#loginEmailErrorMessage').html(jqXHR.responseJSON.msg);
+                $("#loginForm :input").prop("disabled", false);
+                loginEmail.focus();
+            });
+        }
+    }
+
+    function submitSignupForm (event) {
         let isFormOkay = null;
         event.preventDefault();        
         for (var i = 0; i < inputs.length; i++) {
@@ -43,27 +91,38 @@ $(document).ready(function () {
 
         if (isFormOkay === true) {
             signupLoader.style.visibility = 'visible';
+            $('#signupForm :input').prop('disabled', true);
             $.ajax({
                 method: 'POST',
                 url: '/users/register',
+                dataType: 'json',
                 data: {
                     firstName: signupForm.firstName.value,
                     lastName: signupForm.lastName.value,
                     email: signupForm.email.value,
                     phone: signupForm.phone.value,
                     password: signupForm.password.value
+                },
+                statusCode: {
+                    406: function (msg, status, jqXHR) {
+                        console.log(status);
+                    },
+                    501: function (msg, status, jqXHR) {
+                        console.log(status);
+                    }
                 }
-            }).done(function (msg) {
+            }).done(function (msg, status, jqXHR) {
                 signupLoader.style.visibility = 'hidden';
-                console.log(msg)
+                console.log(status);
                 M.toast({ html: 'Registration Successful' });
-                // $('body').val(msg);
             }).fail(function (jqXHR, textStatus) {
                 signupLoader.style.visibility = 'hidden';
                 M.toast({ html: 'Registration not Successful! Try again.' });
+                $('#emailErrorMessage').html(jqXHR.responseJSON.msg);
+                $('#signupForm :input').prop('disabled', false);
+                signupForm.email.focus();
             });
         }
-
     }
 
     function checkInputs () {
@@ -154,6 +213,17 @@ $(document).ready(function () {
             }
         }, false);
     }
-    signupForm.addEventListener('submit', submitsignupForm, false);
+
+    loginEmail.addEventListener('keyup', function (event) {
+        if (!emailRegExp.test(event.target.value)) {
+            event.target.classList.add('invalid');
+            event.target.classList.remove('valid');
+        } else {
+            event.target.classList.add('valid');
+            event.target.classList.remove('invalid');            
+        }
+    }, false);
+    signupForm.addEventListener('submit', submitSignupForm, false);
+    loginForm.addEventListener('submit', submitLoginForm, false);
     checkInputs();
 });

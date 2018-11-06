@@ -58,8 +58,6 @@ form .progress {
     color: #fa9609;
 }
 
-input.valid
-
 .input-field .prefix {
     color: #c5c5c5;
 }
@@ -92,6 +90,13 @@ input.valid
     box-shadow: 0 1px 0 0 #fa9609 !important; */
 }
 
+#emailErrorMessage, .loginFormErrorMessage {
+    color: #f44336;
+    font-size: 12px;
+    margin-left: 3rem;
+    min-height: 18px;
+}
+
 #login-button, button, #signupButton {
     background-color: transparent;
     border: 1px solid #a7b018;
@@ -118,6 +123,7 @@ input.valid
 .modal .modal-footer {
     color: #444;
     text-align: center;
+    z-index: 2;
 }
 
 #signup-link:active {
@@ -126,6 +132,10 @@ input.valid
 
 #signup-link:hover {
     color: #fa9609;
+}
+
+#signup-form-container {
+    display: none;
 }
 
 #logoContainer {
@@ -137,6 +147,7 @@ input.valid
 #signupFormLogo {
     max-width: 200px;
     max-height: 80px;
+    cursor: pointer;
 }
 
 #signupForm {
