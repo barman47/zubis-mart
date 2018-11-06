@@ -120,6 +120,7 @@ $(document).ready(function () {
                 $('#navbar').css('display', 'block');
                 $('footer').css('visibility', 'visible');
                 M.toast({ html: 'Registration Successful' });
+                $('.modal').modal('open');
             }).fail(function (jqXHR, textStatus) {
                 signupLoader.style.visibility = 'hidden';
                 M.toast({ html: 'Registration not Successful! Try again.' });
