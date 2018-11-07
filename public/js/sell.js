@@ -1,8 +1,11 @@
 $(document).ready(function () {
-    var elems = document.querySelectorAll('.slider');
-    var instances = M.Slider.init(elems, {'height' : 350, 'indicators' : true});
-    $('.tooltipped').tooltip();
-    $('.parallax').parallax();
+
+    const registerButtons = document.querySelectorAll('.sell-register-button');
+    const registerContainer = document.getElementById('signup-form-container');
+    const mainContainer = document.getElementById('sell-main');
+
+    const activeLink = document.querySelector('.active');
+    const sellLink = document.querySelector('.sell');
 
     const signupForm = document.signupForm;
     const loginForm = document.loginForm;
@@ -24,6 +27,9 @@ $(document).ready(function () {
 
     const signupLoader = document.querySelector('#signupLoader');
     const loginLoader = document.querySelector('#loginLoader');
+
+    activeLink.classList.remove('active');
+    sellLink.classList.add('active');
 
     function isEmpty(element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -161,6 +167,7 @@ $(document).ready(function () {
                 event.target.classList.remove('invalid');
             }
         }, false);
+
         signupForm.email.addEventListener('keyup', function (event) {
             if (!emailRegExp.test(event.target.value)) {
                 event.target.classList.add('invalid');
@@ -170,6 +177,7 @@ $(document).ready(function () {
                 event.target.classList.remove('invalid');
             }
         }, false);
+
         signupForm.email.addEventListener('focusout', function (event) {
             if (!emailRegExp.test(event.target.value)) {
                 event.target.classList.add('invalid');
@@ -191,6 +199,7 @@ $(document).ready(function () {
                 event.target.classList.remove('invalid');
             }
         }, false);
+
         signupForm.password.addEventListener('focusout', function (event) {
             if (!passwordRegExp.test(event.target.value)) {
                 event.target.classList.add('invalid');
@@ -235,7 +244,19 @@ $(document).ready(function () {
             event.target.classList.remove('invalid');            
         }
     }, false);
+    
+    registerButtons.forEach(function (registerButton) {
+        registerButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            // const url = event.target.attributes[0].nodeValue;
+            registerContainer.style.display = 'block';
+            mainContainer.style.display = 'none';
+            $('.modal').modal();
+        });
+    });
+
     signupForm.addEventListener('submit', submitSignupForm, false);
     loginForm.addEventListener('submit', submitLoginForm, false);
     checkInputs();
+
 });

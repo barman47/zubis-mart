@@ -37,12 +37,3 @@
     padding: 25px 50px;
     box-shadow: 5px 2px 5px #c5c5c5;
 }
-
-#top-arrow {
-    background-color: #a7b018;
-}
-
-#top-arrow:hover {
-    background-color: #959e00;
-    color: #fa9609;
-}

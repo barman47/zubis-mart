@@ -1,7 +1,7 @@
 <header id="page-top">
     <div id="navbar" class="bavbar-fixed">
         <nav>
-            <div class="nav-wrapper container">
+            <div class="nav-wrapper">
                 <a href="#!" class="brand-logo"><img id="logo" src="/img/logo.jpg" alt="Zubis Mart Logo"></a>
                 <a href="#" class="sidenav-trigger" data-target="mobile-menu"><i id="menu-icon" class="mdi mdi-menu"></i></a>
                 <ul id="store-dropdown" class="dropdown-content">
@@ -57,17 +57,19 @@
                 </ul>
                 <ul class="hide-on-med-and-down right">
                     {{#if user}}
-                        <li class="active"><a href="#"><i class="mdi mdi-home left"></i>Home</a></li>
+                        <li class="active"><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
                         <li><a href="#"><i class="mdi mdi-dashboard left"></i>Dashboard</a></li>
                         <li><a href="#!" class="dropdown-trigger" data-target="store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                         <li><a href="#!" class="dropdown-trigger" data-target="services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                         <li><a href="#"><i class="mdi mdi-information-variant left"></i>About</a></li>
-                        <li><a href="#"><i class="mdi mdi-logout left"></i>Log out</a></li>
+                        <li><a href="#"><i class="mdi mdi-account left"></i>My Account</a></li>
+                        <li><a href="/users/logout/{{user._id}}"><i class="mdi mdi-logout left"></i>Log out</a></li>
                     {{else}}
-                        <li class="active"><a href="#"><i class="mdi mdi-home left"></i>Home</a></li>
+                        <li class="active"><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
                         <li><a href="#!" class="dropdown-trigger" data-target="store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                         <li><a href="#!" class="dropdown-trigger" data-target="services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                         <li><a href="#"><i class="mdi mdi-information-variant left"></i>About</a></li>
+                        <li class="sell"><a href="/sell"><i class="mdi mdi-tag left"></i>Sell on Z-Mart</a></li>
                         <li><a href="#loginModal" class="modal-trigger"><i class="mdi mdi-login left"></i>Login/Signup</a></li>
                     {{/if}}
                 </ul>
@@ -75,54 +77,22 @@
         </nav>
         <ul id="mobile-menu" class="sidenav">
             {{#if user}}
-                <li class="active"><a href="#"><i class="mdi mdi-home left"></i>Home</a></li>
+                <li><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
                 <li><a href="#"><i class="mdi mdi-dashboard left"></i>Dashboard</a></li>
                 <li><a href="#!" class="dropdown-trigger" data-target="mobile-store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                 <li><a href="#!" class="dropdown-trigger" data-target="mobile-services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                 <li><a href="#"><i class="mdi mdi-information-variant left"></i>About</a></li>
-                <li><a href="#"><i class="mdi mdi-logout left"></i>Log out</a></li>
+                <li><a href="#"><i class="mdi mdi-account left"></i>My Account</a></li>
+                <li><a href="/users/logout/{{user._id}}"><i class="mdi mdi-logout left"></i>Log out</a></li>
             {{else}}
-                <li class="active"><a href="#"><i class="mdi mdi-home left"></i>Home</a></li>
+                <li><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
                 <li><a href="#!" class="dropdown-trigger" data-target="mobile-store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                 <li><a href="#!" class="dropdown-trigger" data-target="mobile-services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                 <li><a href="#"><i class="mdi mdi-information-variant left"></i>About</a></li>
+                <li class="sell"><a href="/sell"><i class="mdi mdi-tag left"></i>Sell on Z-Mart</a></li>
                 <li><a href="#loginModal" class="modal-trigger"><i class="mdi mdi-login left"></i>Login/Signup</a></li>
             {{/if}}            
         </ul>
     </div>
-    <div id="loginModal" class="modal modal-fixed-footer">
-        <div id="loginLoader" class="progress">
-            <div class="indeterminate"></div>
-        </div>
-        <div class="modal-content">
-            <h4>Login <i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
-            <form id="loginForm" name="loginForm" novalidate>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-email-outline prefix"></i>
-                        <input type="text" name="loginEmail" id="loginEmail" autofocus>
-                        <label for="loginEmail">Email Address</label>
-                        <span class="helper-text" data-error="Please provide your email address"></span>
-                        <span class="loginFormErrorMessage" id="loginEmailErrorMessage"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-lock-outline prefix"></i>
-                        <input type="password" name="loginPassword" id="loginPassword">
-                        <label for="loginPassword">Enter Password</label>
-                        <span class="helper-text" data-error="Please provide your password"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <button id="login-button" class="button btn waves-effect waves-light" type="submit">Login</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <p>Don't have an account? <a href="/views/register.html" id="signup-link">Sign Up</a></p>
-        </div>
-    </div>
+    {{> loginModal}}
 </header>

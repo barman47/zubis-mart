@@ -58,4 +58,6 @@ $(document).ready(function () {
         $('footer').css('visibility', 'visible');
         $('.modal').modal('close');
     });
+
+    
 });

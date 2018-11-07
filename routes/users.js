@@ -85,8 +85,32 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/dashboard/:id', (req, res) => {
-    res.send('You are logged In');
+router.get('/:id', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, user) => {
+        if (err) {
+            return console.log(err)
+        } else {
+            res.render('index', {
+                title: 'Zubis Mart - Home',
+                style: 'index.css',
+                script: 'index.js',
+                user
+            });
+        }
+    });
 });
+
+router.get('/logout/:id', (req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
+
+// function ensureAuthenticated (req, res, next) {
+//     if (req.isAuthenticated()) {
+//         return next();
+//     } else {
+//         // logout
+//     }
+// }
 
 module.exports = router;

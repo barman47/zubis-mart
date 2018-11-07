@@ -13,6 +13,10 @@ nav {
     background-color: #a7b018;
 }
 
+nav .nav-wrapper {
+    padding: 0 40px;
+}
+
 .dropdown-content {
     width: auto !important;
     background-color: #a7b018;
@@ -187,6 +191,15 @@ form .progress {
     background-color: #fa9609;
 }
 
+#top-arrow {
+    background-color: #a7b018;
+}
+
+#top-arrow:hover {
+    background-color: #959e00;
+    color: #fa9609;
+}
+
 .page-footer {
     background-color: transparent;
     color: #333 !important;
@@ -235,5 +248,9 @@ form .progress {
     #signupForm {
         border-radius: 5px;
         width: 85%;
+    }
+
+    .sell-header {
+        font-size: 2.5rem;
     }
 }

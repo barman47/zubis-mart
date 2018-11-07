@@ -1,0 +1,35 @@
+<div id="loginModal" class="modal modal-fixed-footer">
+        <div id="loginLoader" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="modal-content">
+            <h4>Login <i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
+            <form id="loginForm" name="loginForm" novalidate>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <i class="mdi mdi-email-outline prefix"></i>
+                        <input type="text" name="loginEmail" id="loginEmail" autofocus>
+                        <label for="loginEmail">Email Address</label>
+                        <span class="helper-text" data-error="Please provide your email address"></span>
+                        <span class="loginFormErrorMessage" id="loginEmailErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <i class="mdi mdi-lock-outline prefix"></i>
+                        <input type="password" name="loginPassword" id="loginPassword">
+                        <label for="loginPassword">Enter Password</label>
+                        <span class="helper-text" data-error="Please provide your password"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 input-field">
+                        <button id="login-button" class="button btn waves-effect waves-light" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <p>Don't have an account? <a href="/views/register.html" id="signup-link">Sign Up</a></p>
+        </div>
+    </div>

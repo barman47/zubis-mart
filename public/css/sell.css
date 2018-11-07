@@ -1,0 +1,111 @@
+#breadcrumb-container {
+    /* background-color: #fa9609; */
+    background-color: #fff;
+    color: #555 !important;
+    /* margin: 40px 0; */
+    padding: 15px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+}
+
+.breadcrumb:before {
+    color: #ccc;
+    position: relative;
+    top: -7px;
+}
+
+a.breadcrumb {
+    color: #888;
+    font-weight: 200;
+}
+
+a.breadcrumb:hover {
+    color: #333;
+}
+
+#sell-main-container, #sell-bottom {
+    background-color: #fff;
+    margin: 20px 40px;
+    padding: 40px 50px
+}
+
+#sell {
+    /* color: #fa9609; */
+    color: #a7b018;
+    font-weight: 500;
+}
+
+#sell:hover {
+    color: #fa9609;
+}
+
+.sell-header {
+    color: #444;
+}
+
+.sell-sub-header {
+    color: #a7b018;
+}
+
+.sell-sub-header + p {
+    color: #777;
+}
+
+#why-sell-header {
+    color: #fa9609;
+}
+
+.sell-register-button {
+    background-color: transparent;
+    border: 1px solid #a7b018;
+    box-shadow: none;
+    color: #a7b018;
+    margin-top: 25px; 
+}
+
+.sell-register-button:visited {
+    background-color: transparent;
+    border: 1px solid #a7b018;
+    color: #a7b018;
+}
+
+.sell-register-button:hover {
+    background-color: #969e16;
+    border: none;
+    color: #fff;
+    box-shadow: 2px 2px 3px #c5c5c5;
+}
+
+#tab, #tab-pc {
+    height: auto;
+    width: 100%;
+    margin-top: 40px;
+}
+
+#why-sell {
+    background-color: #fff;
+    margin: 0 40px;
+    padding: 15px 30px;
+}
+
+.sell-icons {
+    color: #ccc;
+    font-size: 120px;
+    transition: color 2s;
+}
+
+.sell-icons:hover {
+    color: #fa9609;
+}
+
+#earn-div {
+    margin-top: 20px;
+}
+
+/* #tab-pc {
+    height: auto;
+    width: 100%;
+    margin-top: 40px;
+} */

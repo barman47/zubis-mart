@@ -91,6 +91,14 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/sell', (req, res) => {
+    res.render('sell', {
+        title: 'Zubis Mart - Sell',
+        style: 'sell.css',
+        script: 'sell.js'
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}...`);
 });
