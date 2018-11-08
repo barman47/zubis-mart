@@ -257,4 +257,12 @@ form .progress {
     nav .nav-wrapper {
         padding: 0;
     }
+
+    #left-section {
+        height: auto !important;
+    }
+
+    #right-section h5 {
+        display: none;
+    }
 }
