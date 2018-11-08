@@ -11,6 +11,7 @@ body {
 
 nav {
     background-color: #a7b018;
+    /* box-shadow: none; */
 }
 
 nav .nav-wrapper {
@@ -249,8 +250,11 @@ form .progress {
         border-radius: 5px;
         width: 85%;
     }
-
     .sell-header {
         font-size: 2.5rem;
+    }
+
+    nav .nav-wrapper {
+        padding: 0;
     }
 }

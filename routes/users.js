@@ -100,6 +100,23 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/:id/account', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, user) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.render('dashboard', {
+                title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
+                style: 'dashboard.css',
+                script: 'dashboard.js',
+                user,
+                firstName: user.firstName.toLowerCase(),
+                lastName: user.lastName.toLowerCase()
+            });
+        }
+    });
+});
+
 router.get('/logout/:id', (req, res) => {
     req.logOut();
     res.redirect('/');

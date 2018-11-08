@@ -1,0 +1,105 @@
+#main-section {
+    height: auto;
+    width: 100%;
+}
+
+#left-section {
+    background-color: #fff;
+    height: 100vh;
+    padding: 15px;
+}
+
+#left-section h6 {
+    position: relative;
+    top: -30px;
+    text-transform: capitalize !important;
+}
+
+#right-section {
+    background-color: transparent;
+    padding: 20px 40px;
+    height: auto;
+}
+
+#right-section h5 {
+    color: #fa9609;
+    transition: color 2s;
+}
+
+#right-section h5:hover {
+    color: #969e16;
+}
+
+#dashboard-icon {
+    color: #999;
+}
+
+.profile-icon {
+    color: #999;
+    /* color: #e1e1e1; */
+    font-size: 100px;
+    text-align: center;
+}
+
+#profile-icon-div {
+    text-align: center;
+    margin: 0;
+}
+
+.card-panel, .card-panel span, .card-panel h5, .card-panel h6 {
+    color: #fff !important;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#card1 {
+    background-color: rgba(199, 68, 68, .6);
+    /* background: linear-gradient(to right, #c74444, #e26a6a, #d05a5a) !important; */
+}
+
+#card2 {
+    /* background-color: #26a69a; */
+    background-color: rgba(38, 166, 154, .6);
+}
+
+.card-icon {
+    font-size: 48px;
+}
+
+#stock-data {
+    background-color: #fff;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.table-icon {
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.table-icon:hover {
+    color: #f44336;  
+}
+
+.sold:hover {
+    color: #388e3c;
+}
+
+.collection-item a{
+    color: #333;
+}
+
+.collection-item a:visited{
+    color: #333;
+}
+
+.collection-item a:hover{
+    color: #039be5;
+    text-decoration: underline;
+}
+
+.collection-item a:active{
+    color: #f44336;  
+}

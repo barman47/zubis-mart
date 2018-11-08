@@ -1,0 +1,128 @@
+{{> header}}
+<main>
+    <div id="main-section" class="row">
+        <div id="left-section" class="col s12 l3">
+            <div id="profile-icon-div">
+                <i class="mdi mdi-account-circle  profile-icon"></i>
+                <h6>{{firstName}} {{lastName}}</h6>
+            </div>
+            <ul class="collection with-header">
+                <li class="collection-header"><h4>Welcome back!</h4></li>
+                <li class="collection-item"><a href="#">Add Item</a></li>
+                <li class="collection-item"><a href="#">Edit Data</a></li>
+                <li class="collection-item"><a href="#">Remove My Account</a></li>
+            </ul>
+        </div>
+
+        <div id="right-section" class="col s12 l9">
+            <h5><i id="dashboard-icon" class="mdi mdi-view-dashboard"></i>&nbsp;Dashboard</h5>
+            <div class="row">
+                <div class="col s12 l6">
+                    <div id="card1" class="card-panel hoverable">
+                        <span class="mdi mdi-currency-sign card-icon"></span>
+                        <h5>Stock Total</h5>
+                        <h6>120,000</h6>
+                    </div>
+                </div>
+
+                <div class="col s12 l6">
+                    <div id="card2" class="card-panel hoverable">
+                        <span class="mdi mdi-database card-icon"></span>
+                        <h5>Total Profit</h5>
+                        <h6>120,000</h6>
+                    </div>
+                </div>
+            </div>
+            <div id="stock-data" class="row">
+                <div class="col s12">
+                    {{!-- <h5>Product and Services Summary</h5> --}}
+                    <table class="striped responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                            <tr>
+                                <td>iPhoneX</td>
+                                <td>Product</td>
+                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
+                                <td>Available</td>
+                                <td><span class="mdi mdi-delete-outline table-icon">&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline table-icon sold"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> fab}}
+</main>
+{{> footer}}

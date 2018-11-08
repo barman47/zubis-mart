@@ -1,7 +1,8 @@
 $(document).ready(function () {
     $('.dropdown-trigger').dropdown({ hover: false });
-    $('.sidenav').sidenav();
     $('.modal').modal();
+    $('.sidenav').sidenav();
+    $('.scrollspy').scrollSpy();
 
     window.onscroll = function() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -44,12 +45,14 @@ $(document).ready(function () {
         // });
         $('#signup-form-container').css('display', 'block');
         $('#main-section').css('display', 'none');
+        $('#sell-main').css('display', 'none');
         $('#topButton').css('display', 'none');
         $('#navbar').css('display', 'none');
         $('footer').css('visibility', 'hidden');
         $('.modal').modal('close');
         $('.sidenav').sidenav('close');
     });
+
     $('#signupFormLogo').on('click', function (event) {
         $('#signup-form-container').css('display', 'none');
         $('#main-section').css('display', 'block');
@@ -58,6 +61,10 @@ $(document).ready(function () {
         $('footer').css('visibility', 'visible');
         $('.modal').modal('close');
     });
-
     
+    $('.mobile-about').on('click', function () {
+        setTimeout(function () {
+            $('.sidenav').sidenav('close');
+        }, 1500)
+    });
 });

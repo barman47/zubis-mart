@@ -1,9 +1,8 @@
 #breadcrumb-container {
-    /* background-color: #fa9609; */
     background-color: #fff;
     color: #555 !important;
-    /* margin: 40px 0; */
     padding: 15px;
+    width: 100%;
 }
 
 .breadcrumb {

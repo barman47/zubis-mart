@@ -255,6 +255,17 @@ $(document).ready(function () {
         });
     });
 
+    $('#signup-link').on('click', function (event) {
+        event.preventDefault();
+        $('#signup-form-container').css('display', 'block');
+        $('#main-section').css('display', 'none');
+        $('#topButton').css('display', 'none');
+        $('#navbar').css('display', 'none');
+        $('footer').css('visibility', 'hidden');
+        $('.modal').modal('close');
+        $('.sidenav').sidenav('close');
+    });
+
     signupForm.addEventListener('submit', submitSignupForm, false);
     loginForm.addEventListener('submit', submitLoginForm, false);
     checkInputs();
