@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.tooltipped').tooltip({ position: 'top' });
     const homeLink = document.querySelector('.active');
     const accountLink = document.querySelector('.account');
 

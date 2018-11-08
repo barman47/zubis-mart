@@ -73,7 +73,7 @@
     margin-right: 0;
 }
 
-.table-icon {
+.table-icon, .sold {
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
     font-size: 20px;
