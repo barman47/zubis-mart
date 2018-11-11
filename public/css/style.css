@@ -31,6 +31,10 @@ nav .nav-wrapper {
     background-color: #969e16;
 }
 
+.login-row {
+    margin-bottom: 0 !important;
+}
+
 .modal .progress {
     top: -7px;
 }
@@ -75,24 +79,22 @@ form .progress {
     color: #c5c5c5;
 }
 
-.input-field input:focus + label {
+.input-field input:focus + label, .input-field textarea:focus + label {
     color: #969e16 !important;
 }
-.input-field input:focus {
+.input-field input:focus, .input-field textarea:focus {
     border-bottom: 1px solid #969e16 !important;
     box-shadow: 0 1px 0 0 #969e16 !important;
 }
 
-.input-field input.valid {
+.input-field input.valid, .input-field textarea.valid {
     border-bottom: 1px solid #969e16 !important;
     box-shadow: 0 1px 0 0 #969e16 !important;
 }
 
-.input-field input.invalid {
+.input-field input.invalid, .input-field textarea.invalid {
     border-bottom: 1px solid #f44336 !important;
     box-shadow: 0 1px 0 0 #f44336 !important;
-    /* border-bottom: 1px solid #fa9609 !important;
-    box-shadow: 0 1px 0 0 #fa9609 !important; */
 }
 
 #emailErrorMessage, .loginFormErrorMessage {
@@ -102,18 +104,29 @@ form .progress {
     min-height: 18px;
 }
 
-#login-button, button, #signupButton {
+#login-button, button, #signupButton, #addItemButton, #addServiceButton {
     background-color: transparent;
     border: 1px solid #a7b018;
     color: #a7b018;
     width: 100%;
     box-shadow: none;
 }
-#login-button:hover, #signupButton:hover {
+#login-button:hover, #signupButton:hover, #addItemButton:hover, #addServiceButton:hover {
     background-color: #969e16;
     border: none;
     color: #fff;
     box-shadow: 2px 2px 3px #c5c5c5;
+}
+
+#addImageButton {
+    background-color: #a7b018;
+    box-shadow: none;
+    color: #fff;
+    width: auto;
+}
+
+#addImageButton:hover {
+    background-color: #969e16;
 }
 
 #login {
@@ -264,5 +277,13 @@ form .progress {
 
     #right-section h5 {
         display: none;
+    }
+
+    #loginModal {
+        height: 100%;
+    }
+
+    .modal .modal-content {
+        padding: 5px 14px 0 14px !important;
     }
 }

@@ -1,9 +1,46 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 const mongoose = require('mongoose');
+const multer = require('multer');
 const passport = require('passport');
 
+const Product = require('../models/product');
+
+const config = require('../config/database');
+
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
+
+let conn = mongoose.connection;
+
+conn.once('open', () => {
+    console.log('Database File Upload Connection Established Successfully.');
+});
+
+conn.on('error', (err) => {
+    console.log('File Connection Error... ' + err);
+});
+
+let gridfs;
+let Image;
+
 const User = require('../models/user');
+const Service = require('../models/service');
+// let Image = require('../models/image');
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, './public/uploads');
+    },
+    filename: (req, file, callback) => {
+        callback(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
 const router = express.Router();
 
 router.post('/register', (req, res) => {
@@ -116,6 +153,125 @@ router.get('/:id/account', (req, res) => {
         }
     });
 });
+
+router.post('/addService', (req, res) => {
+    const service = new Service({
+        category: req.body.category,
+        user: req.body.user,
+        description: req.body.description
+    });
+
+    service.save((err, savedService) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log('Service added Successfully');
+            res.status(200).json({
+                message: 'Service added Successfully',
+                category: savedService.category,
+                description: savedService.description
+            });
+        }
+    });
+});
+
+router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
+    // console.log('file ', req.file);
+    const file = req.file;
+    User.findOne({_id: req.params.id}, (err, returnedUser) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            gridfs = require('mongoose-gridfs')({
+                collection: 'images',
+                model: 'Image',
+                mongooseConnection: conn
+            });
+            Image = gridfs.model;
+            Image.write({
+                // filename: newImage.image.data = fs.readFileSync(req.file.path);
+                filename: file.filename,
+                contentType: file.mimetype,
+            }, fs.createReadStream(file.path), (err, createdImage) => {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    Image.readById(createdImage._id, (err, returnedImage) => {
+                        if (err) {
+                            return console.log(err)
+                        } else {
+                            Image.updateOne({_id: createdImage._id}, {$set: {metadata: {
+                                itemName:req.body.itemName,
+                                category: req.body.itemCategory,
+                                user: `${returnedUser.firstName} ${returnedUser.lastName}`,
+                                userEmail: returnedUser.email,
+                                description: req.body.itemDescription,
+                                price: req.body.itemPrice
+                            }}}, (err, updatedImage) => {
+                                if (err) {
+                                    return console.log(err);
+                                } else {
+                                    let product = new Product({
+                                        _id: updatedImage._id,
+                                        name: req.body.itemName,
+                                        category: req.body.itemCategory,
+                                        user: `${returnedUser.firstName} ${returnedUser.lastName}`,
+                                        userEmail: returnedUser.email,
+                                        description: req.body.itemDescription,
+                                        price: req.body.itemPrice
+                                    });
+                                    product.save((err, savedProduct) => {
+                                        if (err) {
+                                            return console.log(err);
+                                        } else {
+                                            res.redirect(`/users/${req.params.id}/account`);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+// router.get('/image', (req, res) => {
+//     User.read({}, (err, returnedFile) => {
+//         if (err) {
+//             return console.log(err);
+//         } else {
+//             // const readStream = gridfs.createReadStream(returnedFile.filename);
+//             res.render('/image', {
+//                 src: returnedFile.filename
+//             });
+//         }
+//     });
+// });
+
+//Saves Image to database
+// router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
+//     console.log('body ', req.body);
+//     console.log('file ', req.file);
+//     const newImage = new Image();
+//     newImage.image.data = fs.readFileSync(req.file.path);
+//     newImage.image.contentType = req.file.mimetype;
+//     newImage.name = req.body.itemName;
+//     newImage.user = 'Uzoanya Dominic';
+//     newImage.category = req.body.itemCategory;
+//     newImage.description = req.body.itemDescription;
+
+//     newImage.save((err, savedImage) => {
+//         if (err) {
+//             return console.log(err);
+//         } else {
+//             res.contentType(savedImage.image.contentType);
+//             res.send(savedImage.image.data);
+//         }
+//     });
+//     // res.status(200).json({ message: 'File Uplaoded Successfully' });
+// });
 
 router.get('/logout/:id', (req, res) => {
     req.logOut();

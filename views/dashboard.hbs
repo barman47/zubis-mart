@@ -4,11 +4,12 @@
         <div id="left-section" class="col s12 l3">
             <div id="profile-icon-div">
                 <i class="mdi mdi-account-circle  profile-icon"></i>
-                <h6>{{firstName}} {{lastName}}</h6>
+                <h6 id="username">{{firstName}} {{lastName}}</h6>
             </div>
             <ul class="collection with-header">
                 <li class="collection-header"><h4>Welcome back!</h4></li>
-                <li class="collection-item"><a href="#">Add Item</a></li>
+                <li class="collection-item"><a class="modal-trigger" data-target="addItemModal">Add Item</a></li>
+                <li class="collection-item"><a class="modal-trigger" data-target="addServiceModal">Add Service</a></li>
                 <li class="collection-item"><a href="#">Edit Data</a></li>
                 <li class="collection-item"><a href="#">Remove My Account</a></li>
             </ul>
@@ -46,76 +47,76 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                             <tr>
                                 <td>iPhoneX</td>
                                 <td>Product</td>
                                 <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
                                 <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-circle-outline sold tooltipped" data-tooltip="Mark as Sold"></span></td>
+                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -123,6 +124,9 @@
             </div>
         </div>
     </div>
+    {{> addItemModal}}
+    {{> addServiceModal}}
+    {{> editUserModal}}
     {{> fab}}
 </main>
 {{> footer}}

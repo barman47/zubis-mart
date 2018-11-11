@@ -69,11 +69,12 @@
 
 #stock-data {
     background-color: #fff;
+    border-radius: 5px;
     margin-left: 0;
     margin-right: 0;
 }
 
-.table-icon, .sold {
+.table-icon {
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
     font-size: 20px;
@@ -81,10 +82,6 @@
 
 .table-icon:hover {
     color: #f44336;  
-}
-
-.sold:hover {
-    color: #388e3c;
 }
 
 .collection-item a{
@@ -97,6 +94,7 @@
 
 .collection-item a:hover{
     color: #039be5;
+    cursor: pointer;
     text-decoration: underline;
 }
 

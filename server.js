@@ -1,4 +1,6 @@
 const express = require('express');
+// const base64js = require('js-base64').Base64;
+// const ab2str = require('arraybuffer-to-string');
 const exphbs = require('express-handlebars');
 // const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
@@ -14,7 +16,7 @@ const users = require('./routes/users');
 
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
-const config = require('./config/database')
+const config = require('./config/database');
 const app = express();
 
 const PORT = process.env.PORT || 6400;

@@ -1,0 +1,37 @@
+<div id="addServiceModal" class="modal">
+    <div id="addServiceLoader" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div class="modal-content">
+        <h4>Add Service for Sale<i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
+        <form id="addServiceForm" name="addServiceForm">
+            <div class="row login-row">
+                <div class="col s12 input-field">
+                    <select name="seviceCategory" id="seviceCategory">
+                        <option value="" disabled selected>Choose a category</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Gardening">Gardening</option>
+                        <option value="Home Cleaning">Home Cleaning</option>
+                        <option value="MC">MC</option>
+                        <option value="Performers/Artistes">Performers/Artistes</option>
+                        <option value="Phone &amp; Laptop Repairs">Phone &amp; Laptop Repairs</option>
+                        <option value="Photography">Photography</option>
+                        <option value="Ushering">Ushering</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row login-row">
+                <div class="col s12 input-field">
+                    <textarea name="serviceDescription" id="serviceDescription" class="materialize-textarea" class="validate"></textarea>
+                    <label for="serviceDescription">Short description here...</label>
+                    <span class="helper-text" data-error="Invalid Description!"></span>
+                </div>
+            </div>
+            <div class="row login-row">
+                <div class="col s12 input-field">
+                    <button id="addServiceButton" class="button btn waves-effect waves-light" type="submit">Add Service</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
