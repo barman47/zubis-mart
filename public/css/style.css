@@ -2,6 +2,31 @@ body {
     background-color: #efefef !important;
 }
 
+.messages {
+    padding: 10px 0;
+    margin: 0px !important;
+}
+
+#failureText {
+    color: #d32f2f;
+    background-color: rgba(244, 67, 54, .30);
+}
+
+#successText {
+    color: #388e3c;
+    background-color: #a5d6a7;
+}
+
+.successClose:hover {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.failureClose:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
 #logo {
     max-width: 155px !important;
     max-height: 300px !important;

@@ -12,6 +12,13 @@
     <title>{{title}}</title>
 </head>
 <body>
+    {{#if success_message}}
+        <p id="successText" class="center messages">{{success_message}}<i class="right mdi mdi-close mdi-18px successClose"></i></p>
+    {{/if}}
+        
+    {{#if failure_message}}
+        <p id="failureText" class="center messages">{{failure_message}}<i class="right mdi mdi-close mdi-18px failureClose"></i></p>    
+    {{/if}}
     {{{body}}}
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/jquery.form.js"></script>

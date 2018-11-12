@@ -4,6 +4,14 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.scrollspy').scrollSpy();
 
+    $('.successClose').click(function () {
+        $('#successText').remove();
+    });
+
+    $('.failureClose').click(function () {
+        $('#failureText').remove();
+    });
+
     window.onscroll = function() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById('top').style.display = 'block';
