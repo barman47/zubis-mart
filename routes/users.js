@@ -236,6 +236,82 @@ router.get('/image', (req, res) => {
     });
 });
 
+router.delete('/removeUser/:id', (req, res) => {
+    const password = req.body.removeAccountPassword;
+    User.findOne({_id: req.params.id}, (err, returnedUser) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            bcrypt.compare(password, returnedUser.password, (err, isMatch) => {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    if (!isMatch) {
+                        console.log('incorrect password');
+                        res.status(401).json({ message: 'Incorrect Password!'});
+                    } else {
+                        Product.deleteMany({
+                            user: `${returnedUser.firstName} ${returnedUser.lastName}`, 
+                            userEmail: returnedUser.email}, (err, deletedProduct) => {
+                            if (err) {
+                                return console.log(err);
+                            } else {
+                                console.log('Products removed sucessfully');
+                                Service.deleteMany({
+                                    user: `${returnedUser.firstName} ${returnedUser.lastName}`}, (err, removedService) => {
+                                    if (err) {
+                                        return console.log(err);
+                                    } else {
+                                        console.log('services removed successfully');
+                                        // gfs.files.remove({metadata.user: returnedUser});
+                                        User.deleteOne({_id: req.params.id}, (err, removedUser) => {
+                                            if (err) {
+                                                return console.log(err);
+                                            } else {
+                                                res.status(200).json({ message: 'Account removed successfully'})
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+});
+
+router.put('/removeUser/:id', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, returnedUser) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            bcrypt.compare(req.body.password, returnedUser.password, (err, isMatch) => {
+                if (isMatch) {
+                    console.log('Correct Password');
+                    User.findOneAndUpdate({_id: req.params.id}, {$set: {
+                        firstName: req.body.firstName.toUpperCase(),
+                        lastName: req.body.lastName.toUpperCase(),
+                        phone: req.body.phone,
+                        email: req.body.email
+                    }}, {new: true}, (err, updatedData) => {
+                        if (err) {
+                            return console.log(err);
+                        } else {
+                            console.log('data updated successfully');
+                            res.status(200).json(updatedData);
+                        }
+                    });
+                } else {
+                    console.log('Incorrect Password');
+                    res.status(401).json({ message: 'Incorrect Password!' });
+                }
+            });
+        }
+    });
+});
+
 router.get('/logout/:id', (req, res) => {
     req.logOut();
     res.redirect('/');

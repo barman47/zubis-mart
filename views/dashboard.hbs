@@ -4,14 +4,15 @@
         <div id="left-section" class="col s12 l3">
             <div id="profile-icon-div">
                 <i class="mdi mdi-account-circle  profile-icon"></i>
-                <h6 id="username">{{firstName}} {{lastName}}</h6>
+                <h6 id="username" data-id="{{user._id}}">{{firstName}} {{lastName}}</h6>
             </div>
             <ul class="collection with-header">
                 <li class="collection-header"><h4>Welcome back!</h4></li>
                 <li class="collection-item"><a class="modal-trigger" data-target="addItemModal">Add Item</a></li>
                 <li class="collection-item"><a class="modal-trigger" data-target="addServiceModal">Add Service</a></li>
-                <li class="collection-item"><a href="#">Edit Data</a></li>
-                <li class="collection-item"><a href="#">Remove My Account</a></li>
+                <li class="collection-item"><a class="modal-trigger" data-target="editDataModal">Edit Data</a></li>
+                <li class="collection-item"><a class="modal-trigger" data-target="changePasswordModal">Change Password</a></li>
+                <li class="collection-item"><a class="modal-trigger" data-target="removeAccountModal">Remove My Account</a></li>
             </ul>
         </div>
 
@@ -126,7 +127,9 @@
     </div>
     {{> addItemModal}}
     {{> addServiceModal}}
-    {{> editUserModal}}
+    {{> editDataModal}}
+    {{> removeAccountModal}}
+    {{> changePasswordModal}}
     {{> fab}}
 </main>
 {{> footer}}

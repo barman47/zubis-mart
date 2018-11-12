@@ -1,0 +1,24 @@
+<div id="removeAccountModal" class="modal">
+    <div id="removeAccountLoader" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div class="modal-content">
+        <h4>Remove User Account<i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
+        <h6>Are you sure you want to permanently remove your account?</h6>
+        <form id="removeAccountForm" name="removeAccountForm">
+            <div class="row login-row">
+                <div class="col s12 input-field">
+                    <input type="password" name="removeAccountPassword" id="removeAccountPassword">
+                    <label for="removeAccountPassword">Password here...</label>
+                    <span class="helper-text" data-error="Invalid Password!">Enter your password to remove your account.</span>
+                    <span id="incorrectRemoveUserPassword"></span>
+                </div>
+            </div>
+            <div class="row login-row">
+                <div class="col s12 input-field">
+                    <button id="removeAccountButton" class="button btn waves-effect waves-light" type="submit">Remove Account</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

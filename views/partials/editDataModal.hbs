@@ -1,0 +1,63 @@
+<div id="editDataModal" class="modal modal-fixed-footer">
+    <div id="editDataLoader" class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <div class="modal-content">
+        <h4>Edit User Information<i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
+        <form id="editDataForm" name="editDataForm">
+           <div class="row">
+                <div class="col s12 l6 input-field">
+                    <i class="mdi mdi-alphabetical prefix"></i>
+                    <input type="text" name="editFirstName" id="editFirstName" class="validate" value="{{user.firstName}}" disabled>
+                    <label for="editFirstName">Enter First Name</label>
+                    <span class="helper-text" data-error="Invalid First Name!"></span>
+                </div>
+                <div class="col s12 l6 input-field">
+                    <i class="mdi mdi-alphabetical prefix"></i>
+                    <input type="text" name="editLastName" id="editLastName" class="validate" value="{{user.lastName}}" disabled>
+                    <label for="editLastName">Enter Last Name</label>
+                    <span class="helper-text" data-error="Invalid Last Name!"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 input-field">
+                    <i class="mdi mdi-email-outline prefix"></i>
+                    <input type="email" name="editEmail" id="editEmail" class="validate" value="{{user.email}}" disabled>
+                    <label for="editEmail">Enter Email Address</label>
+                    <span class="helper-text" data-error="Invalid Email Address!">Example: john@doe.com</span>
+                    <span id="editEmailErrorMessage"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 input-field">
+                    <i class="mdi mdi-phone prefix"></i>
+                    <input type="text" name="editPhone" id="editPhone" class="validate" value="{{user.phone}}" disabled>
+                    <label for="editPhone">Enter Phone Number</label>
+                    <span class="helper-text" data-error="Invalid Phone Number!">Example: 09026425337</span>
+                </div>
+            </div>
+                <div class="row">
+                <div class="col s12 input-field">
+                    <i class="mdi mdi-lock-outline prefix"></i>
+                    <input type="password" name="editPassword" id="editPassword" class="validate" disabled>
+                    <label for="editPassword">Enter Password</label>
+                    <span class="helper-text" data-error="Please provide your password">Provide your password to save changes.</span>
+                    <span id="incorrectEditPassword"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="row login-row">
+            <div class="col s12 l4">
+                <button id="cancelButton" class="modal-close editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-close left prefix editModalButtonIcon"></span>Cancel</button>
+            </div>
+            <div class="col s12 l4">
+                <button id="saveButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-check left prefix editModalButtonIcon"></span>Save</button>
+            </div>
+            <div class="col s12 l4">
+                <button id="editButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-pencil left prefix editModalButtonIcon"></span>Edit</button>
+            </div>
+        </div>
+    </div>
+</div>

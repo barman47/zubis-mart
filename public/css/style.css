@@ -136,6 +136,22 @@ form .progress {
     width: 100%;
     box-shadow: none;
 }
+
+#removeAccountButton {
+    background-color: transparent;
+    border: 1px solid #d32f2f;
+    color: #d32f2f;
+    width: 100%;
+    box-shadow: none;
+}
+
+#removeAccountButton:hover {
+    background-color: #d32f2f;
+    border: none;
+    color: #fff;
+    box-shadow: 2px 2px 3px #c5c5c5;
+}
+
 #login-button:hover, #signupButton:hover, #addItemButton:hover, #addServiceButton:hover {
     background-color: #969e16;
     border: none;

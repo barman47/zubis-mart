@@ -101,3 +101,59 @@
 .collection-item a:active{
     color: #f44336;  
 }
+
+#editEmailErrorMessage, #incorrectRemoveUserPassword, #incorrectEditPassword {
+    color: #f44336;
+    position: relative;
+    min-height: 18px;
+    display: block;
+    font-size: 12px;
+    margin-left: 3rem;
+}
+
+#addItemModal, #editDataModal {
+    max-height: 95%;
+}
+
+.editModalButton {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    margin-right: 10px;
+    width: 100%;
+}
+
+#cancelButton {
+    background-color: #fa9609;
+}
+
+#cancelButton:hover {
+    background-color: #e28400;
+    box-shadow: 2px 2px 3px #c5c5c5;
+}
+
+#editButton {
+    background-color: #a7b018;
+}
+
+#editButton:hover {
+    background-color: #969e16;
+    box-shadow: 2px 2px 3px #c5c5c5;
+}
+
+#saveButton {
+    background-color: #43a047; 
+    box-shadow: none;
+}
+
+#saveButton:hover {
+    background-color: #388e3c; 
+    box-shadow: 2px 2px 3px #c5c5c5;
+}
+
+.editModalButtonIcon {
+    position: relative;
+    left: 10px;
+    font-size: 20px;
+}

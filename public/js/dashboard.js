@@ -7,12 +7,28 @@ $(document).ready(function () {
 
     const serviceForm = document.addServiceForm;
     const itemForm = document.addItemForm;
+    const editForm = document.editDataForm;
+    const removeAccountForm = document.removeAccountForm;
 
     const serviceLoader = document.querySelector('#addServiceLoader');
     const itemLoader = document.querySelector('#addItemLoader');
+    const removeAccountLoader = document.querySelector('#removeAccountLoader');
+    const editDataLoader = document.querySelector('#editDataLoader');
 
     const serviceCategory = serviceForm.seviceCategory;
     const serviceDescription = serviceForm.serviceDescription;
+
+    const cancelButton = document.querySelector('#cancelButton');
+    const editButton = document.querySelector('#editButton');
+    const saveButton = document.querySelector('#saveButton');
+
+    const editInputs = [
+        editForm.editFirstName,
+        editForm.editLastName,
+        editForm.editEmail,
+        editForm.editPhone,
+        editForm.editPassword
+    ];
 
     const itemName = itemForm.itemName;
     const itemPrice = itemForm.itemPrice;
@@ -27,6 +43,13 @@ $(document).ready(function () {
         itemForm.itemDescription,
         itemForm.fileField
     ];
+
+    const removeAccountPassword = removeAccountForm.removeAccountPassword;
+    const userId = document.getElementById('username').getAttribute('data-id');
+
+    const emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
+    const phoneRegExp = /^\d{11}$/;
+    const passwordRegExp = /^[\w@-]{8,20}$/;
 
     function isEmpty (element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -244,4 +267,208 @@ $(document).ready(function () {
         //}
     });
     // itemForm.addEventListener('submit', submitItemForm);
+    removeAccountPassword.addEventListener('focusout', function (event) {
+        if (isEmpty(event.target)) {
+            event.target.classList.add('invalid');
+        } else {
+            event.target.classList.remove('invalid');
+        }
+    });
+
+    removeAccountForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (isEmpty(removeAccountPassword)) {
+            removeAccountPassword.classList.add('invalid');
+            removeAccountPassword.focus();
+        } else {
+            removeAccountPassword.classList.remove('invalid');
+            removeAccountLoader.style.visibility = 'visible';
+            $('#removeAccountButton').html('REMOVING ACCOUNT...');
+            $('#removeAccountForm :input').prop('disabled', true);
+            $.ajax({
+                method: 'DELETE',
+                url: `/users/removeUser/${userId}`,
+                dataType: 'json',
+                data: {
+                    id: userId,
+                    removeAccountPassword: $('#removeAccountPassword').val()
+                },
+                statusCode: {
+                    401: function (msg, status, jqXHR) {
+                        $('#removeAccountForm :input').prop('disabled', false);
+                        removeAccountLoader.style.visibility = 'hidden';
+                        $('#incorrectRemoveUserPassword').html(msg.responseJSON.message);
+                        $('#removeAccountButton').html('REMOVE ACCOUNT');
+                        removeAccountPassword.focus();
+                    }
+                }
+            }).done (function (msg) {
+                M.toast({ html: msg.message });
+                removeAccountLoader.style.visibility = 'hidden';
+                $('#removeAccountForm :input').prop('disabled', false);
+                $('#removeAccountButton').html('REMOVE ACCOUNT');
+                setTimeout(function () {
+                    window.location.href = '/';
+                }, 3000);
+                
+            }).fail (function (xhr) {
+                console.log('xhr ', xhr);
+            });
+        }
+    });
+    cancelButton.addEventListener('click', function () {
+        editInputs.forEach(function (input) {
+            input.disabled = true;
+        });
+    });
+    editButton.addEventListener('click', function () {
+        editInputs.forEach(function (input) {
+            input.disabled = false;
+        });
+        editInputs[0].focus();
+    });
+    function checkEditInputs () {
+        editForm.editFirstName.addEventListener('focusout', function (event) {
+            if (isEmpty(event.target)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                M.toast({ html: 'Invalid First Name!' });
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        editForm.editLastName.addEventListener('focusout', function (event) {
+            if (isEmpty(event.target)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                M.toast({ html: 'Invalid First Name!' });
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+        editForm.editEmail.addEventListener('keyup', function (event) {
+            if (!emailRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+        editForm.editEmail.addEventListener('focusout', function (event) {
+            if (!emailRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                M.toast({ html: 'Invalid Email Address!' });
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+    
+        editForm.editPassword.addEventListener('keyup', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+        editForm.editPassword.addEventListener('focusout', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                M.toast({ html: 'Invalid password!' });
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        editForm.editPhone.addEventListener('keyup', function (event) {
+            if (!phoneRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        editForm.editPhone.addEventListener('focusout', function (event) {
+            if (!phoneRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                M.toast({ html: 'Invalid Password!' });
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+    }
+
+    saveButton.addEventListener('click', function (event) {
+        let isEditFormOkay = null;
+        for (var i = 0; i < editInputs.length; i++) {
+            if (editInputs[i].disabled === true) {
+                M.toast({ html: 'Please click the edit button to update information' });
+                break;
+            } else if (isEmpty(editInputs[i])) {
+                editInputs[i].classList.add('invalid');
+                editInputs[i].focus();
+                M.toast({ html: 'Form not submitted' });
+                isEditFormOkay = false;
+                break;
+            } else {
+                isEditFormOkay = true
+            }
+        }
+
+        if (isEditFormOkay === true) {
+            editDataLoader.style.visibility = 'visible';
+            $('#editDataForm :input').prop('disabled', true);
+            $.ajax({
+                method: 'PUT',
+                url: `/users/removeUser/${userId}`,
+                dataType: 'json',
+                data: {
+                    firstName: $('#editFirstName').val(),
+                    lastName: $('#editLastName').val(),
+                    email: $('#editEmail').val(),
+                    phone: $('#editPhone').val(),
+                    password: $('#editPassword').val()
+                },
+                statusCode: {
+                    401: function (msg, status, jqXHR) {
+                        $('#editDataForm :input').prop('disabled', false);
+                        editDataLoader.style.visibility = 'hidden';
+                        $('#incorrectEditPassword').html(msg.responseJSON.message);
+                        editForm.editPassword.focus();
+                    }
+                }
+            }).done (function (msg) {
+                M.toast({ html: 'Update Sucessful' });
+                editDataLoader.style.visibility = 'hidden';
+                let username = document.querySelector('#username');
+                username.innerHTML = `${msg.firstName} ${msg.lastName}`;
+                setTimeout(function () {
+                    $('.modal').modal('close');
+                }, 2000);
+                
+            }).fail (function (xhr) {
+                console.log('xhr ', xhr);
+            });
+        }
+    });
+
+    checkEditInputs();
 });
