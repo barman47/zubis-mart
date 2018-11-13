@@ -113,22 +113,6 @@ router.post('/register', (req, res) => {
     }
 });
 
-router.get('/image', (req, res) => {
-    const query = {
-        metada: {itemaName: 'New Product'}
-    };
-    gfs.files.find().toArray((err, returnedFiles) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log(returnedFiles);
-            res.render('image', {
-                files: returnedFiles
-            });
-        }
-    });
-});
-
 router.post('/login', (req, res, next) => {
     passport.authenticate('user', (err, user, info) => {
         if (err) {
@@ -399,6 +383,22 @@ router.delete('/removeService', (req, res) => {
         } else {
             console.log('Service removed successfully');
             res.status(200).json({ message: 'Service removed successfully' });
+        }
+    });
+});
+
+router.get('/image', (req, res) => {
+    const query = {
+        metada: {itemaName: 'New Product'}
+    };
+    gfs.files.find().toArray((err, returnedFiles) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log(returnedFiles);
+            res.render('image', {
+                files: returnedFiles
+            });
         }
     });
 });
