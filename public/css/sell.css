@@ -2,7 +2,7 @@
     background-color: #fff;
     color: #555 !important;
     padding: 15px;
-    width: 100%;
+    width: 100% !important;
 }
 
 .breadcrumb {

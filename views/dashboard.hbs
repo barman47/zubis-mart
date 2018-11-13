@@ -35,92 +35,58 @@
                     </div>
                 </div>
             </div>
-            <div id="stock-data" class="row">
+            <div class="row stock-data">
                 <div class="col s12">
-                    {{!-- <h5>Product and Services Summary</h5> --}}
-                    <table class="striped responsive-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                            <tr>
-                                <td>iPhoneX</td>
-                                <td>Product</td>
-                                <td><span class="mdi mdi-currency-ngn"></span>30,000</td>
-                                <td>Available</td>
-                                <td><span class="mdi mdi-delete-outline table-icon tooltipped" data-tooltip="Remove Item"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {{#if products}}
+                        <h5>Products Summary</h5>
+                        <table class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                {{#each products}}
+                                    <tr>
+                                        <td>{{this.name}}</td>
+                                        <td>{{this.category}}</td>
+                                        <td><span class="mdi mdi-currency-ngn"></span>{{this.price}}</td>
+                                        <td><span class="mdi mdi-delete-outline products-icon" data-id="{{this._id}}"></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    {{else}}
+                        <h4 class="not-available">You have no Products at this time.</h4>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="row stock-data">
+                <div class="col s12">
+                    {{#if services}}
+                        <h5>Services Summary</h5>
+                        <table class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="servicesTableBody">
+                                {{#each services}}
+                                    <tr>
+                                        <td>{{this.category}}</td>
+                                        <td><span class="mdi mdi-delete-outline services-icon" data-id="{{this._id}}"></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    {{else}}
+                        <h4 class="not-available">You have no Services at this time.</h4>
+                    {{/if}}
                 </div>
             </div>
         </div>

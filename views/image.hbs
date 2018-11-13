@@ -1,1 +1,5 @@
-<img src="/users/image/{{src}}" alt="Image">
+{{#if files}}
+    {{#each files}}
+        <img src="/users/image/{{this.filename}}" alt="">
+    {{/each}}
+{{/if}}

@@ -6,7 +6,7 @@ const ServiceSchema = mongoose.Schema({
         required: true
     },
 
-    user: {
+    userName: {
         type: String,
         required: true
     },

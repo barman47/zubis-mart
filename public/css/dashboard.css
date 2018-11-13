@@ -23,6 +23,7 @@
 
 #right-section h5 {
     color: #fa9609;
+    font-weight: lighter;
     transition: color 2s;
 }
 
@@ -67,20 +68,29 @@
     font-size: 48px;
 }
 
-#stock-data {
+.stock-data {
     background-color: #fff;
     border-radius: 5px;
     margin-left: 0;
     margin-right: 0;
 }
 
-.table-icon {
+.services-icon, .products-icon {
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
     font-size: 20px;
 }
 
-.table-icon:hover {
+.not-available {
+    background-color: #fff;
+    border-radius: 5px;
+    color: #777;
+    font-weight: lighter;
+    padding: 15px;
+    text-align: center;
+}
+
+.services-icon:hover, .products-icon:hover {
     color: #f44336;  
 }
 
@@ -102,13 +112,21 @@
     color: #f44336;  
 }
 
-#editEmailErrorMessage, #incorrectRemoveUserPassword, #incorrectEditPassword {
+#editEmailErrorMessage, #incorrectRemoveUserPassword, #incorrectEditPassword, {
     color: #f44336;
     position: relative;
     min-height: 18px;
     display: block;
     font-size: 12px;
     margin-left: 3rem;
+}
+
+#oldPasswordErrorMessage, #newPasswordErrorMessage {
+    color: #f44336;
+    position: relative;
+    min-height: 18px;
+    display: block;
+    font-size: 12px;
 }
 
 #addItemModal, #editDataModal {

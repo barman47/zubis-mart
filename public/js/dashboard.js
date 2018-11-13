@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $('select').formSelect();
-    $('.tooltipped').tooltip({ position: 'top' });
+
+    const productsIcon = document.querySelectorAll('.products-icon');
+    const servicesIcon = document.querySelectorAll('.services-icon');
 
     const homeLink = document.querySelector('.active');
     const accountLink = document.querySelector('.account');
@@ -9,11 +11,13 @@ $(document).ready(function () {
     const itemForm = document.addItemForm;
     const editForm = document.editDataForm;
     const removeAccountForm = document.removeAccountForm;
+    const changePasswordForm = document.changePasswordForm;
 
     const serviceLoader = document.querySelector('#addServiceLoader');
-    const itemLoader = document.querySelector('#addItemLoader');
+    const addItemLoader = document.querySelector('#addItemLoader');
     const removeAccountLoader = document.querySelector('#removeAccountLoader');
     const editDataLoader = document.querySelector('#editDataLoader');
+    const changePasswordLoader = document.querySelector('#changePasswordLoader');
 
     const serviceCategory = serviceForm.seviceCategory;
     const serviceDescription = serviceForm.serviceDescription;
@@ -29,12 +33,6 @@ $(document).ready(function () {
         editForm.editPhone,
         editForm.editPassword
     ];
-
-    const itemName = itemForm.itemName;
-    const itemPrice = itemForm.itemPrice;
-    const itemCategory = itemForm.itemCategory;
-    const itemDescription = itemForm.itemDescription;
-    const itemImage = itemForm.fileField;
 
     const saleItems = [
         itemForm.itemName,
@@ -56,6 +54,60 @@ $(document).ready(function () {
             return true;
         } else {
             return false;
+        }
+    }
+
+    function submitChangePasswordForm (event) {
+        event.preventDefault();
+        if (isEmpty(changePasswordForm.oldPassword)) {
+            changePasswordForm.oldPassword.classList.add('invalid');
+            changePasswordForm.oldPassword.focus();
+        } else if (isEmpty(changePasswordForm.newPassword)) {
+            changePasswordForm.newPassword.classList.add('invalid');
+            changePasswordForm.newPassword.focus();
+        } else if (isEmpty(changePasswordForm.confirmPassword)) {
+            changePasswordForm.confirmPassword.classList.add('invalid');
+            changePasswordForm.confirmPassword.focus();
+        } else if (changePasswordForm.confirmPassword.value !== changePasswordForm.newPassword.value) {
+            changePasswordForm.confirmPassword.classList.add('invalid');
+            changePasswordForm.confirmPassword.focus();
+        } else {
+            changePasswordLoader.style.visibility = 'visible';
+            $('#changePasswordForm :input').prop('disabled', true);
+            $.ajax({
+                url: `/users/${userId}/changePassword`,
+                type: 'PUT',
+                data: {
+                    oldPassword: $('#oldPassword').val(),
+                    newPassword: $('#newPassword').val()
+                },
+                statusCode: {
+                    401: function (msg, status, jqXHR) {
+                        $('#changePasswordForm :input').prop('disabled', false);
+                        changePasswordLoader.style.visibility = 'hidden';
+                        $('#oldPasswordErrorMessage').html(msg.responseJSON.message);
+                        $('#oldPassword').focus();
+                    },
+                    500: function (msg, status, jqXHR) {
+                        $('#changePasswordForm :input').prop('disabled', false);
+                        changePasswordLoader.style.visibility = 'hidden';
+                        M.toast({ html: msg.responseJSON.message });
+                    },
+                }
+            }).fail(function (jqXHR, textStatus) {
+                $('#changePasswordForm :input').prop('disabled', false);
+                changePasswordLoader.style.visibility = 'hidden';
+                M.toast({ html: 'Something went wrong. Please try again.' });
+
+            }).done(function (msg, status, jqXHR) {
+                $('#changePasswordForm :input').prop('disabled', false);
+                $('#changePasswordForm :input').val('');
+                changePasswordLoader.style.visibility = 'hidden';
+                M.toast({ html: 'Password Changed Successfully' });
+                setTimeout(function () {
+                    $('.modal').modal('close');
+                }, 3000);
+            });
         }
     }
 
@@ -106,38 +158,22 @@ $(document).ready(function () {
                 }, 3000);
 
                 const tableRow = document.createElement('tr');
-                const tableBody = document.getElementById('tbody');
+                const tableBody = document.getElementById('servicesTableBody');
 
-                const tableDataName = document.createElement('td');
                 const tableDataCategory = document.createElement('td');
-                const tableDataPrice = document.createElement('td');
-                const tableDataStatus = document.createElement('td');
                 const tableDataAction = document.createElement('td');
 
                 const deleteIcon = document.createElement('span');
-                const checkIcon = document.createElement('span');
 
-                deleteIcon.setAttribute('class', 'mdi mdi-delete-outline table-icon tooltipped');
+                deleteIcon.setAttribute('class', 'mdi mdi-delete-outline services-icon');
                 deleteIcon.setAttribute('data-tooltip', 'Remove Item');
 
-                const serviceName = document.createTextNode(msg.category);
-                tableDataName.appendChild(serviceName);
-
-                const serviceCategory = document.createTextNode('Service');
+                const serviceCategory = document.createTextNode(msg.category);
                 tableDataCategory.appendChild(serviceCategory);
-
-                const servicePrice = document.createTextNode('');
-                tableDataPrice.appendChild(servicePrice);
-
-                const serviceStatus = document.createTextNode('Available');
-                tableDataStatus.appendChild(serviceStatus);
 
                 tableDataAction.appendChild(deleteIcon);
 
-                tableRow.appendChild(tableDataName);
                 tableRow.appendChild(tableDataCategory);
-                tableRow.appendChild(tableDataPrice);
-                tableRow.appendChild(tableDataStatus);
                 tableRow.appendChild(tableDataAction);
 
                 tableBody.appendChild(tableRow);
@@ -150,37 +186,102 @@ $(document).ready(function () {
         }
     }
 
-    // function submitItemForm (event) {
-    //     event.preventDefault();
-    //     let isOkay = null;
-    //     for (var i = 0; i < saleItems.length; i++) {
-    //         if (isEmpty(saleItems[i])) {
-    //             saleItems[i].classList.add('invalid');
-    //             saleItems[i].focus();
-    //             M.toast({ html: 'Please complete the form' });
-    //             isOkay = false;
-    //             break;
-    //         } else {
-    //             isOkay = true;
-    //         }
-    //     }
+    productsIcon.forEach(function (icon) {
+        icon.addEventListener('click', function (event) {
+            $(event.target.parentElement.parentElement).remove();
+            $.ajax({
+                url: '/users/removeProduct',
+                type: 'DELETE',
+                data: {
+                    id: event.target.dataset.id
+                },
+                statusCode: {
+                    501: function (msg, status, jqXHR) {
+                        console.log(status);
+                    }
+                }
+            }).fail(function (jqXHR, textStatus) {
+                console.log('error: item not deleted ', textStatus);
+            }).done(function (msg, status, jqXHR) {
+                M.toast({ html: 'Product Deleted Successfully' });
+            });
+        });
+    });
 
-    //     if (isOkay === true) {
-    //         serviceLoader.style.visibility = 'visible';
-    //         $('#addItemButton').html('UPLOADING...');
-    //         $('#addItemForm :input').prop('disabled', true);
-    //         $(event.target).ajaxSubmit({
-    //             fail: function (xhr) {
-    //                 status('Error ' + xhr.status);
-    //             },
-    //             success: function (response) {
-    //                 console.log(response);
-    //             }
-    //         });
-    //         M.toast({ html: 'File Uploaded Successfully!' });
-    //         return false;
-    //     }
-    // }
+    servicesIcon.forEach(function (icon) {
+        icon.addEventListener('click', function (event) {
+            $(event.target.parentElement.parentElement).remove();
+            $.ajax({
+                url: '/users/removeService',
+                type: 'DELETE',
+                data: {
+                    id: event.target.dataset.id
+                },
+                statusCode: {
+                    501: function (msg, status, jqXHR) {
+                        console.log(status);
+                    }
+                }
+            }).fail(function (jqXHR, textStatus) {
+                console.log('error: item not deleted ', textStatus);
+            }).done(function (msg, status, jqXHR) {
+                M.toast({ html: 'Service Deleted Successfully' });
+            });
+        });
+    });
+
+    function checkChangePasswordInputs () {
+        changePasswordForm.oldPassword.addEventListener('keyup', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+        changePasswordForm.oldPassword.addEventListener('focusout', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        changePasswordForm.newPassword.addEventListener('keyup', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        changePasswordForm.newPassword.addEventListener('focusout', function (event) {
+            if (!passwordRegExp.test(event.target.value)) {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+                event.target.focus();
+            } else {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            }
+        }, false);
+
+        changePasswordForm.confirmPassword.addEventListener('keyup', function (event) {
+            if (event.target.value === changePasswordForm.newPassword.value) {
+                event.target.classList.add('valid');
+                event.target.classList.remove('invalid');
+            } else {
+                event.target.classList.add('invalid');
+                event.target.classList.remove('valid');
+            }
+        }, false);
+    }
 
     serviceDescription.addEventListener('keyup', function (event) {
         if (!isEmpty(event.target) || event.target.value.toString().length >= 5) {
@@ -197,7 +298,6 @@ $(document).ready(function () {
 
     serviceForm.addEventListener('submit', submitServiceForm);
     $('#addItemForm').submit(function (event) {
-        // event.preventDefault();
         let isOkay = null;
         for (var i = 0; i < saleItems.length; i++) {
             if (isEmpty(saleItems[i])) {
@@ -211,62 +311,11 @@ $(document).ready(function () {
                 isOkay = true;
             }
         }
-
-        // if (isOkay === true) {
-        //     itemLoader.style.visibility = 'visible';
-        //     $('#addItemButton').html('UPLOADING...');
-        //     $('#addItemForm :input').prop('disabled', true);
-        //     const form = document.getElementById('addItemForm');
-        //     let formData = new FormData(form);
-        //     const data = {
-        //         image: itemImage.value,
-        //         name: itemName.value,
-        //         price: itemPrice.value,
-        //         user: $('#username').html().toUpperCase(),
-        //         category: itemCategory.value
-        //     }
-        //     $.ajax({
-        //         url: event.target.attributes[4].nodeValue,
-        //         data: formData,
-        //         type: 'POST',
-        //         // dataType: 'json',
-        //         processData: false,
-        //         // contentType: false,
-        //         enctype: 'multipart/form-data',
-        //         cache: false,
-        //         fail: function (xhr) {
-        //             itemLoader.style.visibility = 'hidden';
-        //             $('#addItemButton').html('ADD ITEM');
-        //             $('#addItemForm :input').prop('disabled', false);
-        //             status('Error ' + xhr.status);
-        //         },
-        //         success: function (response) {
-        //             itemLoader.style.visibility = 'hidden';
-        //             $('#addItemButton').html('ADD ITEM');
-        //             $('#addItemForm :input').prop('disabled', false);
-        //             console.log(response);
-        //             M.toast({ html: 'File Uploaded Successfully!' });
-        //         }
-        //     });
-            // $(this).ajaxSubmit({
-            //     fail: function (xhr) {
-            //         itemLoader.style.visibility = 'hidden';
-            //         $('#addItemButton').html('ADD ITEM');
-            //         $('#addItemForm :input').prop('disabled', false);
-            //         status('Error ' + xhr.status);
-            //     },
-            //     success: function (response) {
-            //         itemLoader.style.visibility = 'hidden';
-            //         $('#addItemButton').html('ADD ITEM');
-            //         $('#addItemForm :input').prop('disabled', false);
-            //         console.log(response);
-            //         M.toast({ html: 'File Uploaded Successfully!' });
-            //     }
-            // });
-            // return false;
-        //}
+        addItemLoader.style.visibility = 'visible';
     });
-    // itemForm.addEventListener('submit', submitItemForm);
+
+    changePasswordForm.addEventListener('submit', submitChangePasswordForm);
+    
     removeAccountPassword.addEventListener('focusout', function (event) {
         if (isEmpty(event.target)) {
             event.target.classList.add('invalid');
@@ -316,7 +365,8 @@ $(document).ready(function () {
             });
         }
     });
-    cancelButton.addEventListener('click', function () {
+    cancelButton.addEventListener('click', function (event) {
+        event.preventDefault();
         editInputs.forEach(function (input) {
             input.disabled = true;
         });
@@ -438,7 +488,7 @@ $(document).ready(function () {
             $('#editDataForm :input').prop('disabled', true);
             $.ajax({
                 method: 'PUT',
-                url: `/users/removeUser/${userId}`,
+                url: `/users/editUser/${userId}`,
                 dataType: 'json',
                 data: {
                     firstName: $('#editFirstName').val(),
@@ -471,4 +521,5 @@ $(document).ready(function () {
     });
 
     checkEditInputs();
+    checkChangePasswordInputs();
 });

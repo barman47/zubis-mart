@@ -33,21 +33,21 @@ conn.on('error', (err) => {
 
 const storage = new GridFsStorage({
   url: mongoURI,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString('hex') + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
-          bucketName: 'images'
-        };
-        resolve(fileInfo);
-      });
-    });
-  }
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'images'
+                };
+                resolve(fileInfo);
+            });
+        });
+    }
 });
 const upload = multer({ storage });
 
@@ -113,6 +113,22 @@ router.post('/register', (req, res) => {
     }
 });
 
+router.get('/image', (req, res) => {
+    const query = {
+        metada: {itemaName: 'New Product'}
+    };
+    gfs.files.find().toArray((err, returnedFiles) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log(returnedFiles);
+            res.render('image', {
+                files: returnedFiles
+            });
+        }
+    });
+});
+
 router.post('/login', (req, res, next) => {
     passport.authenticate('user', (err, user, info) => {
         if (err) {
@@ -152,13 +168,27 @@ router.get('/:id/account', (req, res) => {
         if (err) {
             return console.log(err);
         } else {
-            res.render('dashboard', {
-                title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
-                style: 'dashboard.css',
-                script: 'dashboard.js',
-                user,
-                firstName: user.firstName.toLowerCase(),
-                lastName: user.lastName.toLowerCase()
+            Product.find({userEmail: user.email}, (err, products) => {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    Service.find({userName: `${user.firstName} ${user.lastName}`}, (err, services) => {
+                        if (err) {
+                            return console.log(err);
+                        } else {
+                            res.render('dashboard', {
+                                title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
+                                style: 'dashboard.css',
+                                script: 'dashboard.js',
+                                firstName: user.firstName.toLowerCase(),
+                                lastName: user.lastName.toLowerCase(),
+                                products,
+                                services,
+                                user
+                            });
+                        }
+                    });
+                }
             });
         }
     });
@@ -167,7 +197,7 @@ router.get('/:id/account', (req, res) => {
 router.post('/addService', (req, res) => {
     const service = new Service({
         category: req.body.category,
-        user: req.body.user,
+        userName: req.body.user,
         description: req.body.description
     });
 
@@ -194,7 +224,7 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
             gfs.files.updateOne({filename: file.filename}, {$set: {metadata: {
                 itemName:req.body.itemName,
                 category: req.body.itemCategory,
-                user: `${returnedUser.firstName} ${returnedUser.lastName}`,
+                userName: `${returnedUser.firstName} ${returnedUser.lastName}`,
                 userEmail: returnedUser.email,
                 description: req.body.itemDescription,
                 price: req.body.itemPrice
@@ -205,7 +235,7 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
                     let product = new Product({
                         name: req.body.itemName,
                         category: req.body.itemCategory,
-                        user: `${returnedUser.firstName} ${returnedUser.lastName}`,
+                        userName: `${returnedUser.firstName} ${returnedUser.lastName}`,
                         userEmail: returnedUser.email,
                         description: req.body.itemDescription,
                         price: req.body.itemPrice
@@ -219,18 +249,6 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
                         }
                     });
                 }
-            });
-        }
-    });
-});
-
-router.get('/image', (req, res) => {
-    gfs.files.find({}, (err, returnedFile) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            res.render('image', {
-                src: returnedFile.filename
             });
         }
     });
@@ -268,7 +286,7 @@ router.delete('/removeUser/:id', (req, res) => {
                                             if (err) {
                                                 return console.log(err);
                                             } else {
-                                                res.status(200).json({ message: 'Account removed successfully'})
+                                                res.status(200).json({ message: 'Account removed successfully' })
                                             }
                                         });
                                     }
@@ -282,7 +300,7 @@ router.delete('/removeUser/:id', (req, res) => {
     });
 });
 
-router.put('/removeUser/:id', (req, res) => {
+router.put('/editUser/:id', (req, res) => {
     User.findOne({_id: req.params.id}, (err, returnedUser) => {
         if (err) {
             return console.log(err);
@@ -308,6 +326,79 @@ router.put('/removeUser/:id', (req, res) => {
                     res.status(401).json({ message: 'Incorrect Password!' });
                 }
             });
+        }
+    });
+});
+
+router.put('/:id/changePassword', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, returnedUser) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'Something Went wrong. Try again' });
+        } else {
+            bcrypt.compare(req.body.oldPassword, returnedUser.password, (err, isMatch) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).json({ error: 'Something Went wrong. Try again' });
+                } else {
+                    if (!isMatch) {
+                        console.log('No match');
+                        res.status(401).json({ message: 'Incorrect Password' });
+                    } else {
+                        console.log('There is a Match');
+                        bcrypt.genSalt(10, (err, salt) => {
+                            if (err) {
+                                console.log(err);
+                                res.status(500).json({ error: 'Something Went wrong. Try again' });
+                            } else {
+                                bcrypt.hash(req.body.newPassword, salt, (err, hash) => {
+                                    if (err) {
+                                        console.log(err);
+                                        res.status(500).json({ error: 'Something Went wrong. Try again' });
+                                    } else {
+                                        const newPassword = hash;
+                                        User.findOneAndUpdate({_id: req.params.id}, {$set: {password: newPassword}}, (err) => {
+                                            if (err) {
+                                                console.log(err);
+                                                res.status(500).json({ error: 'Something Went wrong. Try again' });
+                                            } else {
+                                                console.log('Password Changed Successfully');
+                                                res.status(200).json({ message: 'Password Changed Successfully' });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+});
+
+router.delete('/removeProduct', (req, res) => {
+    console.log(req.body);
+    Product.findOneAndRemove({_id: req.body.id}, (err, removedProduct) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Product not removed' });
+        } else {
+            console.log('Product removed successfully');
+            res.status(200).json({ message: 'Product removed successfully' });
+        }
+    });
+});
+
+router.delete('/removeService', (req, res) => {
+    console.log(req.body);
+    Service.findOneAndRemove({_id: req.body.id}, (err, removedService) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ message: 'Service not removed' });
+        } else {
+            console.log('Service removed successfully');
+            res.status(200).json({ message: 'Service removed successfully' });
         }
     });
 });

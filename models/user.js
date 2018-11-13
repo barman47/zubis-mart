@@ -23,6 +23,14 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+
+    stockTotal: {
+        type: Number
+    },
+
+    totalProfit: {
+        type: Number
     }
 });
 

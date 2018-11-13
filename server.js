@@ -1,7 +1,5 @@
 const fs = require('fs');
 const express = require('express');
-// const base64js = require('js-base64').Base64;
-// const ab2str = require('arraybuffer-to-string');
 const exphbs = require('express-handlebars');
 // const favicon = require('express-favicon');
 const bodyParser = require('body-parser');

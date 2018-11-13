@@ -3,7 +3,7 @@
         <div class="indeterminate"></div>
     </div>
     <div class="modal-content">
-        <h4>Edit User Information<i id="modal-close" class="mdi mdi-close modal-close right"></i></h4>
+        <h4>Edit User Information</h4>
         <form id="editDataForm" name="editDataForm">
            <div class="row">
                 <div class="col s12 l6 input-field">
@@ -36,7 +36,7 @@
                     <span class="helper-text" data-error="Invalid Phone Number!">Example: 09026425337</span>
                 </div>
             </div>
-                <div class="row">
+            <div class="row">
                 <div class="col s12 input-field">
                     <i class="mdi mdi-lock-outline prefix"></i>
                     <input type="password" name="editPassword" id="editPassword" class="validate" disabled>
@@ -45,19 +45,17 @@
                     <span id="incorrectEditPassword"></span>
                 </div>
             </div>
+            <div class="row login-row">
+                <div class="col s12 l4">
+                    <button id="cancelButton" class="modal-close editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-close left prefix editModalButtonIcon"></span>Cancel</button>
+                </div>
+                <div class="col s12 l4">
+                    <button id="saveButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-check left prefix editModalButtonIcon"></span>Save</button>
+                </div>
+                <div class="col s12 l4">
+                    <button id="editButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-pencil left prefix editModalButtonIcon"></span>Edit</button>
+                </div>
+            </div>
         </form>
-    </div>
-    <div class="modal-footer">
-        <div class="row login-row">
-            <div class="col s12 l4">
-                <button id="cancelButton" class="modal-close editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-close left prefix editModalButtonIcon"></span>Cancel</button>
-            </div>
-            <div class="col s12 l4">
-                <button id="saveButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-check left prefix editModalButtonIcon"></span>Save</button>
-            </div>
-            <div class="col s12 l4">
-                <button id="editButton" class="editModalButton btn waves-effect waves-light" type="submit"><span class="mdi mdi-pencil left prefix editModalButtonIcon"></span>Edit</button>
-            </div>
-        </div>
     </div>
 </div>
