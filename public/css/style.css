@@ -43,6 +43,10 @@ nav .nav-wrapper {
     padding: 0 40px;
 }
 
+nav ul a {
+    font-family: 'Rajdhani', sans-serif;
+}
+
 .dropdown-content {
     width: auto !important;
     background-color: #a7b018;
@@ -84,6 +88,7 @@ form .progress {
 .modal h4, #loginFormHeader {
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 10px;
+    font-family: 'Rajdhani', sans-serif;
     font-size: 25px;
     color: #666;
 }
@@ -102,6 +107,7 @@ form .progress {
 
 .input-field label {
     color: #c5c5c5;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .input-field input:focus + label, .input-field textarea:focus + label {
@@ -129,7 +135,11 @@ form .progress {
     min-height: 18px;
 }
 
-#login-button, button, #signupButton, #addItemButton, #addServiceButton {
+.btn {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#login-button, button, #signupButton, #addItemButton, #addServiceButton, #changePasswordButton {
     background-color: transparent;
     border: 1px solid #a7b018;
     color: #a7b018;
@@ -152,7 +162,7 @@ form .progress {
     box-shadow: 2px 2px 3px #c5c5c5;
 }
 
-#login-button:hover, #signupButton:hover, #addItemButton:hover, #addServiceButton:hover {
+#login-button:hover, #signupButton:hover, #addItemButton:hover, #addServiceButton:hover, #changePasswordButton:hover {
     background-color: #969e16;
     border: none;
     color: #fff;
@@ -239,6 +249,7 @@ form .progress {
 
 .sidenav li > a, .sidenav li > a > .mdi {
     color: #fff;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .slider .indicators .indicator-item.active {
@@ -258,6 +269,7 @@ form .progress {
 .page-footer {
     background-color: transparent;
     color: #333 !important;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #footerLink li{
@@ -332,3 +344,8 @@ form .progress {
         margin-bottom: 20px;
     }
 }
+
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Dosis', sans-serif;
+font-family: 'Rajdhani', sans-serif; */

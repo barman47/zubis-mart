@@ -1,6 +1,7 @@
 .sub-header {
     text-align: center;
     color: #fa9609;
+    font-family: 'Rajdhani', sans-serif;
     font-weight: lighter;
 }
 
@@ -10,6 +11,8 @@
 
 .card .card-content .card-title, .card .card-reveal .card-title {
     color: #a7b018 !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
 }
 
 .card .card-reveal .card-title .close-card:hover {
@@ -20,9 +23,14 @@
     color: #555;
 }
 
+.card .card-reveal p {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .price {
     color: #555;
     cursor: default;
+    font-family: 'Rajdhani', sans-serif;
     font-size: 18px !important;
     font-style: unset !important;
     font-weight: bold;
@@ -34,6 +42,8 @@
 
 #about {
     background-color: #fff;
-    padding: 25px 50px;
     box-shadow: 5px 2px 5px #c5c5c5;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.3rem;
+    padding: 25px 50px;
 }

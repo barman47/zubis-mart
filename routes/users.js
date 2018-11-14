@@ -388,9 +388,6 @@ router.delete('/removeService', (req, res) => {
 });
 
 router.get('/image', (req, res) => {
-    const query = {
-        metada: {itemaName: 'New Product'}
-    };
     gfs.files.find().toArray((err, returnedFiles) => {
         if (err) {
             return console.log(err);
@@ -412,7 +409,8 @@ router.get('/logout/:id', (req, res) => {
 //     if (req.isAuthenticated()) {
 //         return next();
 //     } else {
-//         // logout
+//         req.flash('failure', 'Please login');
+//         res.redirect('/');
 //     }
 // }
 

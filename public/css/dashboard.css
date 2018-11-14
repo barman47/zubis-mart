@@ -15,6 +15,10 @@
     text-transform: capitalize !important;
 }
 
+#username {
+    font-family: 'Dosis', sans-serif;
+}
+
 #right-section {
     background-color: transparent;
     padding: 20px 40px;
@@ -23,6 +27,7 @@
 
 #right-section h5 {
     color: #fa9609;
+    font-family: 'Rajdhani', sans-serif;
     font-weight: lighter;
     transition: color 2s;
 }
@@ -56,11 +61,9 @@
 
 #card1 {
     background-color: rgba(199, 68, 68, .6);
-    /* background: linear-gradient(to right, #c74444, #e26a6a, #d05a5a) !important; */
 }
 
 #card2 {
-    /* background-color: #26a69a; */
     background-color: rgba(38, 166, 154, .6);
 }
 
@@ -73,6 +76,11 @@
     border-radius: 5px;
     margin-left: 0;
     margin-right: 0;
+}
+
+th {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600;
 }
 
 .services-icon, .products-icon {
@@ -94,8 +102,14 @@
     color: #f44336;  
 }
 
+.collection h4 {
+    font-family: 'Rajdhani', sans-serif;
+}
+
 .collection-item a{
     color: #333;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
 }
 
 .collection-item a:visited{

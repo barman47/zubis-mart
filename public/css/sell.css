@@ -1,6 +1,7 @@
 #breadcrumb-container {
     background-color: #fff;
     color: #555 !important;
+    font-family: 'Rajdhani', sans-serif;
     padding: 15px;
     width: 100% !important;
 }
@@ -42,18 +43,22 @@ a.breadcrumb:hover {
 
 .sell-header {
     color: #444;
+    font-family: 'Dosis', sans-serif;
 }
 
 .sell-sub-header {
     color: #a7b018;
+    font-family: 'Dosis', sans-serif;
 }
 
 .sell-sub-header + p {
     color: #777;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #why-sell-header {
     color: #fa9609;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .sell-register-button {
