@@ -8,9 +8,7 @@ const passport = require('passport');
 const User = require('../models/user');
 const Service = require('../models/service');
 const Product = require('../models/product');
-const ProductImage = require('../models/productImage');
 
-// const mongoURI = require('../config/database').database;
 const mongoURI ='mongodb://localhost:27017/zubismart';
 
 const conn = mongoose.createConnection(mongoURI, {
