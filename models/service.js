@@ -6,6 +6,11 @@ const ServiceSchema = mongoose.Schema({
         required: true
     },
 
+    userEmail: {
+        type: String,
+        required: true
+    },
+
     userName: {
         type: String,
         required: true

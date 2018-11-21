@@ -44,10 +44,20 @@ $(document).ready(function () {
 
     const removeAccountPassword = removeAccountForm.removeAccountPassword;
     const userId = document.getElementById('username').getAttribute('data-id');
+    const userEmail = document.getElementById('username').getAttribute('data-email');
 
     const emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
     const phoneRegExp = /^\d{11}$/;
     const passwordRegExp = /^[\w@-]{8,20}$/;
+
+    // itemForm.itemPrice.addEventListener('keyup', function (event) {
+    //     if (isNaN(event.target.value)) {
+    //         // event.target.value += ''
+    //     } else {
+    //         // event.target.value += event.target.value;
+    //     }
+    //     console.log(isNaN(event.target.value));
+    // });
 
     function isEmpty (element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -133,7 +143,8 @@ $(document).ready(function () {
                 data: {
                     category: serviceCategory.value,
                     description: serviceDescription.value,
-                    user: $('#username').html().toUpperCase()
+                    userEmail: userEmail,
+                    userName: $('#username').html().toUpperCase()
                 },
                 statusCode: {
                     406: function (msg, status, jqXHR) {
@@ -306,12 +317,13 @@ $(document).ready(function () {
                 saleItems[i].focus();
                 M.toast({ html: 'Please complete the form' });
                 isOkay = false;
+                addItemLoader.style.visibility = 'hidden';
                 break;
             } else {
                 isOkay = true;
+                addItemLoader.style.visibility = 'visible';
             }
         }
-        addItemLoader.style.visibility = 'visible';
     });
 
     changePasswordForm.addEventListener('submit', submitChangePasswordForm);

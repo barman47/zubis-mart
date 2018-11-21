@@ -11,6 +11,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 // const moment = require('moment');
 
+const products = require('./routes/products');
+const services = require('./routes/services');
 const users = require('./routes/users');
 
 const path = require('path');
@@ -19,6 +21,8 @@ const config = require('./config/database');
 const app = express();
 
 const PORT = process.env.PORT || 6400;
+
+let gfs;
 
 mongoose.connect(config.database, {
     useNewUrlParser: true
@@ -82,6 +86,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/products', products);
+app.use('/services', services);
 app.use('/users', users);
 
 app.get('/', (req, res) => {
