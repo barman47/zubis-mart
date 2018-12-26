@@ -1,0 +1,41 @@
+{{> header}}
+<main>
+    <div class="breadcrumb-container" class="row">
+        <div class="col s12">
+            <a href="/" class="breadcrumb">Home</a>
+            <a href="" class="breadcrumb">Store</a>
+            <a href="/products/books" class="breadcrumb active">Books</a>
+            <h4>Books</h4>
+        </div>
+    </div>
+    <section>
+        {{#if product}}
+            <div class="section">
+                <div class="row">
+                    {{#each product}}
+                        <div class="col s12 m6 l3">
+                            <div class="card medium">
+                                <div class="card-image">
+                                    <img src="data:image/jpeg;charset=utf-8;base64,{{base64ArrayBuffer this.image.data.buffer}}" alt="{{this.name}}" class="materialboxed" data-caption="{{this.name}}">
+                                    <span class="card-title">{{this.name}}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p class="price"><span class="mdi mdi-currency-ngn">{{this.price}}</span></p>
+                                </div>
+                                <div class="card-action product">
+                                    <p>Seller: <span class="product-info">{{this.userName}}</span></p>
+                                    <p>Contact: <span class="product-info">{{this.phone}}</span></p>
+                                    <p>Description: <span class="product-info">{{this.description}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        {{else}}
+            <h3 class="no-product">THERE ARE NO BOOKS AT THIS TIME</h3>
+        {{/if}}
+    </section>
+</main>
+{{> fab}}
+{{> footer}}

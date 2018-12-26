@@ -212,6 +212,7 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
                 category: req.body.itemCategory,
                 userName: `${returnedUser.firstName} ${returnedUser.lastName}`,
                 userEmail: returnedUser.email,
+                phone: returnedUser.phone,
                 description: req.body.itemDescription,
                 price: req.body.itemPrice,
                 originalname: file.originalname

@@ -1,0 +1,53 @@
+.breadcrumb-container {
+    background-color: #fff;
+    color: #555 !important;
+    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+    padding: 2rem;
+    width: 100% !important;
+}
+
+.breadcrumb {
+    font-size: 0.875rem;
+}
+
+.breadcrumb:before {
+    color: #ccc;
+    position: relative;
+    top: -7px;
+}
+
+a.breadcrumb.active {
+    color: #a7b018;
+}
+
+a.breadcrumb.active:hover {
+    color: #ffa500;
+}
+
+a.breadcrumb {
+    color: #888;
+    font-weight: 200;
+}
+
+a.breadcrumb.visited {
+    color: #ccc;
+}
+
+a.breadcrumb:hover {
+    color: #333;
+}
+
+.product {
+    font-family: 'Montserrat', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+.product-info {
+    font-weight: 100;
+}
+
+.no-product {
+    color: #ffa500;
+    font-family: 'Rajdhani', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}

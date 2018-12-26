@@ -4,7 +4,7 @@
         <div id="left-section" class="col s12 l3">
             <div id="profile-icon-div">
                 <i class="mdi mdi-account-circle  profile-icon"></i>
-                <h6 id="username" data-id="{{user._id}}">{{firstName}} {{lastName}}</h6>
+                <h6 id="username" data-id="{{user._id}}" data-email="{{user.email}}" data-phone="{{user.phone}}">{{firstName}} {{lastName}}</h6>
             </div>
             <ul class="collection with-header">
                 <li class="collection-header"><h4>Welcome back!</h4></li>
@@ -15,7 +15,6 @@
                 <li class="collection-item"><a class="modal-trigger" data-target="removeAccountModal">Remove My Account</a></li>
             </ul>
         </div>
-
         <div id="right-section" class="col s12 l9">
             <h5><i id="dashboard-icon" class="mdi mdi-view-dashboard"></i>&nbsp;Dashboard</h5>
             <div class="row">
@@ -23,7 +22,7 @@
                     <div id="card1" class="card-panel hoverable">
                         <span class="mdi mdi-currency-sign card-icon"></span>
                         <h5>Stock Total</h5>
-                        <h6>120,000</h6>
+                        <h6><span class="mdi mdi-currency-ngn left"></span>120,000</h6>
                     </div>
                 </div>
 
@@ -31,15 +30,15 @@
                     <div id="card2" class="card-panel hoverable">
                         <span class="mdi mdi-database card-icon"></span>
                         <h5>Total Profit</h5>
-                        <h6>120,000</h6>
+                        <h6><span class="mdi mdi-currency-ngn left"></span>120,000</h6>
                     </div>
                 </div>
             </div>
             <div class="row stock-data">
                 <div class="col s12">
-                    {{#if products}}
-                        <h5>Products Summary</h5>
-                        <table class="striped responsive-table">
+                    <table class="striped responsive-table">
+                        {{#if products}}
+                            <h5>Products Summary</h5>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -54,14 +53,14 @@
                                         <td>{{this.name}}</td>
                                         <td>{{this.category}}</td>
                                         <td><span class="mdi mdi-currency-ngn"></span>{{this.price}}</td>
-                                        <td><span class="mdi mdi-delete-outline products-icon" data-id="{{this._id}}"></td>
+                                        <td><span class="mdi mdi-delete-outline delete-products-icon" data-id="{{this._id}}"></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
-                        </table>
-                    {{else}}
-                        <h4 class="not-available">You have no Products at this time.</h4>
-                    {{/if}}
+                        {{else}}
+                            <h4 class="not-available">You have no Products at this time.</h4>
+                        {{/if}}
+                    </table>
                 </div>
             </div>
             <div class="row stock-data">
@@ -72,6 +71,7 @@
                             <thead>
                                 <tr>
                                     <th>Category</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -79,7 +79,8 @@
                                 {{#each services}}
                                     <tr>
                                         <td>{{this.category}}</td>
-                                        <td><span class="mdi mdi-delete-outline services-icon" data-id="{{this._id}}"></td>
+                                        <td>{{this.description}}</td>
+                                        <td><span class="mdi mdi-delete-outline delete-services-icon" data-id="{{this._id}}"></td>
                                     </tr>
                                 {{/each}}
                             </tbody>

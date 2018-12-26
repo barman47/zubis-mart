@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $('select').formSelect();
 
-    const productsIcon = document.querySelectorAll('.products-icon');
-    const servicesIcon = document.querySelectorAll('.services-icon');
+    const deleteProductIcon = document.querySelectorAll('.delete-products-icon');
+    const deleteServiceIcon = document.querySelectorAll('.delete-services-icon');
 
     const homeLink = document.querySelector('.active');
     const accountLink = document.querySelector('.account');
@@ -197,47 +197,53 @@ $(document).ready(function () {
         }
     }
 
-    productsIcon.forEach(function (icon) {
+    deleteProductIcon.forEach(function (icon) {
         icon.addEventListener('click', function (event) {
-            $(event.target.parentElement.parentElement).remove();
-            $.ajax({
-                url: '/users/removeProduct',
-                type: 'DELETE',
-                data: {
-                    id: event.target.dataset.id
-                },
-                statusCode: {
-                    501: function (msg, status, jqXHR) {
-                        console.log(status);
+            var deleteProduct = confirm("Are you sure you want to remove this item?");
+            if (deleteProduct === true) {
+                $(event.target.parentElement.parentElement).remove();
+                $.ajax({
+                    url: '/users/removeProduct',
+                    type: 'DELETE',
+                    data: {
+                        id: event.target.dataset.id
+                    },
+                    statusCode: {
+                        501: function (msg, status, jqXHR) {
+                            console.log(status);
+                        }
                     }
-                }
-            }).fail(function (jqXHR, textStatus) {
-                console.log('error: item not deleted ', textStatus);
-            }).done(function (msg, status, jqXHR) {
-                M.toast({ html: 'Product Deleted Successfully' });
-            });
+                }).fail(function (jqXHR, textStatus) {
+                    console.log('error: item not deleted ', textStatus);
+                }).done(function (msg, status, jqXHR) {
+                    M.toast({ html: 'Product Deleted Successfully' });
+                });
+            }
         });
     });
 
-    servicesIcon.forEach(function (icon) {
+    deleteServiceIcon.forEach(function (icon) {
         icon.addEventListener('click', function (event) {
-            $(event.target.parentElement.parentElement).remove();
-            $.ajax({
-                url: '/users/removeService',
-                type: 'DELETE',
-                data: {
-                    id: event.target.dataset.id
-                },
-                statusCode: {
-                    501: function (msg, status, jqXHR) {
-                        console.log(status);
+            var deleteService = confirm("Are you sure you want to remove this Serivice?");
+            if (deleteService === true) {
+                $(event.target.parentElement.parentElement).remove();
+                $.ajax({
+                    url: '/users/removeService',
+                    type: 'DELETE',
+                    data: {
+                        id: event.target.dataset.id
+                    },
+                    statusCode: {
+                        501: function (msg, status, jqXHR) {
+                            console.log(status);
+                        }
                     }
-                }
-            }).fail(function (jqXHR, textStatus) {
-                console.log('error: item not deleted ', textStatus);
-            }).done(function (msg, status, jqXHR) {
-                M.toast({ html: 'Service Deleted Successfully' });
-            });
+                }).fail(function (jqXHR, textStatus) {
+                    console.log('error: item not deleted ', textStatus);
+                }).done(function (msg, status, jqXHR) {
+                    M.toast({ html: 'Service Deleted Successfully' });
+                });
+            }
         });
     });
 

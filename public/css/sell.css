@@ -28,11 +28,10 @@ a.breadcrumb:hover {
 #sell-main-container, #sell-bottom {
     background-color: #fff;
     margin: 20px 40px;
-    padding: 40px 50px
+    padding: 40px 50px;
 }
 
 #sell {
-    /* color: #fa9609; */
     color: #a7b018;
     font-weight: 500;
 }

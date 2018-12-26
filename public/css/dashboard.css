@@ -83,7 +83,7 @@ th {
     font-weight: 600;
 }
 
-.services-icon, .products-icon {
+.delete-services-icon, .delete-products-icon {
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
     font-size: 20px;
@@ -98,7 +98,7 @@ th {
     text-align: center;
 }
 
-.services-icon:hover, .products-icon:hover {
+.delete-services-icon:hover, .delete-products-icon:hover {
     color: #f44336;  
 }
 
