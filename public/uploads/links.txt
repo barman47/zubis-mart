@@ -1,0 +1,2 @@
+https://codeforwin.org/2018/02/c-program-find-and-replace-a-word-in-file.html
+https://codeforwin.org/2018/02/c-program-find-occurrence-of-a-word-in-file.html
