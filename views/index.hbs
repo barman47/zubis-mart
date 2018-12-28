@@ -39,146 +39,30 @@
         </div>
         <div>
             <h5 class="sub-header">Recent Products</h5>
-            <div class="card-container row">
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
+            {{#if returnedProducts}}
+                <div class="row">
+                    {{#each returnedProducts}}
+                        <div class="col s12 m6 l3">
+                            <div class="card medium">
+                                <div class="card-image">
+                                    <img src="data:image/jpeg;charset=utf-8;base64,{{base64ArrayBuffer this.image.data.buffer}}" alt="{{this.name}}" class="materialboxed" data-caption="{{this.name}}">
+                                    <span class="card-title">{{this.name}}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p class="price"><span class="mdi mdi-currency-ngn">{{this.price}}</span></p>
+                                </div>
+                                <div class="card-action product">
+                                    <p>Seller: <span class="product-info">{{this.userName}}</span></p>
+                                    <p>Contact: <span class="product-info">{{this.phone}}</span></p>
+                                    <p>Description: <span class="product-info">{{this.description}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container row">
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-                <div class="card sticky-action card-item hoverable col s12  l3">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="/img/slide4.jpg" alt="">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator">MacBook Pro<i class="mdi mdi-dots-vertical tooltipped option-icon right" data-tooltip="View Info"></i></span>
-                    </div>
-                    <div class="card-action">
-                        <p class="price"><span class="mdi mdi-currency-ngn">25,000</span></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title">MacBook Pro<i class="mdi mdi-close close-card right"></i></span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ab.</p>
-                        <p>Sold By: Onwuka Zubis</p>
-                        <p>Contact: 09026425337</p>
-                    </div>
-                </div>
-            </div>
+            {{else}}
+                <h3 id="no-items">There Are Items for Sale.</h3>
+            {{/if}}
         </div>
         <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
@@ -205,69 +89,7 @@
             <div class="parallax"><img class="responsive-img" src="/img/slide2.jpg" alt="Parallax Image 2"></div>
         </div>
     </section>
-    <div id="signup-form-container">
-        <div id="logoContainer">
-            <img id="signupFormLogo" class="center-align" src="/img/transparent-logo.png" alt="Zubis Mart Logo">
-        </div>
-        <div>
-            <form id="signupForm" name="signupForm">
-                <div id="signupLoader" class="progress">
-                    <div class="indeterminate"></div>
-                </div>
-                <h4 id="loginFormHeader" class="center">Create An Account</h4>
-                <div class="row">
-                    <div class="col s12 l6 input-field">
-                        <i class="mdi mdi-alphabetical prefix"></i>
-                        <input type="text" name="firstName" id="firstName" class="validate">
-                        <label for="firstName">Enter First Name</label>
-                        <span class="helper-text" data-error="Invalid First Name!" data-success="Okay"></span>
-                    </div>
-                    <div class="col s12 l6 input-field">
-                        <i class="mdi mdi-alphabetical prefix"></i>
-                        <input type="text" name="lastName" id="lastName" class="validate">
-                        <label for="lastName">Enter Last Name</label>
-                        <span class="helper-text" data-error="Invalid Last Name!" data-success="Okay"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-email-outline prefix"></i>
-                        <input type="email" name="email" id="email" class="validate">
-                        <label for="email">Enter Email Address</label>
-                        <span class="helper-text" data-error="Invalid Email Address!" data-success="Okay">Example: john@doe.com</span>
-                        <span id="emailErrorMessage"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-phone prefix"></i>
-                        <input type="text" name="phone" id="phone" class="validate">
-                        <label for="phone">Enter Phone Number</label>
-                        <span class="helper-text" data-error="Invalid Phone Number!" data-success="Okay">Example: 09026425337</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <i class="mdi mdi-lock-outline prefix"></i>
-                        <input type="password" name="password" id="password" class="validate">
-                        <label for="password">Enter Password</label>
-                        <span class="helper-text" data-error="Invalid Password! Password should be at least 8 characters long." data-success="Okay">Password should be at least 8 characters long.</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 input-field">
-                        <button type="submit" class="btn waves-effect waves-light" id="signupButton">Create Account</button>
-                    </div>
-                </div>
-                <div id="signupFormFooterRow" class="row">
-                    <div id="signupFormFooter" class="col s12 input-field">
-                        <p class="center">Already have an account?</p>
-                        <a href="#loginModal" class="modal-trigger button btn waves-effect waves-light" id="login">Login</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    {{> signupForm}}
     {{> fab}}
 </main>
 {{> footer}}

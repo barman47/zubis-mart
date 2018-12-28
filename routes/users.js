@@ -184,6 +184,7 @@ router.post('/addService', (req, res) => {
         category: req.body.category,
         userName: req.body.userName,
         userEmail: req.body.userEmail,
+        phone: req.body.phone,
         description: req.body.description
     });
 

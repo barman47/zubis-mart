@@ -44,6 +44,11 @@ const ProductSchema = mongoose.Schema({
     image: {
         data: Buffer,
         contentType: String
+    },
+
+    dateCreated: {
+        type: Number,
+        default: new Date()
     }
 });
 

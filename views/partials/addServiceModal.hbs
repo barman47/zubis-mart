@@ -21,15 +21,15 @@
                         <option value="Gardening">Gardening</option>
                         <option value="MC & DJ">MC &amp; DJ</option>
                         <option value="Phone & Laptop Repairs">Phone &amp; Laptop Repairs</option>
-                        <option value="others">Others</option>
+                        <option value="Others">Others</option>
                     </select>
                 </div>
             </div>
             <div class="row login-row">
                 <div class="col s12 input-field">
-                    <textarea name="serviceDescription" id="serviceDescription" class="materialize-textarea" class="validate"></textarea>
+                    <textarea name="serviceDescription" id="serviceDescription" class="materialize-textarea" class="validate" maxlength="160"></textarea>
                     <label for="serviceDescription">Short description here...</label>
-                    <span class="helper-text" data-error="Invalid Description!"></span>
+                    <span class="helper-text" data-error="Invalid Description!">Characters <span id="serviceDescriptionCharacters">0</span>/160</span>
                 </div>
             </div>
             <div class="row login-row">

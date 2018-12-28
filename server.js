@@ -94,10 +94,16 @@ app.use('/services', services);
 app.use('/users', users);
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Zubis Mart - Home',
-        style: 'index.css',
-        script: 'index.js'
+    Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
+        if (err) {
+            return console.log(err);
+        }
+        res.render('index', {
+            title: 'Zubis Mart - Home',
+            style: 'index.css',
+            script: 'index.js',
+            returnedProducts
+        });
     });
 });
 

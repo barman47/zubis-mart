@@ -1,0 +1,38 @@
+{{> header}}
+<main>
+    <div class="breadcrumb-container" class="row">
+        <div class="col s12">
+            <a href="/" class="breadcrumb">Home</a>
+            <a href="" class="breadcrumb">Store</a>
+            <a href="/services/gardening" class="breadcrumb active">Gardening</a>
+            <h4>Gardening</h4>
+        </div>
+    </div>
+    <section>
+        {{#if services}}
+            <div class="section">
+                <div class="row">
+                    {{#each services}}
+                        <div class="col s12 m6 l3">
+                            <div class="service-card hoverable">
+                                <div class="card-icon">
+                                    <span class="mdi mdi-leaf service-icon"></span>
+                                </div>
+                                <div class="content service">
+                                    <p>Seller: <span class="service-info">{{this.userName}}</span></p>
+                                    <p>Contact: <span class="service-info">{{this.phone}}</span></p>
+                                    <p>Description: <span class="service-info">{{this.description}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        {{else}}
+            <h3 class="no-service">THIS SERVICE IS CURRENTLY UNAVAILABLE</h3>
+        {{/if}}
+    </section>
+    {{> signupForm}}
+</main>
+{{> fab}}
+{{> footer}}

@@ -2,6 +2,111 @@ const express = require('express');
 
 const router = express.Router();
 
+router.get('/accommodation', (req, res) => {
+    Service.find({category: 'Accommodation'})
+    .then((services) => {
+        res.render('accommodation', {
+            title: 'Services - Accommodation',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/catering', (req, res) => {
+    Service.find({category: 'Catering'})
+    .then((services) => {
+        res.render('catering', {
+            title: 'Services - Catering',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/furniture', (req, res) => {
+    Service.find({category: 'Furniture'})
+    .then((services) => {
+        res.render('furniture', {
+            title: 'Services - Furniture',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/hairStyling', (req, res) => {
+    Service.find({category: 'Hair Styling'})
+    .then((services) => {
+        res.render('hairStyling', {
+            title: 'Services - Hair Styling',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/homeAndDecor', (req, res) => {
+    Service.find({category: 'Home & Interior Decor'})
+    .then((services) => {
+        res.render('homeAndDecor', {
+            title: 'Services - Home and Interior Decoration',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/laundry', (req, res) => {
+    Service.find({category: 'Laundry'})
+    .then((services) => {
+        res.render('laundry', {
+            title: 'Services - Laundry',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
+router.get('/makeUp', (req, res) => {
+    Service.find({category: 'Make up'})
+    .then((services) => {
+        res.render('makeUp', {
+            title: 'Services - Make Up',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
 router.get('/photography', (req, res) => {
     Service.find({category: 'Photography'})
     .then((services) => {
@@ -17,25 +122,10 @@ router.get('/photography', (req, res) => {
     });
 });
 
-router.get('/homeCleaning', (req, res) => {
-    Service.find({category: 'Home Cleaning'})
-    .then((services) => {
-        res.render('homeCleaning', {
-            title: 'Services - Home Cleaning',
-            style: 'services.css',
-            script: 'services.js',
-            services
-        });
-    })
-    .catch((err) => {
-        return console.log(err);
-    });
-});
-
 router.get('/ushering', (req, res) => {
     Service.find({category: 'Ushering'})
     .then((services) => {
-        res.render('photography', {
+        res.render('ushering', {
             title: 'Services - Ushering',
             style: 'services.css',
             script: 'services.js',
@@ -63,40 +153,10 @@ router.get('/gardening', (req, res) => {
 });
 
 router.get('/mc', (req, res) => {
-    Service.find({category: 'MC'})
+    Service.find({category: 'MC & DJ'})
     .then((services) => {
         res.render('mc', {
             title: 'Services - MC',
-            style: 'services.css',
-            script: 'services.js',
-            services
-        });
-    })
-    .catch((err) => {
-        return console.log(err);
-    });
-});
-
-router.get('/performersAndArtistes', (req, res) => {
-    Service.find({category: 'Performers/Artistes'})
-    .then((services) => {
-        res.render('performersAndArtistes', {
-            title: 'Services - Performers / Artistes',
-            style: 'services.css',
-            script: 'services.js',
-            services
-        });
-    })
-    .catch((err) => {
-        return console.log(err);
-    });
-});
-
-router.get('/fashion', (req, res) => {
-    Service.find({category: 'Fashion'})
-    .then((services) => {
-        res.render('fashionServices', {
-            title: 'Services - Fashion',
             style: 'services.css',
             script: 'services.js',
             services
@@ -121,5 +181,21 @@ router.get('/phoneAndLaptopRepairs', (req, res) => {
         return console.log(err);
     });
 });
+
+router.get('/others', (req, res) => {
+    Service.find({category: 'Others'})
+    .then((services) => {
+        res.render('otherServices', {
+            title: 'Services - Other Services',
+            style: 'services.css',
+            script: 'services.js',
+            services
+        });
+    })
+    .catch((err) => {
+        return console.log(err);
+    });
+});
+
 
 module.exports = router;

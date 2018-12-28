@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     const homeLink = document.querySelector('.active');
     const accountLink = document.querySelector('.account');
+    homeLink.classList.remove('active');
+    accountLink.classList.add('active');
 
     const serviceForm = document.addServiceForm;
     const itemForm = document.addItemForm;
@@ -45,19 +47,14 @@ $(document).ready(function () {
     const removeAccountPassword = removeAccountForm.removeAccountPassword;
     const userId = document.getElementById('username').getAttribute('data-id');
     const userEmail = document.getElementById('username').getAttribute('data-email');
+    const phone = document.getElementById('username').getAttribute('data-phone');
+
+    const serviceDescriptionNumberOfCharacters = document.querySelector('#serviceDescriptionCharacters');
+    const itemDescriptionNumberOfCharacters = document.querySelector('#itemDescriptionCharacters');
 
     const emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
     const phoneRegExp = /^\d{11}$/;
     const passwordRegExp = /^[\w@-]{8,20}$/;
-
-    // itemForm.itemPrice.addEventListener('keyup', function (event) {
-    //     if (isNaN(event.target.value)) {
-    //         // event.target.value += ''
-    //     } else {
-    //         // event.target.value += event.target.value;
-    //     }
-    //     console.log(isNaN(event.target.value));
-    // });
 
     function isEmpty (element) {
         if (element.value === '' || element.value.trim() === '') {
@@ -144,7 +141,8 @@ $(document).ready(function () {
                     category: serviceCategory.value,
                     description: serviceDescription.value,
                     userEmail: userEmail,
-                    userName: $('#username').html().toUpperCase()
+                    userName: $('#username').html().toUpperCase(),
+                    phone: phone
                 },
                 statusCode: {
                     406: function (msg, status, jqXHR) {
@@ -172,6 +170,7 @@ $(document).ready(function () {
                 const tableBody = document.getElementById('servicesTableBody');
 
                 const tableDataCategory = document.createElement('td');
+                const tableDataDescription = document.createElement('td');
                 const tableDataAction = document.createElement('td');
 
                 const deleteIcon = document.createElement('span');
@@ -182,9 +181,12 @@ $(document).ready(function () {
                 const serviceCategory = document.createTextNode(msg.category);
                 tableDataCategory.appendChild(serviceCategory);
 
+                tableDataDescription.appendChild(msg.description);
+
                 tableDataAction.appendChild(deleteIcon);
 
                 tableRow.appendChild(tableDataCategory);
+                tableRow.appendChild(tableDataDescription);
                 tableRow.appendChild(tableDataAction);
 
                 tableBody.appendChild(tableRow);
@@ -301,6 +303,8 @@ $(document).ready(function () {
     }
 
     serviceDescription.addEventListener('keyup', function (event) {
+        const characters = new String(event.target.value).length;
+        serviceDescriptionNumberOfCharacters.innerHTML = characters;
         if (!isEmpty(event.target) || event.target.value.toString().length >= 5) {
             event.target.classList.add('valid');
             event.target.classList.remove('invalid');
@@ -310,8 +314,10 @@ $(document).ready(function () {
         }
     });
 
-    homeLink.classList.remove('active');
-    accountLink.classList.add('active');
+    itemForm.itemDescription.addEventListener('keyup', function (event) {
+        const characters = new String(event.target.value).length;
+        itemDescriptionNumberOfCharacters.innerHTML = characters;  
+    });
 
     serviceForm.addEventListener('submit', submitServiceForm);
     $('#addItemForm').submit(function (event) {
