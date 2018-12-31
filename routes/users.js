@@ -133,20 +133,49 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+// router.post('/login', (req, res, next) => {
+//     passport.authenticate('user', {
+//         successRedirect: '/dashboard',
+//         failureRedirect: '/users/login',
+//         failureFlash: true
+//     })(req, res, next);
+// });
+
 router.get('/:id', (req, res) => {
-    User.findOne({_id: req.params.id}, (err, user) => {
+    Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
-            return console.log(err)
-        } else {
+            return console.log(err);
+        }
+        User.findById(req.params.id)
+        .then((returnedUser) => {
             res.render('index', {
                 title: 'Zubis Mart - Home',
                 style: 'index.css',
                 script: 'index.js',
-                user
+                returnedProducts,
+                user: returnedUser
             });
-        }
+        })
+        .catch((err) => {
+            return console.log(err);
+        });
     });
 });
+
+// router.get('/:id', (req, res) => {
+//     User.findOne({_id: req.params.id}, (err, user) => {
+//         if (err) {
+//             return console.log(err)
+//         } else {
+//             res.render('index', {
+//                 title: 'Zubis Mart - Home',
+//                 style: 'index.css',
+//                 script: 'index.js',
+//                 user
+//             });
+//         }
+//     });
+// });
 
 router.get('/:id/account', (req, res) => {
     User.findOne({_id: req.params.id}, (err, user) => {

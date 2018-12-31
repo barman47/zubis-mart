@@ -43,7 +43,7 @@
                 <div class="row">
                     {{#each returnedProducts}}
                         <div class="col s12 m6 l3">
-                            <div class="card medium">
+                            <div class="card medium hoverable">
                                 <div class="card-image">
                                     <img src="data:image/jpeg;charset=utf-8;base64,{{base64ArrayBuffer this.image.data.buffer}}" alt="{{this.name}}" class="materialboxed" data-caption="{{this.name}}">
                                     <span class="card-title">{{this.name}}</span>
@@ -61,7 +61,7 @@
                     {{/each}}
                 </div>
             {{else}}
-                <h3 id="no-items">There Are Items for Sale.</h3>
+                <h3 id="no-items">There are no Items for Sale.</h3>
             {{/if}}
         </div>
         <div class="parallax-container valign-wrapper">

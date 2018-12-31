@@ -72,7 +72,7 @@
                 </ul>
                 <ul class="hide-on-med-and-down right">
                     {{#if user}}
-                        <li class="active"><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
+                        <li class="active"><a href="/users/{{user._id}}"><i class="mdi mdi-home left"></i>Home</a></li>
                         <li class="store"><a href="#!" class="dropdown-trigger" data-target="store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                         <li class="services"><a href="#!" class="dropdown-trigger" data-target="services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                         <li class="account"><a href="/users/{{user._id}}/account"><i class="mdi mdi-account left"></i>My Account</a></li>
@@ -89,7 +89,7 @@
         </nav>
         <ul id="mobile-menu" class="sidenav">
             {{#if user}}
-                <li class="active"><a href="/"><i class="mdi mdi-home left"></i>Home</a></li>
+                <li class="active"><a href="/users/{{user._id}}"><i class="mdi mdi-home left"></i>Home</a></li>
                 <li class="store"><a href="#!" class="dropdown-trigger" data-target="mobile-store-dropdown"><i class="mdi mdi-shopping left"></i>Store</a></li>
                 <li class="services"><a href="#!" class="dropdown-trigger" data-target="mobile-services-dropdown"><i class="mdi mdi-truck-fast left"></i>Services</a></li>
                 <li class="account"><a href="/users/{{user._id}}/account"><i class="mdi mdi-account left"></i>My Account</a></li>

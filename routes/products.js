@@ -26,7 +26,7 @@ router.get('/phonesAndElectronics', (req, res) => {
             title: 'Products - Phones & Electronics',
             style: 'products.css',
             script: 'products.js',
-            product
+            product,
         });
     })
     .catch((err) => {
