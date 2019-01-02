@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const https = require('https');
+const http = require('http');
 // const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -23,17 +24,6 @@ const app = express();
 
 const hostname = 'zubismart.com'
 const PORT = process.env.PORT || 6400;
-
-const options = {
-    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`),
-    key: fs.readFileSync('./security/zubismart.key'),
-    cert: fs.readFileSync('./security/zubismart_com.crt')
-}
-// const options = {
-//     ca: path.join(__dirname, 'security', '')
-//     key:,
-//     cert: 
-// }
 
 let gfs;
 
@@ -106,6 +96,14 @@ app.use('/products', products);
 app.use('/services', services);
 app.use('/users', users);
 
+app.use(function(req, res, next) {
+    if (req.secure) {
+        next();
+    } else {
+        res.redirect('https://' + req.headers.host + req.url);
+    }
+});
+
 app.get('/', (req, res) => {
     Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
@@ -128,10 +126,18 @@ app.get('/sell', (req, res) => {
     });
 });
 
-https.createServer(options, () => {
-    console.log(`Server is up on port ${PORT} with ssl certificate`);
-});
+const options = {
+    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`),
+    key: fs.readFileSync('./security/zubismart.key'),
+    cert: fs.readFileSync('./security/zubismart_com.crt')
+};
 
-app.listen(PORT, () => {
-    console.log(`Server is up on port ${PORT}...`);
-});
+https.createServer(options, app).listen(443);
+http.createServer(app).listen(PORT);
+
+// For development
+// app.listen(PORT, () => {
+//     console.log(`Server is up on port ${PORT}...`);    
+// });
+
+console.log(`Server is up on port ${PORT}...`);
