@@ -132,12 +132,20 @@ const options = {
     cert: fs.readFileSync('./security/zubismart_com.crt')
 };
 
-https.createServer(options, app).listen(443);
-http.createServer(app).listen(PORT);
+httpServer = http.createServer(app);
+httpsServer = https.createServer(options, app);
+
+httpServer.listen(PORT, () => {
+    console.log(`Server is up on port ${PORT}...`);    
+});
+
+httpsServer.listen(443, () => {
+    console.log(`Server is up on port 443...`);    
+})
 
 // For development
 // app.listen(PORT, () => {
 //     console.log(`Server is up on port ${PORT}...`);    
 // });
 
-console.log(`Server is up on port ${PORT}...`);
+// console.log(`Server is up on port ${PORT}...`);
