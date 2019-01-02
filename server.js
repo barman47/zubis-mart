@@ -127,9 +127,9 @@ app.get('/sell', (req, res) => {
 });
 
 const options = {
-    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`),
-    key: fs.readFileSync('./security/zubismart.key'),
-    cert: fs.readFileSync('./security/zubismart_com.crt')
+    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`, 'utf8'),
+    key: fs.readFileSync('./security/zubismart.key', 'utf8'),
+    cert: fs.readFileSync('./security/zubismart_com.crt', 'utf8')
 };
 
 https.createServer(options, app).listen(PORT, () => {
