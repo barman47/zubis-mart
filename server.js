@@ -96,13 +96,13 @@ app.use('/products', products);
 app.use('/services', services);
 app.use('/users', users);
 
-app.use(function(req, res, next) {
-    if (req.secure) {
-        next();
-    } else {
-        res.redirect('https://' + req.headers.host + req.url);
-    }
-});
+// app.use(function(req, res, next) {
+//     if (req.secure) {
+//         next();
+//     } else {
+//         res.redirect('https://' + req.headers.host + req.url);
+//     }
+// });
 
 app.get('/', (req, res) => {
     Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
@@ -132,16 +132,9 @@ const options = {
     cert: fs.readFileSync('./security/zubismart_com.crt')
 };
 
-httpServer = http.createServer(app);
-httpsServer = https.createServer(options, app);
-
-httpServer.listen(PORT, () => {
+https.createServer(options, app).listen(PORT, () => {
     console.log(`Server is up on port ${PORT}...`);    
 });
-
-httpsServer.listen(443, () => {
-    console.log(`Server is up on port 443...`);    
-})
 
 // For development
 // app.listen(PORT, () => {
