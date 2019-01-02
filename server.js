@@ -1,6 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const exphbs = require('express-handlebars');
+const https = require('https');
 // const favicon = require('express-favicon');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -20,7 +21,19 @@ const publicPath = path.join(__dirname, 'public');
 const config = require('./config/database');
 const app = express();
 
+const hostname = 'zubismart.com'
 const PORT = process.env.PORT || 6400;
+
+const options = {
+    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`),
+    key: fs.readFileSync('./security/zubismart.key'),
+    cert: fs.readFileSync('./security/zubismart_com.crt')
+}
+// const options = {
+//     ca: path.join(__dirname, 'security', '')
+//     key:,
+//     cert: 
+// }
 
 let gfs;
 
@@ -113,6 +126,10 @@ app.get('/sell', (req, res) => {
         style: 'sell.css',
         script: 'sell.js'
     });
+});
+
+https.createServer(options, () => {
+    console.log(`Server is up on port ${PORT} with ssl certificate`);
 });
 
 app.listen(PORT, () => {
