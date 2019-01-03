@@ -51,7 +51,7 @@ module.exports = (passport) => {
         });
     }));
 
-    let sessionConstructor = function (userId, userGroup, details) {
+    function sessionConstructor (userId, userGroup, details) {
         this.userId = userId;
         this.userGroup = userGroup;
         this.details = details;
@@ -67,7 +67,7 @@ module.exports = (passport) => {
             userGroup = Admin;
         }
 
-        sessionConstructor = new SessionConstructor(userObject.id, userGroup);
+        sessionConstructor = new SessionConstructor(userObject.id, userGroup, '');
         done (null, sessionConstructor);
     });
 

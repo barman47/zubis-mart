@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser('keybaord cat'));
 app.use(session({
     secret: 'keyboard cat',
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 app.use(flash());
@@ -126,19 +126,19 @@ app.get('/sell', (req, res) => {
     });
 });
 
-const options = {
-    ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`, 'utf8'),
-    key: fs.readFileSync('./security/zubismart.key', 'utf8'),
-    cert: fs.readFileSync('./security/zubismart_com.crt', 'utf8')
-};
+// const options = {
+//     ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`, 'utf8'),
+//     key: fs.readFileSync('./security/zubismart.key', 'utf8'),
+//     cert: fs.readFileSync('./security/zubismart_com.crt', 'utf8')
+// };
 
-https.createServer(options, app).listen(PORT, () => {
-    console.log(`Server is up on port ${PORT}...`);    
-});
-
-// For development
-// app.listen(PORT, () => {
+// https.createServer(options, app).listen(PORT, () => {
 //     console.log(`Server is up on port ${PORT}...`);    
 // });
+
+// For development
+app.listen(PORT, () => {
+    console.log(`Server is up on port ${PORT}...`);    
+});
 
 // console.log(`Server is up on port ${PORT}...`);
