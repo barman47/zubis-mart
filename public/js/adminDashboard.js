@@ -32,6 +32,7 @@ $(document).ready(function () {
                         if (password === null || password === '') {
                             toggleSwitch.checked = true;
                         } else {
+                            showSpinner();
                             $.ajax({
                                 method: 'PUT',
                                 url: `/admin/disableUser/${id}`,
@@ -78,6 +79,7 @@ $(document).ready(function () {
                         if (password === null || password === '') {
                             toggleSwitch.checked = false;
                         } else {
+                            showSpinner();
                             $.ajax({
                                 method: 'PUT',
                                 url: `/admin/enableUser/${id}`,
