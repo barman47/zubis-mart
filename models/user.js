@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+
 const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -23,6 +25,20 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+
+    createdAt: {
+        type: String,
+        default: moment().format('MMMM Do YYYY') 
+    },
+
+    lastLogin: {
+        type: String
+    },
+
+    enabled: {
+        type: Boolean,
+        default: false
     },
 
     stockTotal: {

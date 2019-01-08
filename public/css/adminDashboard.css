@@ -1,0 +1,72 @@
+body {
+    background-color: #fff !important;
+}
+
+#preloader-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(241, 241, 241, 0.5);
+}
+
+.preloader-wrapper {
+    position: relative;
+    top: 45vh;
+    left: 45vw
+}
+
+.header {
+    text-align: center;
+}
+
+input {
+    width: 50% !important;
+}
+
+.error-message {
+    border-radius: 5px;
+    color: rgba(204, 75, 55, 0.8);
+    background-color: rgba(204, 75, 55, 0.5);
+}
+
+.success-message {
+    border-radius: 5px;
+    color: #388e3c;
+    background-color: #a5d6a7;
+}
+
+.message p span {
+    float: right;
+    cursor: pointer;
+}
+
+tbody {
+    font-size: 0.85rem;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: #cddc39 !important;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+    background-color: #a7b018 !important;
+}
+
+.tooltipped {
+    cursor: pointer;
+}
+
+.editUser {
+    color: #03a9f4;
+}
+
+.removeUser {
+    color: red;
+}
+
+.markAsPaid {
+    color: green;
+}

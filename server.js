@@ -11,8 +11,9 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const passport = require('passport');
-// const moment = require('moment');
+const moment = require('moment');
 
+const admin = require('./routes/admin');
 const products = require('./routes/products');
 const services = require('./routes/services');
 const users = require('./routes/users');
@@ -48,7 +49,8 @@ app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     partialsDir: 'views/partials',
     helpers: {
-        base64ArrayBuffer: require('./utils/base64ArrayBuffer')
+        base64ArrayBuffer: require('./utils/base64ArrayBuffer'),
+        isUserEnabled: require('./utils/isUserEnabled')
     }
 }));
 app.set('view engine', '.hbs');
@@ -92,17 +94,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/admin', admin);
 app.use('/products', products);
 app.use('/services', services);
 app.use('/users', users);
-
-// app.use(function(req, res, next) {
-//     if (req.secure) {
-//         next();
-//     } else {
-//         res.redirect('https://' + req.headers.host + req.url);
-//     }
-// });
 
 app.get('/', (req, res) => {
     Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {

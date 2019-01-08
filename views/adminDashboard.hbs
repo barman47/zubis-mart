@@ -1,0 +1,98 @@
+{{> header}}
+<main>
+    <div id="preloader-container">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <h3 class="center">Admin  Dashboard</h3>
+        <input type="text" name="findUser" id="findUser" placeholder="Find User">
+    </div>
+    <div>
+        {{#if users}}
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Phone</th>
+                        <th>Joined</th>
+                        <th>Last-Login</th>
+                        <th>Last Payment</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                        <tr>
+                            <td>1.</td>
+                            <td class="username">{{this.firstName}} {{this.lastName}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.phone}}</td>
+                            <td>{{this.createdAt}}</td>
+                            <td>{{this.lastLogin}}</td>
+                            <td>{{this.lastPayment}}</td>
+                            <td>
+                                <div class="switch">
+                                    <label>
+                                        Off
+                                        <input type="checkbox" class="toggleSwitch" data-id="{{this._id}}" {{isUserEnabled this}}>
+                                        <span class="lever"></span>
+                                        On
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="mdi mdi-pencil-circle mdi-24px tooltipped editUser" data-id="{{this._id}}" data-tooltip="Edit User"></span>    
+                                <span class="mdi mdi-delete-circle mdi-24px tooltipped removeUser" data-id="{{this._id}}" data-tooltip="Remove User"></span>    
+                                <span class="mdi mdi-check-circle mdi-24px tooltipped markAsPaid" data-id="{{this._id}}" data-tooltip="Mark as Paid"></span>    
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+</main>
+<script src="/js/moment.min.js"></script>

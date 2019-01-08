@@ -4,6 +4,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const passport = require('passport');
+const moment = require('moment');
 
 const base64ArrayBuffer = require('../utils/base64ArrayBuffer');
 const User = require('../models/user');
@@ -124,9 +125,17 @@ router.post('/login', (req, res, next) => {
         req.logIn(user, (err) => {
             let id = user._id;
             id = mongoose.Types.ObjectId(id); 
-            res.status(200).json({ 
-                msg: 'User Logged In',
-                id 
+            User.findOneAndUpdate({_id: id}, {$set: {
+                lastLogin: moment().format('MMMM Do YYYY, by h:mm:ss a')
+            }}, (err, updatedData) => {
+                if (err) {
+                    return console.log(err);
+                } else {
+                    res.status(200).json({ 
+                        msg: 'User Logged In',
+                        id 
+                    });
+                }
             });
         });
     })(req, res, next);
@@ -278,19 +287,17 @@ router.delete('/removeUser/:id', (req, res) => {
                                         return console.log(err);
                                     } else {
                                         console.log('services removed successfully');
-                                        gfs.files.deleteMany({metadata: {userEmail: returnedUser.email}}, (err, removedProductImages) => {
-                                            if (err) {
-                                                return console.log(err);
-                                            } else {
-                                                User.deleteOne({_id: req.params.id}, (err, removedUser) => {
-                                                    if (err) {
-                                                        return console.log(err);
-                                                    } else {
-                                                        res.status(200).json({ message: 'Account removed successfully' });
-                                                    }
-                                                });
-                                            }
-                                        });
+                                        if (err) {
+                                            return console.log(err);
+                                        } else {
+                                            User.deleteOne({_id: req.params.id}, (err, removedUser) => {
+                                                if (err) {
+                                                    return console.log(err);
+                                                } else {
+                                                    res.status(200).json({ message: 'Account removed successfully' });
+                                                }
+                                            });
+                                        }
                                     }
                                 });
                             }

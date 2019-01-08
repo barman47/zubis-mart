@@ -135,7 +135,10 @@ $(document).ready(function () {
                 statusCode: {
                     404: function (msg, status, jqXHR) {
                         console.log(status);
-                        console.log(jqXHR);
+                        console.log(msg);
+                        // $('#loginEmailErrorMessage').html(jqXHR.responseJSON.msg);
+                        // $("#loginForm :input").prop("disabled", false);
+                        // loginEmail.focus();
                     }
                 }
             }).done(function (msg, status, jqXHR) {
@@ -147,7 +150,6 @@ $(document).ready(function () {
                 loginLoader.style.visibility = 'hidden';
                 M.toast({ html: 'Login Failed!' });
                 console.log('textStatus', textStatus);
-                $('#loginEmailErrorMessage').html(jqXHR.responseJSON.msg);
                 $("#loginForm :input").prop("disabled", false);
                 loginEmail.focus();
             });
