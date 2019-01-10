@@ -44,15 +44,20 @@
         </div>
     </div>
     <div class="header">
-        <h3 class="center">Admin  Dashboard</h3>
-        <input type="text" name="findUser" id="findUser" placeholder="Find User">
+        <h3 class="center" id="heading">Admin Dashboard</h3>
+        <div class="input-field">
+            <span class="mdi mdi-magnify mdi-24px mdi-flip-h prefix"></span>
+            <input type="text" name="findUser" id="findUser" placeholder="Find User" autofocus>
+        </div>
+        <div id="numberOfUsers">
+            <h5>Number of Users: <span id="users-number">{{numberOfUsers}}</span></h5>
+        </div>
     </div>
     <div>
         {{#if users}}
-            <table>
+            <table class="striped responsive-table">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Name</th>
                         <th>Username</th>
                         <th>Phone</th>
@@ -63,16 +68,15 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableBody">
                     {{#each users}}
-                        <tr>
-                            <td>1.</td>
+                        <tr class="userRows">
                             <td class="username">{{this.firstName}} {{this.lastName}}</td>
                             <td>{{this.email}}</td>
                             <td>{{this.phone}}</td>
                             <td>{{this.createdAt}}</td>
-                            <td>{{this.lastLogin}}</td>
-                            <td>{{this.lastPayment}}</td>
+                            <td>{{lastLogin this.lastLogin}}</td>
+                            <td>{{lastPaid this.lastPaid}}</td>
                             <td>
                                 <div class="switch">
                                     <label>
@@ -95,4 +99,5 @@
         {{/if}}
     </div>
 </main>
-<script src="/js/moment.min.js"></script>
+{{> fab}}
+{{> footer}}

@@ -1,9 +1,11 @@
 $(document).ready(function () {
     $('.tooltipped').tooltip();
-
+    
     const toggleSwitches = document.querySelectorAll('.toggleSwitch');
     const removeUser = document.querySelectorAll('.removeUser');
     const paidMarkers = document.querySelectorAll('.markAsPaid');
+
+    const searchBox = document.getElementById('findUser');
 
     const showSpinner = () => {
         const spinnerContainer = document.getElementById('preloader-container');
@@ -15,9 +17,26 @@ $(document).ready(function () {
         spinnerContainer.style.display = 'none';
     };
 
+    const filterUsers = (event) => {
+        let filterValue = event.target.value.toUpperCase();
+        let tableBody = document.getElementById('tableBody');
+        let userRows = tableBody.querySelectorAll('.userRows');
+
+        // let users = document.querySelectorAll('.username');
+
+        userRows.forEach((userRow) => {
+            if (userRow.childNodes[1].innerHTML.toUpperCase().indexOf(filterValue) > -1 || userRow.childNodes[3].innerHTML.toUpperCase().indexOf(filterValue) > -1) {
+                userRow.style.display = '';
+            } else {
+                userRow.style.display = 'none'
+            }
+        });
+    };
+
     toggleSwitches.forEach((toggleSwitch) => {
         let switchState = toggleSwitch.checked;
         toggleSwitch.addEventListener('click', (event) => {
+            console.log(event.target.parentElement.parentElement.parentElement.previousElementSibling);
             event.preventDefault();
             const id = event.target.dataset.id;
             let paymentSwitch = event.target;
@@ -100,7 +119,7 @@ $(document).ready(function () {
                                     hideSpinner();
                                 } else {
                                     toggleSwitch.checked = true;
-                                    // Continue here with moment
+                                    event.target.parentElement.parentElement.parentElement.previousElementSibling.innerHTML = msg.paidAt;
                                     M.toast({ 
                                         html: msg.message,
                                         classes: 'success-message'
@@ -206,11 +225,12 @@ $(document).ready(function () {
                                 });
                                 hideSpinner();
                             } else {
+                                toggleSwitch.checked = true;    
+                                event.target.parentElement.previousElementSibling.previousElementSibling.innerHTML = msg.paidAt;
                                 M.toast({ 
                                     html: msg.message,
                                     classes: 'success-message' 
                                 });
-                                toggleSwitch.checked = true;    
                             }
                         }).fail (function (xhr) {
                             hideSpinner();
@@ -225,4 +245,6 @@ $(document).ready(function () {
             }
         });
     });
+
+    searchBox.addEventListener('keyup', filterUsers);
 });

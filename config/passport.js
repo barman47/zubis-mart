@@ -3,87 +3,86 @@ const User = require('../models/user');
 const Admin = require('../models/admin');
 const bcrypt = require('bcryptjs');
 
-module.exports = (passport) => {
+module.exports = function (passport) {
     passport.use('user', new LocalStrategy({
         usernameField: 'loginEmail',
-        passwordField: 'loginPassword',
-        passReqToCallback: true
-      }, function verifyCallback(req, loginEmail, loginPassword, done) {
-            User.findOne({ email: loginEmail }, function(err, user) {
-            if (err) return done(err);
-            if (!user) {
-                return done(null, false, {msg: 'No user found'});
-            }
-            bcrypt.compare(loginPassword, user.password, (err, isMatch) => {
-                if (err) return done(err);
-                if (!isMatch) {
-                    return done(null, false, {msg: 'Incorrect Password'});
-                } else {
-                    return done(null, user);
-                }
-            });
-        });
-    }));
+        passwordField: 'loginPassword'
+    }, (loginEmail, loginPassword, done) => {
+            User.findOne({ email: loginEmail })
+                .then(user => {
+                    if (!user) {
+                        return done(null, false, { msg: 'User not registered' })
+                    }
+                    bcrypt.compare(loginPassword, user.password, (err, isMatch) => {
+                        if (err) throw err;
+                        
+                        if (isMatch) {
+                            return done(null, user)
+                        } else {
+                            return done(null, false, { msg: 'Incorrect Password' })
+                        }
+                    });
+                })
+                .catch(err => console.log(err));
+        })
+    );
 
-    passport.use('admin', new LocalStrategy({
-        usernameField: 'username',
-        passwordField: 'password',
-        passReqToCallback: true
-    }, function verifyCallback (req, username, password, done) {
-        Teacher.findOne({username}, function (err, admin) {
-            if (err) {
-                return done (err);
-            }
+    passport.use('admin', new LocalStrategy({ 
+        usernameField: 'adminUsername',
+        passwordField: 'adminPassword'
+    }, (adminUsername, adminPassword, done) => {
+            Admin.findOne({ username: adminUsername })
+                .then(admin => {
+                    if (!admin) {
+                        return done(null, false, { message: 'Admin not registered' })
+                    }
+                    bcrypt.compare(adminPassword, admin.password, (err, isMatch) => {
+                        if (err) throw err;
+                        
+                        if (isMatch) {
+                            return done(null, admin)
+                        } else {
+                            return done(null, false, { message: 'Incorrect Password' })
+                        }
+                    });
+                })
+                .catch(err => console.log(err));
+        })
+    );
 
-            if (!admin) {
-                return done(null, false, {msg: 'No admin found'});
-            }
-            bcrypt.compare(password, admin.password, (err, isMatch) => {
-                if (err) {
-                    return done(err);
-                }
-                if (!isMatch) {
-                    return done (null, false, {msg: 'Incorrect Password'});
-                } else {
-                    return done(null, admin);
-                }
-            });
-        });
-    }));
-
-    function sessionConstructor (userId, userGroup, details) {
+    function SessionConstructor(userId, userGroup, details) {
         this.userId = userId;
         this.userGroup = userGroup;
         this.details = details;
     }
-
-    passport.serializeUser((userObject, done) => {
-        let userGroup = User;
-        let userPrototype = Object.getPrototypeOf(userObject);
-
+    
+    passport.serializeUser(function (userObject, done) {
+        let userGroup = "user";
+        let userPrototype =  Object.getPrototypeOf(userObject);
+      
         if (userPrototype === User.prototype) {
-            userGroup = User;
+            userGroup = "user";
         } else if (userPrototype === Admin.prototype) {
-            userGroup = Admin;
-        }
-
-        sessionConstructor = new SessionConstructor(userObject.id, userGroup, '');
-        done (null, sessionConstructor);
+            userGroup = "admin";
+        } 
+    
+        let sessionConstructor = new SessionConstructor(userObject.id, userGroup, '');
+        done(null,sessionConstructor);
     });
-
-    passport.deserializeUser((sessionConstructor, done) => {
-        if (sessionConstructor.userGroup === User) {
+    
+    passport.deserializeUser(function (sessionConstructor, done) {
+        if (sessionConstructor.userGroup == 'user') {
             User.findOne({
-                _id: sessionConstructor.userId,
-            }, '-localStrategy.password', (err, user) => {
-                done (err, user)
+                _id: sessionConstructor.userId
+            }, '-localStrategy.password', function (err, user) { // When using string syntax, prefixing a path with - will flag that path as excluded.
+                done(err, user);
             });
-        } else if (sessionConstructor.userGroup === Admin) {
+        } else if (sessionConstructor.userGroup == 'admin') {
             Admin.findOne({
                 _id: sessionConstructor.userId
-            }, '-localStrategy.password', (err, admin) => {
-                done (err, admin);
+            }, '-localStrategy.password', function (err, admin) { // When using string syntax, prefixing a path with - will flag that path as excluded.
+                done(err, admin);
             });
-        }
+        } 
     });
 };

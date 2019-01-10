@@ -175,13 +175,15 @@ $(document).ready(function () {
 
                 const deleteIcon = document.createElement('span');
 
-                deleteIcon.setAttribute('class', 'mdi mdi-delete-outline services-icon');
+                // deleteIcon.setAttribute('class', 'mdi mdi-delete-outline services-icon');
+                deleteIcon.classList.add('mdi','mdi-delete-outline', 'delete-services-icon');
                 deleteIcon.setAttribute('data-tooltip', 'Remove Item');
 
                 const serviceCategory = document.createTextNode(msg.category);
                 tableDataCategory.appendChild(serviceCategory);
 
-                tableDataDescription.appendChild(msg.description);
+                const serviceDescription = document.createTextNode(msg.category);
+                tableDataDescription.appendChild(serviceDescription);
 
                 tableDataAction.appendChild(deleteIcon);
 

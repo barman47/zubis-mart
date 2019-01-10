@@ -33,12 +33,16 @@ const UserSchema = mongoose.Schema({
     },
 
     lastLogin: {
-        type: String
+        type: Date
     },
 
     enabled: {
         type: Boolean,
         default: false
+    },
+
+    lastPaid: {
+        type: Date,
     },
 
     stockTotal: {

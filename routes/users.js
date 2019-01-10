@@ -114,6 +114,14 @@ router.post('/register', (req, res) => {
     }
 });
 
+// router.post('/login', (req, res, next) => {
+//     passport.authenticate('user', {
+//         successRedirect: `/oge`,
+//         failureRedirect: '/',
+//         failureFlash: true
+//     })(req, res, next);
+// });
+
 router.post('/login', (req, res, next) => {
     passport.authenticate('user', (err, user, info) => {
         if (err) {
@@ -123,26 +131,31 @@ router.post('/login', (req, res, next) => {
             return res.status(404).json({ msg: 'Incorrect Email or Password' });
         }
         req.logIn(user, (err) => {
-            let id = user._id;
-            id = mongoose.Types.ObjectId(id); 
-            User.findOneAndUpdate({_id: id}, {$set: {
-                lastLogin: moment().format('MMMM Do YYYY, by h:mm:ss a')
-            }}, (err, updatedData) => {
-                if (err) {
-                    return console.log(err);
-                } else {
-                    res.status(200).json({ 
-                        msg: 'User Logged In',
-                        id 
-                    });
-                }
-            });
+            if (err) {
+                return console.log(err);
+            } else {
+                let id = user._id;
+                const lastLogin = moment();
+                id = mongoose.Types.ObjectId(id); 
+                User.findOneAndUpdate({_id: id}, {$set: {
+                    lastLogin
+                }}, (err, updatedData) => {
+                    if (err) {
+                        return console.log(err);
+                    } else {
+                        // res.redirect('/');
+                        return res.status(200).json({ 
+                            msg: 'User Logged In',
+                            id 
+                        });
+                    }
+                });
+            }
         });
     })(req, res, next);
 });
 
 router.get('/:id', (req, res) => {
-    console.log(req.user);
     Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
             return console.log(err);
@@ -222,7 +235,6 @@ router.post('/addService', (req, res) => {
         if (err) {
             return console.log(err);
         } else {
-            console.log('Service added Successfully');
             res.status(200).json({
                 message: 'Service added Successfully',
                 category: savedService.category,
@@ -286,7 +298,6 @@ router.delete('/removeUser/:id', (req, res) => {
                                     if (err) {
                                         return console.log(err);
                                     } else {
-                                        console.log('services removed successfully');
                                         if (err) {
                                             return console.log(err);
                                         } else {
@@ -316,7 +327,6 @@ router.put('/editUser/:id', (req, res) => {
         } else {
             bcrypt.compare(req.body.password, returnedUser.password, (err, isMatch) => {
                 if (isMatch) {
-                    console.log('Correct Password');
                     User.findOneAndUpdate({_id: req.params.id}, {$set: {
                         firstName: req.body.firstName.toUpperCase(),
                         lastName: req.body.lastName.toUpperCase(),
@@ -326,12 +336,11 @@ router.put('/editUser/:id', (req, res) => {
                         if (err) {
                             return console.log(err);
                         } else {
-                            console.log('data updated successfully');
                             res.status(200).json(updatedData);
                         }
                     });
                 } else {
-                    console.log('Incorrect Password');
+                    
                     res.status(401).json({ message: 'Incorrect Password!' });
                 }
             });
@@ -371,7 +380,6 @@ router.put('/:id/changePassword', (req, res) => {
                                                 console.log(err);
                                                 res.status(500).json({ error: 'Something Went wrong. Try again' });
                                             } else {
-                                                console.log('Password Changed Successfully');
                                                 res.status(200).json({ message: 'Password Changed Successfully' });
                                             }
                                         });

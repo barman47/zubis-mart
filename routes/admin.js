@@ -1,9 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const moment = require('moment');
+const passport = require('passport');
+
 const router = express.Router();
 
 const Admin = require('../models/admin');
 const User = require('../models/user');
+const ensureAdminAuthenticated = require('../utils/ensureAdminAuthenticated');
 
 router.post('/register', (req, res) => {
     let admin = new Admin({
@@ -19,7 +23,7 @@ router.post('/register', (req, res) => {
         } else {
             if (returnedAdmin) {
                 res.status(200).json({
-                    msg: `User ${returnedAdmin.username} already exists!`,
+                    msg: `${returnedAdmin.username} already exists!`,
                     returnedAdmin
                 });
             } else {
@@ -60,17 +64,55 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('adminLogin');
+    res.render('adminLogin', {
+        title: 'Zubismart - Admin Login', 
+        style: 'adminLogin.css',
+        script: 'adminLogin.js'
+    });
 });
 
-router.get('/dashboard', (req, res) => {
+// router.post('/login', (req, res, next) => {
+//     passport.authenticate('admin', {
+//         successRedirect: `/admin/dashboard`,
+//         failureRedirect: '/admin/login',
+//         failureFlash: 'Incorrect Password'
+//     })(req, res, next);
+// });
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('admin', (err, admin, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!admin) {
+            return res.render('adminLogin', {
+                title: 'Zubismart - Admin Login', 
+                style: 'adminLogin.css',
+                script: 'adminLogin.js',
+                adminPassword: req.body.adminPassword,
+                adminUsername: req.body.adminUsername,
+                wrongPassword: info.message
+            });
+        }
+        req.logIn(admin, (err) => {
+            if (err) {
+                return console.log(err);
+            } else {
+                return res.redirect('/admin/dashboard');
+            }
+        });
+    })(req, res, next);
+});
+
+router.get('/dashboard', ensureAdminAuthenticated, (req, res) => {
     User.find({})
         .then((users) => {
             res.render('adminDashboard', {
                 title: 'Zubismart - Admin',
                 style: 'adminDashboard.css',
                 script: 'adminDashboard.js',
-                users
+                users,
+                numberOfUsers: users.length
             });
         })
         .catch((err) => {
@@ -142,15 +184,18 @@ router.put('/enableUser/:id', (req, res) => {
                             message: 'Password Incorrect'
                         }).end()
                     } else {
+                        let paidAt = moment();
                         User.findOneAndUpdate({ _id: req.params.id }, { $set: {
-                            enabled: true
+                            enabled: true,
+                            lastPaid: paidAt
                         }}, { new: true }, (err, updatedUser) => {
                             if (err) {
                                 return console.log(err);
                             } else {
                                 res.status(200).json({ 
                                     message: 'User Enabled Successfully',
-                                    updatedUser 
+                                    updatedUser,
+                                    paidAt: paidAt.fromNow()
                                 }).end();
                             }
                         });
