@@ -1,5 +1,5 @@
 module.exports = (user) => { 
-    if (user.enabled === true) {
+    if (user.hasPaid === true) {
         return 'checked';
     }
 };

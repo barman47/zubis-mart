@@ -50,7 +50,7 @@ app.engine('.hbs', exphbs({
     partialsDir: 'views/partials',
     helpers: {
         base64ArrayBuffer: require('./utils/base64ArrayBuffer'),
-        isUserEnabled: require('./utils/isUserEnabled'),
+        hasPaid: require('./utils/hasUserPaid'),
         lastPaid: require('./utils/lastPaid'),
         lastLogin: require('./utils/lastLogin')
     }

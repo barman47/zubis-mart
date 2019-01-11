@@ -20,7 +20,7 @@ conn.on('error', (err) => {
 });
 
 router.get('/phonesAndElectronics', (req, res) => {
-    Product.find({category: 'Phones & Electronics'})
+    Product.find({ category: 'Phones & Electronics', hasPaid: true })
     .then((product) => {
         res.render('phonesAndElectronics', {
             title: 'Products - Phones & Electronics',
@@ -35,7 +35,7 @@ router.get('/phonesAndElectronics', (req, res) => {
 });
 
 router.get('/cosmetics', (req, res) => {
-    Product.find({category: 'Cosmetics'})
+    Product.find({ category: 'Cosmetics', hasPaid: true })
     .then((product) => {
         res.render('cosmetics', {
             title: 'Products - Cosmetics',
@@ -50,7 +50,7 @@ router.get('/cosmetics', (req, res) => {
 });
 
 router.get('/books', (req, res) => {
-    Product.find({category: 'Books'})
+    Product.find({ category: 'Books', hasPaid: true })
     .then((product) => {
         res.render('books', {
             title: 'Products - Books',
@@ -65,7 +65,7 @@ router.get('/books', (req, res) => {
 });
 
 router.get('/fashion', (req, res) => {
-    Product.find({category: 'Fashion'})
+    Product.find({ category: 'Fashion', hasPaid: true })
     .then((product) => {
         res.render('fashion', {
             title: 'Products - Fashion',
@@ -80,7 +80,7 @@ router.get('/fashion', (req, res) => {
 });
 
 router.get('/homeAndFurniture', (req, res) => {
-    Product.find({category: 'Home & Furniture'})
+    Product.find({ category: 'Home & Furniture', hasPaid: true })
     .then((product) => {
         res.render('homeAndFurniture', {
             title: 'Products - Home & Furniture',
@@ -95,7 +95,7 @@ router.get('/homeAndFurniture', (req, res) => {
 });
 
 router.get('/vehicles', (req, res) => {
-    Product.find({category: 'Vehicles'})
+    Product.find({ category: 'Vehicles', hasPaid: true })
     .then((product) => {
         res.render('vehicles', {
             title: 'Products - Vehicles',
@@ -110,7 +110,7 @@ router.get('/vehicles', (req, res) => {
 });
 
 router.get('/others', (req, res) => {
-    Product.find({category: 'Others'})
+    Product.find({ category: 'Others', hasPaid: true })
     .then((product) => {
         res.render('otherProducts', {
             title: 'Products - Others',

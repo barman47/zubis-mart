@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/accommodation', (req, res) => {
-    Service.find({category: 'Accommodation'})
+    Service.find({ category: 'Accommodation', hasPaid: true})
     .then((services) => {
         res.render('accommodation', {
             title: 'Services - Accommodation',
@@ -18,7 +18,7 @@ router.get('/accommodation', (req, res) => {
 });
 
 router.get('/catering', (req, res) => {
-    Service.find({category: 'Catering'})
+    Service.find({ category: 'Catering', hasPaid: true })
     .then((services) => {
         res.render('catering', {
             title: 'Services - Catering',
@@ -33,7 +33,7 @@ router.get('/catering', (req, res) => {
 });
 
 router.get('/furniture', (req, res) => {
-    Service.find({category: 'Furniture'})
+    Service.find({ category: 'Furniture', hasPaid: true })
     .then((services) => {
         res.render('furniture', {
             title: 'Services - Furniture',
@@ -48,7 +48,7 @@ router.get('/furniture', (req, res) => {
 });
 
 router.get('/hairStyling', (req, res) => {
-    Service.find({category: 'Hair Styling'})
+    Service.find({ category: 'Hair Styling', hasPaid: true })
     .then((services) => {
         res.render('hairStyling', {
             title: 'Services - Hair Styling',
@@ -63,7 +63,7 @@ router.get('/hairStyling', (req, res) => {
 });
 
 router.get('/homeAndDecor', (req, res) => {
-    Service.find({category: 'Home & Interior Decor'})
+    Service.find({ category: 'Home & Interior Decor', hasPaid: true })
     .then((services) => {
         res.render('homeAndDecor', {
             title: 'Services - Home and Interior Decoration',
@@ -78,7 +78,7 @@ router.get('/homeAndDecor', (req, res) => {
 });
 
 router.get('/laundry', (req, res) => {
-    Service.find({category: 'Laundry'})
+    Service.find({ category: 'Laundry', hasPaid: true })
     .then((services) => {
         res.render('laundry', {
             title: 'Services - Laundry',
@@ -93,7 +93,7 @@ router.get('/laundry', (req, res) => {
 });
 
 router.get('/makeUp', (req, res) => {
-    Service.find({category: 'Make up'})
+    Service.find({ category: 'Make up', hasPaid: true })
     .then((services) => {
         res.render('makeUp', {
             title: 'Services - Make Up',
@@ -108,7 +108,7 @@ router.get('/makeUp', (req, res) => {
 });
 
 router.get('/photography', (req, res) => {
-    Service.find({category: 'Photography'})
+    Service.find({ category: 'Photography', hasPaid: true })
     .then((services) => {
         res.render('photography', {
             title: 'Services - Photography',
@@ -123,7 +123,7 @@ router.get('/photography', (req, res) => {
 });
 
 router.get('/ushering', (req, res) => {
-    Service.find({category: 'Ushering'})
+    Service.find({ category: 'Ushering', hasPaid: true })
     .then((services) => {
         res.render('ushering', {
             title: 'Services - Ushering',
@@ -138,7 +138,7 @@ router.get('/ushering', (req, res) => {
 });
 
 router.get('/gardening', (req, res) => {
-    Service.find({category: 'Gardening'})
+    Service.find({ category: 'Gardening', hasPaid: true })
     .then((services) => {
         res.render('gardening', {
             title: 'Services - Gardening',
@@ -153,7 +153,7 @@ router.get('/gardening', (req, res) => {
 });
 
 router.get('/mc', (req, res) => {
-    Service.find({category: 'MC & DJ'})
+    Service.find({ category: 'MC & DJ', hasPaid: true })
     .then((services) => {
         res.render('mc', {
             title: 'Services - MC',
@@ -168,7 +168,7 @@ router.get('/mc', (req, res) => {
 });
 
 router.get('/phoneAndLaptopRepairs', (req, res) => {
-    Service.find({category: 'Phone & Laptop Repairs'})
+    Service.find({ category: 'Phone & Laptop Repairs', hasPaid: true })
     .then((services) => {
         res.render('phoneAndLaptopRepairs', {
             title: 'Services - Phone & Laptop Repairs',
@@ -183,7 +183,7 @@ router.get('/phoneAndLaptopRepairs', (req, res) => {
 });
 
 router.get('/others', (req, res) => {
-    Service.find({category: 'Others'})
+    Service.find({ category: 'Others', hasPaid: true })
     .then((services) => {
         res.render('otherServices', {
             title: 'Services - Other Services',

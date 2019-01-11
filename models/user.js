@@ -36,7 +36,7 @@ const UserSchema = mongoose.Schema({
         type: Date
     },
 
-    enabled: {
+    hasPaid: {
         type: Boolean,
         default: false
     },

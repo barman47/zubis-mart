@@ -16,7 +16,6 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         transactionPassword: req.body.transactionPassword
     });
-
     Admin.findOne({ username: admin.username }, (err, returnedAdmin) => {
         if (err) {
             return res.status(500).send(err);
@@ -120,7 +119,7 @@ router.get('/dashboard', ensureAdminAuthenticated, (req, res) => {
         });
 });
 
-router.delete('/removeUserAccount/:id', (req, res) => {
+router.delete('/removeUserAccount/:id', ensureAdminAuthenticated, (req, res) => {
     const transactionPasssword = req.body.password;
     User.findOne({_id: req.params.id}, (err, returnedUser) => {
         if (err) {
@@ -170,7 +169,7 @@ router.delete('/removeUserAccount/:id', (req, res) => {
     });
 });
 
-router.put('/enableUser/:id', (req, res) => {
+router.put('/enableUser/:id', ensureAdminAuthenticated, (req, res) => {
     Admin.findOne({ username: 'onwukazubis@gmail.com' }, (err, returnedAdmin) => {
         if (err) {
             return console.log(err);
@@ -186,17 +185,33 @@ router.put('/enableUser/:id', (req, res) => {
                     } else {
                         let paidAt = moment();
                         User.findOneAndUpdate({ _id: req.params.id }, { $set: {
-                            enabled: true,
+                            hasPaid: true,
                             lastPaid: paidAt
                         }}, { new: true }, (err, updatedUser) => {
                             if (err) {
                                 return console.log(err);
                             } else {
-                                res.status(200).json({ 
-                                    message: 'User Enabled Successfully',
-                                    updatedUser,
-                                    paidAt: paidAt.fromNow()
-                                }).end();
+                                Product.updateMany({ userEmail: updatedUser.email }, { $set: {
+                                    hasPaid: true
+                                }}, { new: true }, (err, updatedProduct) => {
+                                    if (err) {
+                                        return console.log(err);
+                                    } else {
+                                        Service.updateMany({ userEmail: updatedUser.email }, { $set: {
+                                            hasPaid: true
+                                        }}, { new: true }, (err, updatedService) => {
+                                            if (err) {
+                                                return console.log(err);
+                                            } else {
+                                                res.status(200).json({ 
+                                                    message: 'User Enabled Successfully',
+                                                    updatedUser,
+                                                    paidAt: paidAt.fromNow()
+                                                }).end();
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         });
                     }
@@ -206,7 +221,7 @@ router.put('/enableUser/:id', (req, res) => {
     });
 });
 
-router.put('/disableUser/:id', (req, res) => {
+router.put('/disableUser/:id', ensureAdminAuthenticated, (req, res) => {
     Admin.findOne({ username: 'onwukazubis@gmail.com' }, (err, returnedAdmin) => {
         if (err) {
             return console.log(err);
@@ -221,15 +236,31 @@ router.put('/disableUser/:id', (req, res) => {
                         }).end()
                     } else {
                         User.findOneAndUpdate({ _id: req.params.id }, { $set: {
-                            enabled: false
+                            hasPaid: false
                         }}, { new: true }, (err, updatedUser) => {
                             if (err) {
                                 return console.log(err);
                             } else {
-                                res.status(200).json({ 
-                                    message: 'User Disabled Successfully',
-                                    updatedUser 
-                                }).end();
+                                Product.updateMany({ userEmail: updatedUser.email }, {$set: {
+                                    hasPaid: false
+                                }}, { new: true }, (err, updatedProduct) => {
+                                    if (err) {
+                                        return console.log(err);
+                                    } else {
+                                        Service.updateMany({ userEmail: updatedUser.email }, {$set: {
+                                            hasPaid: false
+                                        }}, { new: true }, (err, updatedService) => {
+                                            if (err) {
+                                                return console.log(err);
+                                            } else {
+                                                res.status(200).json({ 
+                                                    message: 'User Disabled Successfully',
+                                                    updatedUser 
+                                                }).end();
+                                            }
+                                        });     
+                                    }
+                                });
                             }
                         });
                     }

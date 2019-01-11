@@ -223,25 +223,36 @@ router.get('/:id/account', (req, res) => {
 });
 
 router.post('/addService', (req, res) => {
-    const service = new Service({
-        category: req.body.category,
-        userName: req.body.userName,
-        userEmail: req.body.userEmail,
-        phone: req.body.phone,
-        description: req.body.description
-    });
-
-    service.save((err, savedService) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            res.status(200).json({
-                message: 'Service added Successfully',
-                category: savedService.category,
-                description: savedService.description
+    User.findOne({ email: req.body.userEmail })
+        .then((returnedUser) => {
+            const service = new Service({
+                category: req.body.category,
+                userName: req.body.userName,
+                userEmail: req.body.userEmail,
+                phone: req.body.phone,
+                description: req.body.description,
+                hasPaid: false
             });
-        }
-    });
+            returnedUser.hasPaid === true ? service.hasPaid = true : service.hasPaid = false;
+            service.save()
+                .then((savedService) => {
+                    res.status(200).json({
+                        message: 'Service added Successfully',
+                        category: savedService.category,
+                        description: savedService.description
+                    });        
+                })
+                .catch((err) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                });
+        })
+        .catch((err) => {
+            if (err) {
+                return console.log(err);
+            }
+        });
 });
 
 router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
@@ -258,8 +269,10 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
                 phone: returnedUser.phone,
                 description: req.body.itemDescription,
                 price: req.body.itemPrice,
-                originalname: file.originalname
+                originalname: file.originalname,
+                hasPaid: false
             });
+            returnedUser.hasPaid === true ? product.hasPaid = true : product.hasPaid = false;
             product.image.data = fs.readFileSync(file.path);
             product.save((err, savedProduct) => {
                 if (err) {
@@ -278,10 +291,8 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
 
 router.delete('/removeUser/:id', (req, res) => {
     const password = req.body.removeAccountPassword;
-    User.findOne({_id: req.params.id}, (err, returnedUser) => {
-        if (err) {
-            return console.log(err);
-        } else {
+    User.findOne({ _id: req.params.id })
+        .then((returnedUser) => {
             bcrypt.compare(password, returnedUser.password, (err, isMatch) => {
                 if (err) {
                     return console.log(err);
@@ -289,35 +300,38 @@ router.delete('/removeUser/:id', (req, res) => {
                     if (!isMatch) {
                         res.status(401).json({ message: 'Incorrect Password!'});
                     } else {
-                        Product.deleteMany({
-                            userEmail: returnedUser.email}, (err, deletedProduct) => {
-                            if (err) {
-                                return console.log(err);
-                            } else {
-                                Service.deleteMany({userEmail: returnedUser.email}, (err, removedService) => {
-                                    if (err) {
-                                        return console.log(err);
-                                    } else {
-                                        if (err) {
-                                            return console.log(err);
-                                        } else {
-                                            User.deleteOne({_id: req.params.id}, (err, removedUser) => {
+                        Product.deleteMany({ userEmail: returnedUser.email })
+                            .then((deletedProduct) => {
+                                Service.deleteMany({userEmail: returnedUser.email})
+                                    .then((removedService) => {
+                                        User.deleteOne({_id: req.params.id})
+                                            .then((removedUser) => {
+                                                return res.status(200).json({ message: 'Account removed successfully' }).end();
+                                            })
+                                            .catch((err) => {
                                                 if (err) {
                                                     return console.log(err);
-                                                } else {
-                                                    res.status(200).json({ message: 'Account removed successfully' });
                                                 }
                                             });
+                                    })
+                                    .catch((err) => {
+                                        if (err) {
+                                            return console.log(err);
                                         }
-                                    }
-                                });
-                            }
-                        });
+                                    });
+                            })
+                            .catch((err) => {
+                                if (err) {
+                                    return console.log(err);
+                                }
+                            });
                     }
                 }
             });
-        }
-    });
+        })
+        .catch((err) => {
+            return console.log(err);
+        });
 });
 
 router.put('/editUser/:id', (req, res) => {

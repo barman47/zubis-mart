@@ -24,6 +24,10 @@ const ServiceSchema = mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+
+    hasPaid: {
+        type: Boolean
     }
 });
 
