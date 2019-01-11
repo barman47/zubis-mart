@@ -102,7 +102,7 @@ app.use('/services', services);
 app.use('/users', users);
 
 app.get('/', (req, res) => {
-    Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
+    Product.find({ hasPaid: true }, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
             return console.log(err);
         }
