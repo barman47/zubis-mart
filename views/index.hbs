@@ -1,7 +1,7 @@
 {{> header}}
 <main>
     <section id="main-section">
-            <div class="slider">
+        <div class="slider">
             <ul class="slides">
                 <li>
                     <img class="slides" src="/img/slide1.jpg" alt="Slide 1">
@@ -37,8 +37,40 @@
                 </li>				
             </ul>
         </div>
+        <div id="advert" class="container row">
+            <div class="col s12 l4 m6 advert-header">
+                <h5>Electronics</h5>
+                <a href="/products/phonesAndElectronics">View All</a>
+                <div id="advert-item-1" class="advert-item"></div>
+            </div>
+            <div class="col s12 l4 m6 advert-header">
+                <h5>Books</h5>
+                <a href="/products/books">View All</a>
+                <div id="advert-item-2" class="advert-item"></div>
+            </div>
+            <div class="col s12 l4 m6 advert-header">
+                <h5>Clothing</h5>
+                <a href="/products/fashion">View All</a>
+                <div id="advert-item-3" class="advert-item"></div>
+            </div>
+            {{!-- <div class="col s12 l4 m6 advert-item">
+                <h5>Electronics</h5>
+                <a href="/products/phonesAndElectronics">View All</a><br>
+                <span class="mdi mdi-tablet-cellphone"></span>
+            </div>
+            <div class="col s12 l4 m6 advert-item">
+                <h5>Books</h5>
+                <a href="/products/books">View All</a><br>
+                <span class="mdi mdi-book-open-page-variant"></span>
+            </div>
+            <div class="col s12 l4 m6 advert-item">
+                <h5>Fashion</h5>
+                <a href="/products/fashion">View All</a><br>
+                <span class="mdi mdi-watch"></span>
+            </div> --}}
+        </div>
         <div>
-            <h5 class="sub-header">Recent Products</h5>
+            <h5 class="sub-header">Featured Products</h5>
             {{#if returnedProducts}}
                 <div class="row">
                     {{#each returnedProducts}}
@@ -64,16 +96,25 @@
                 <h3 id="no-items">There are no Items for Sale.</h3>
             {{/if}}
         </div>
-        <div class="parallax-container valign-wrapper">
+        <div id="parallax1">
+            <div class="parallax-overlay">
+                <div class="parallax-text">
+                    <h5>OUR PHILOSOPHY</h5>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi fuga harum at aspernatur amet, veritatis sed odit recusandae rerum cumque?</p>
+                </div>
+            </div>
+        </div>
+        {{!-- <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
                 <div class="container">
                     <div class="row center">
-                        <h5 class="header col s12 light parallax-header">Your favourite collection of shoes in several different colours and sizes.</h5>
+                        <h5 class="header col s12 light parallax-header">Our Philosopyh</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda odit nulla itaque odio voluptas, dolor libero nemo? Quae, temporibus ea.</p>
                     </div>
                 </div>
             </div>
-            <div class="parallax"><img class="responsive-img" src="/img/slide5.jpg" alt="Unsplashed background img 2"></div>
-        </div>
+            <div id="parallax1" class="parallax"><img class="responsive-img" src="/img/slide5.jpg" alt="Unsplashed background img 2"></div>
+        </div> --}}
         <div class="scrollspy" id="about">
             <h5 class="sub-header">About Zubis Mart</h5>
             <p>

@@ -308,6 +308,10 @@ form .progress {
     }
 } */
 @media (max-width: 768px) {
+    .advert-header {
+        border: 2px solid #e1e1e1 !important;
+    }
+    
     .card-item {
         flex-basis: 100% !important;
     }
@@ -340,8 +344,3 @@ form .progress {
         margin-bottom: 20px;
     }
 }
-
-/* font-family: 'Roboto', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Dosis', sans-serif;
-font-family: 'Rajdhani', sans-serif; */
