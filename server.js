@@ -135,7 +135,7 @@ app.get('/sell', (req, res) => {
 
 // For development
 app.listen(PORT, () => {
-    console.log(`Server is up on port ${PORT}...`);    
+    console.log(`Server is up on port ${PORT}...`);   
 });
 
 // console.log(`Server is up on port ${PORT}...`);
