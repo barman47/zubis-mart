@@ -266,7 +266,56 @@ form .progress {
     color: #fa9609;
 }
 
+.page-footer .col h5 {
+    font-size: 1.5rem;
+}
+
+.footer-link-list li {
+    color: #a2a2a2;
+    font-size: 1rem;
+    font-weight: lighter;
+    list-style-type: disc !important;
+    list-style-position: inside !important;
+    text-align: left;
+}
+
+.footer-link-list li a {
+    color: #a2a2a2;
+}
+
+.footer-link-list li a:hover {
+    text-decoration: underline;
+}
+.footer-link-list li a:visited {
+    color: #a2a2a2;
+}
+
 .page-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #3d383e;
+}
+
+#footerLink li{
+    display: inline-block;
+}
+
+.footerLinks {
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.footerLinks a {
+    color: #a7b018;
+    text-align: center;
+}
+
+.footerLinks a:hover {
+    color: #fa9609;
+}
+
+/* .page-footer {
     background-color: transparent;
     color: #333 !important;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -295,7 +344,7 @@ form .progress {
     border-top: 2px solid #e5e5e5;
     color: #333 !important;
     text-align: center;
-}
+} */
 
 /* @media (min-width: 768px) {
     #loginModal {
@@ -342,5 +391,10 @@ form .progress {
 
     .editModalButton {
         margin-bottom: 20px;
+    }
+
+    .page-footer, .page-footer .footer-link-list li {
+        text-align: center;
+        list-style-type: none !important;
     }
 }

@@ -23,10 +23,7 @@ const publicPath = path.join(__dirname, 'public');
 const config = require('./config/database');
 const app = express();
 
-const hostname = 'zubismart.com'
 const PORT = process.env.PORT || 6400;
-
-let gfs;
 
 mongoose.connect(config.database, {
     useNewUrlParser: true
@@ -58,11 +55,14 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser('keybaord cat'));
+app.use(cookieParser('keyboard cat'));
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 300000
+    }
 }));
 app.use(flash());
 app.use((req, res, next) => {
@@ -102,7 +102,7 @@ app.use('/services', services);
 app.use('/users', users);
 
 app.get('/', (req, res) => {
-    Product.find({ hasPaid: true }, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
+    Product.find({ hasPaid: true }, {}, {limit: 12, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
             return console.log(err);
         }
@@ -123,19 +123,6 @@ app.get('/sell', (req, res) => {
     });
 });
 
-// const options = {
-//     ca: fs.readFileSync(`./security/zubismart_com.ca-bundle`, 'utf8'),
-//     key: fs.readFileSync('./security/zubismart.key', 'utf8'),
-//     cert: fs.readFileSync('./security/zubismart_com.crt', 'utf8')
-// };
-
-// https.createServer(options, app).listen(PORT, () => {
-//     console.log(`Server is up on port ${PORT}...`);    
-// });
-
-// For development
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}...`);   
 });
-
-// console.log(`Server is up on port ${PORT}...`);
