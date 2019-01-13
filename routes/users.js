@@ -143,7 +143,6 @@ router.post('/login', (req, res, next) => {
                     if (err) {
                         return console.log(err);
                     } else {
-                        // res.redirect('/');
                         return res.status(200).json({ 
                             msg: 'User Logged In',
                             id 

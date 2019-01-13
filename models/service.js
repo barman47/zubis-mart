@@ -26,6 +26,12 @@ const ServiceSchema = mongoose.Schema({
         required: true
     },
 
+    dateCreated: {
+        type: Number,
+        default: new Date(),
+        index: true
+    },
+
     hasPaid: {
         type: Boolean
     }

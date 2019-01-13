@@ -48,7 +48,8 @@ const ProductSchema = mongoose.Schema({
 
     dateCreated: {
         type: Number,
-        default: new Date()
+        default: new Date(),
+        index: true
     },
 
     hasPaid: {
