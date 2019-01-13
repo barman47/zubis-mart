@@ -4,8 +4,16 @@ $(document).ready(function () {
     const registerContainer = document.getElementById('signup-form-container');
     const mainContainer = document.getElementById('sell-main');
 
-    const activeLink = document.querySelector('.active');
-    const sellLink = document.querySelector('.sell');
+    const sellLink = document.querySelectorAll('.sell');
+    const homeLinks = document.querySelectorAll('.active');
+
+    homeLinks.forEach(function (homeLink) {
+        homeLink.classList.remove('active');
+    });
+
+    sellLink.forEach(function (link) {
+        link.classList.add('active');
+    });
 
     // const signupForm = document.signupForm;
     // const loginForm = document.loginForm;

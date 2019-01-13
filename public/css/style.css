@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #efefef !important;
 }
@@ -221,7 +226,6 @@ form .progress {
 
 #signupForm {
     background-color: #fff;
-    /* border-radius: 10px; */
     box-shadow: 0px 0px 10px #c5c5c5;
     margin: 35px auto 0 auto;
     padding: 5px 0 0 0;
@@ -231,7 +235,6 @@ form .progress {
 #signupFormFooter {
     background-color: #efefef;
     margin: 0;
-    /* padding: 0 0.75rem; */
     padding-bottom: 30px;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -253,7 +256,6 @@ form .progress {
 }
 
 .slider .indicators .indicator-item.active {
-    /* background-color: #83bc47; */
     background-color: #fa9609;
 }
 
@@ -352,6 +354,10 @@ form .progress {
         padding: 0;
     }
 
+    #discount {
+        padding-bottom: 0;
+    }
+
     #left-section {
         height: auto !important;
     }
@@ -375,7 +381,9 @@ form .progress {
 
     .footer-copyright {
         border: none;
+        display: -webkit-flex;
         display: flex;
+        -webkit-flex-direction: column-reverse;
         flex-direction: column-reverse;
     }
 

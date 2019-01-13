@@ -6,33 +6,34 @@
                 <li>
                     <img class="slides" src="/img/slide1.jpg" alt="Slide 1">
                     <div class="caption center-align">
-                        <h3 id="slide1-header">Victory Granite and Tiles</h3>
-                        <h5 class="section light" style="color: rgba(0, 0, 0, .8); background-color: rgba(255, 255, 255, 0.5);"><em>Amplify the beauty of your Home...</em></h5>
+                        <h3 id="slide1-header">Welcome to Zubis Mart</h3>
+                        <h5 class="section light" style="color: rgba(0, 0, 0, .8); background-color: rgba(255, 255, 255, 0.5);"><em>We give you the best service you deserve</em></h5>
                     </div>
                 </li>		
                 <li>
                     <img class="slides" src="/img/slide2.jpg" alt="Slide 2">
                     <div class="caption center-align">
-                        <h3 id="slide2-header" class="section light">we define comfort...</h3>
+                        <h3 id="slide2-header" class="section light">Your convenience is our concern.</h3>
                     </div>
                 </li>		
                 <li>
                     <img class="slides" src="/img/slide3.jpg" alt="Slide 3">
                     <div class="caption">
-                        <h3 id="slide3-header">Home Furniture, <br>with Exquisite Taste</h3>
+                        <h3 id="slide3-header">Get the most <br>affordable prices you can find</h3>
                     </div>
                 </li>		
                 <li>
                     <img class="slides" src="/img/slide4.jpg" alt="Slide 4">
                     <div class="caption center-align">
-                        <h3 id="slide4-header">Make your House a Home</h3>
+                        <h3 id="slide4-header">Improve your shopping experience</h3>
                         <h5 id="slide4-subtitle"class="section light">We offer the best!</h5>
                     </div>
                 </li>		
                 <li>
                     <img class="slides" src="/img/slide5.jpg" alt="Slide 5">
                     <div class="caption center-align">
-                        <a class="btn waves-effect waves-light view-more" href="#target" data-href="/partials/bedroom-furniture.html">See More Furniture</a>
+                        {{!-- <h3>From the best designer wears, to the best artistes and home keepers, we provide </h3> --}}
+                        <a class="btn waves-effect waves-light view-more" href="/products/fashion">More Wears</a>
                     </div>
                 </li>				
             </ul>
@@ -89,24 +90,35 @@
                 </div>
             </div>
         </div>
-        {{!-- <div id="discount">
-            
-        </div> --}}
-        <div class="scrollspy" id="about">
+        <div id="discount">
+            <div class="advert-header">
+                Launch Day <span style="font-weight: bold; color: #2193b0;">Discount</span>
+            </div>
+            <div id="advert-content">
+                <div class="row">
+                    <div class="col s12 m8 l8">
+                        <h3><span>Exclusive</span> Launch Day Discount</h3>
+                        <p>about <span>45<span>%</span></span> OFF!</p>
+                        <p>for the first <span>20</span> Subscribers</p>  
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <button class="btn waves-effect waves-light modal-trigger" data-target="loginModal">Register Now!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- <div class="scrollspy" id="about">
             <h5 class="sub-header">About Zubis Mart</h5>
             <p>
                 Zubis mart is an online shopping avenue for every product and services you can think of and ever need. It covers products ranging from clothing and electronics, to make up, programming services and lots more. The best thing about Zubis mart is that it not only gives you the opportunity to buy, it also gives you the opportunity to sell and make your own money; it’s a market after all.
             </p>
-        </div>
-        <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div class="row center">
-                        <h5 class="header col s12 light parallax-header">Your favourite collection of shoes in several different colours and sizes.</h5>
-                    </div>
+        </div> --}}
+        <div id="parallax2">
+            <div class="parallax-overlay">
+                <div class="parallax-text">
+                    <h5 class="header col s12 light parallax-header">Your favourite collection of shoes in several different colours and sizes.</h5>
                 </div>
             </div>
-            <div class="parallax"><img class="responsive-img" src="/img/slide2.jpg" alt="Parallax Image 2"></div>
         </div>
     </section>
     {{> fab}}
