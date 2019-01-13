@@ -36,21 +36,6 @@ $(document).ready(function () {
 
     $('#signup-link').on('click', function (event) {
         event.preventDefault();
-        // const url = event.target.attributes[0].nodeValue;
-        // $.ajax({
-        //     method: 'GET',
-        //     url
-        // }).done(function (msg) {
-        //     console.log(msg)
-        //     // $('body').val(msg);
-        // }).fail(function (jqXHR, textStatus) {
-
-        // });
-        // $('main').load(url, function() {
-        //     $('#navbar').css('display', 'none');
-        //     $('footer').css('visibility', 'hidden');
-        //     $('.modal').modal('close');
-        // });
         $('#signup-form-container').css('display', 'block');
         $('#main-section').css('display', 'none');
         $('#sell-main').css('display', 'none');
@@ -71,12 +56,6 @@ $(document).ready(function () {
         $('#navbar').css('display', 'block');
         $('footer').css('visibility', 'visible');
         $('.modal').modal('close');
-    });
-    
-    $('.mobile-about').on('click', function () {
-        setTimeout(function () {
-            $('.sidenav').sidenav('close');
-        }, 1500)
     });
 
     var elems = document.querySelectorAll('.slider');
@@ -131,15 +110,6 @@ $(document).ready(function () {
                 data: {
                     loginEmail: loginEmail.value,
                     loginPassword: loginPassword.value
-                },
-                statusCode: {
-                    404: function (msg, status, jqXHR) {
-                        console.log(status);
-                        console.log(msg);
-                        // $('#loginEmailErrorMessage').html(jqXHR.responseJSON.msg);
-                        // $("#loginForm :input").prop("disabled", false);
-                        // loginEmail.focus();
-                    }
                 }
             }).done(function (msg, status, jqXHR) {
                 loginLoader.style.visibility = 'hidden';
@@ -147,11 +117,21 @@ $(document).ready(function () {
                 const url = `/users/${id}`;
                 window.location.href = url;
             }).fail(function (jqXHR, textStatus) {
-                loginLoader.style.visibility = 'hidden';
-                M.toast({ html: 'Login Failed!' });
-                console.log('textStatus', textStatus);
-                $("#loginForm :input").prop("disabled", false);
-                loginEmail.focus();
+                if (jqXHR.status === 404) {
+                    M.toast({
+                        html: jqXHR.responseJSON.msg,
+                        displayLength: 15000,
+                        classes: 'password-error-message'
+                    });
+                    loginLoader.style.visibility = 'hidden';
+                    $("#loginForm :input").prop("disabled", false);
+                    loginEmail.focus();
+                } else {
+                    M.toast({ html: 'Login Failed!' });
+                    loginLoader.style.visibility = 'hidden';
+                    $("#loginForm :input").prop("disabled", false);
+                    loginEmail.focus();
+                }
             });
         }
     }
