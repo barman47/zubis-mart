@@ -205,7 +205,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 M.toast({ html: 'Invalid First Name!' });
-                event.target.focus();
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
@@ -217,7 +216,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 M.toast({ html: 'Invalid First Name!' });
-                event.target.focus();
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
@@ -237,7 +235,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 M.toast({ html: 'Invalid Email Address!' });
-                event.target.focus();
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
@@ -258,7 +255,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 M.toast({ html: 'Invalid password!' });
-                event.target.focus();
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');
@@ -280,7 +276,6 @@ $(document).ready(function () {
                 event.target.classList.add('invalid');
                 event.target.classList.remove('valid');
                 M.toast({ html: 'Invalid Password!' });
-                event.target.focus();
             } else {
                 event.target.classList.add('valid');
                 event.target.classList.remove('invalid');

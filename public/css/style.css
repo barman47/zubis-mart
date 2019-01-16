@@ -428,12 +428,12 @@ form .progress {
     font-size: 30px;
 }
 
-.footerLinks a {
+.footerLinks a, .myLink a {
     color: #a2a2a2;
     text-align: center;
 }
 
-.footerLinks a:hover {
+.footerLinks a:hover, .myLink a:hover {
     color: #fff;
 }
 

@@ -38,6 +38,9 @@ conn.on('error', (err) => {
     console.log('Unable to Connect to Database. ' + err);
 });
 
+const time = new moment();
+console.log(time > time.add(1, 'month'));
+
 // app.use(favicon(publicPath + '/img/favicon.png'));
 app.use(express.static(publicPath));
 app.engine('.hbs', exphbs({
