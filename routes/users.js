@@ -155,7 +155,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/:id', (req, res) => {
-    Product.find({}, {}, {limit: 8, sort: {dateCreated: -1}}, (err, returnedProducts) => {
+    Product.find({ hasPaid: true }, {}, {limit: 12, sort: {dateCreated: -1}}, (err, returnedProducts) => {
         if (err) {
             return console.log(err);
         }

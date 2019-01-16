@@ -6,8 +6,7 @@
                 <li>
                     <img class="slides" src="/img/slide1.jpg" alt="Slide 1">
                     <div class="caption center-align">
-                        <h3 id="slide1-header">Welcome to Zubis Mart</h3>
-                        <h5 class="section light" style="color: rgba(0, 0, 0, .8); background-color: rgba(255, 255, 255, 0.5);"><em>We give you the best service you deserve</em></h5>
+                        <h3 id="slide1-header" style="margin-top: 50px;">Welcome to Zubis Mart</h3>
                     </div>
                 </li>		
                 <li>
@@ -33,7 +32,7 @@
                     <img class="slides" src="/img/slide5.jpg" alt="Slide 5">
                     <div class="caption center-align">
                         {{!-- <h3>From the best designer wears, to the best artistes and home keepers, we provide </h3> --}}
-                        <a class="btn waves-effect waves-light view-more" href="/products/fashion">More Wears</a>
+                        <a class="btn waves-effect waves-light view-more" href="/products/fashion" style="margin-top: 70px;">More Wears</a>
                     </div>
                 </li>				
             </ul>
@@ -70,16 +69,16 @@
                                     <p class="price"><span class="mdi mdi-currency-ngn">{{this.price}}</span></p>
                                 </div>
                                 <div class="card-action product">
-                                    <p>Seller: <span class="product-info">{{this.userName}}</span></p>
-                                    <p>Contact: <span class="product-info">{{this.phone}}</span></p>
-                                    <p>Description: <span class="product-info">{{this.description}}</span></p>
+                                    <p class="seller-label">Seller: <span class="product-info">{{this.userName}}</span></p>
+                                    <p class="seller-label">Contact: <span class="product-info">{{this.phone}}</span></p>
+                                    <p class="seller-label">Description: <span class="product-info">{{this.description}}</span></p>
                                 </div>
                             </div>
                         </div>
                     {{/each}}
                 </div>
             {{else}}
-                <h3 id="no-items">There are no Items for Sale.</h3>
+                <h3 class="no-items">There are no Items for Sale.</h3>
             {{/if}}
         </div>
         <div id="parallax1">
@@ -116,7 +115,7 @@
         <div id="parallax2">
             <div class="parallax-overlay">
                 <div class="parallax-text">
-                    <h5 class="header col s12 light parallax-header">Your favourite collection of shoes in several different colours and sizes.</h5>
+                    <h5 class="header col s12 light parallax-header">Your favourite collection of wears in several colours and sizes.</h5>
                 </div>
             </div>
         </div>

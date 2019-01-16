@@ -1,44 +1,21 @@
-.breadcrumb-container {
-    background-color: #fff;
-    color: #555 !important;
-    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
-    padding: 2rem;
-    width: 100% !important;
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-.breadcrumb {
-    font-size: 0.875rem;
-}
-
-.breadcrumb:before {
-    color: #ccc;
-    position: relative;
-    top: -7px;
-}
-
-a.breadcrumb.active {
-    color: #a7b018;
-}
-
-a.breadcrumb.active:hover {
-    color: #ffa500;
-}
-
-a.breadcrumb {
-    color: #888;
-    font-weight: 200;
-}
-
-a.breadcrumb.visited {
-    color: #ccc;
-}
-
-a.breadcrumb:hover {
-    color: #333;
+main {
+    flex: 1 0 auto;
 }
 
 section {
-    margin-top: 2.5rem;
+    background-color: #ffffff;
+}
+
+.sub-header {
+    margin-top: 0 !important;
+    padding-top: 10px;
+    z-index: 3 !important;
 }
 
 .service-card {
@@ -74,8 +51,6 @@ section {
     font-size: 5rem;
 }
 
-.no-service {
-    color: #ffa500;
-    font-family: 'Rajdhani', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: center;
+.no-items {
+    margin: 0 !important;
 }
