@@ -175,21 +175,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// router.get('/:id', (req, res) => {
-//     User.findOne({_id: req.params.id}, (err, user) => {
-//         if (err) {
-//             return console.log(err)
-//         } else {
-//             res.render('index', {
-//                 title: 'Zubis Mart - Home',
-//                 style: 'index.css',
-//                 script: 'index.js',
-//                 user
-//             });
-//         }
-//     });
-// });
-
 router.get('/:id/account', (req, res) => {
     User.findOne({_id: req.params.id}, (err, user) => {
         if (err) {

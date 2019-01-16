@@ -38,9 +38,6 @@ conn.on('error', (err) => {
     console.log('Unable to Connect to Database. ' + err);
 });
 
-const time = new moment();
-console.log(time > time.add(1, 'month'));
-
 // app.use(favicon(publicPath + '/img/favicon.png'));
 app.use(express.static(publicPath));
 app.engine('.hbs', exphbs({
@@ -52,7 +49,8 @@ app.engine('.hbs', exphbs({
         hasPaid: require('./utils/hasUserPaid'),
         lastPaid: require('./utils/lastPaid'),
         lastLogin: require('./utils/lastLogin'),
-        searchResults: require('./utils/searchResults')
+        searchResults: require('./utils/searchResults'),
+        formatJoinedDate: require('./utils/formatJoinedDate')
     }
 }));
 app.set('view engine', '.hbs');
@@ -104,6 +102,34 @@ app.use('/admin', admin);
 app.use('/products', products);
 app.use('/services', services);
 app.use('/users', users);
+
+// Checking user subscription
+User.find({})
+    .then((users) => {
+        const today = new moment();
+        let dateCreated;
+        let expiryDate;
+        users.forEach((user) => {
+            dateCreated = new moment(user.createdAt);
+            expiryDate = dateCreated.add(1, 'month');
+            if (today >= expiryDate) {
+                User.findOneAndUpdate({ _id: user.id}, { $set: {
+                    hasPaid: false
+                } }, { new: true })
+                    .then((updatedUser) => {
+                        console.log('user sunscription expired ', updatedUser);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        });
+        console.log('Done Checking user subscription.');
+
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}...`);   

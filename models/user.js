@@ -28,8 +28,8 @@ const UserSchema = mongoose.Schema({
     },
 
     createdAt: {
-        type: String,
-        default: moment().format('MMMM Do YYYY') 
+        type: Date,
+        default: new Date()
     },
 
     lastLogin: {
