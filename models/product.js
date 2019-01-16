@@ -57,4 +57,6 @@ const ProductSchema = mongoose.Schema({
     }
 });
 
+ProductSchema.index({'$**': 'text'});
+
 module.exports =  Product = mongoose.model('Product', ProductSchema);
