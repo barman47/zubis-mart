@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>{{this.name}}</td>
                                         <td>{{this.category}}</td>
-                                        <td><span class="mdi mdi-currency-ngn"></span>{{this.price}}</td>
+                                        <td><span class="mdi mdi-currency-ngn"></span>{{formatPrice this.price}}</td>
                                         <td><span class="mdi mdi-delete-outline delete-products-icon" data-id="{{this._id}}"></td>
                                     </tr>
                                 {{/each}}

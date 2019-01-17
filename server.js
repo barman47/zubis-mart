@@ -32,6 +32,32 @@ const conn = mongoose.connection;
 
 conn.once('open', () => {
     console.log('Database Connection Established Successfully.');
+    // Checking user subscription
+    User.find({})
+        .then((users) => {
+            const today = new moment();
+            let dateCreated;
+            let expiryDate;
+            users.forEach((user) => {
+                dateCreated = new moment(user.createdAt);
+                expiryDate = dateCreated.add(1, 'month');
+                if (today >= expiryDate) {
+                    User.findOneAndUpdate({ _id: user.id}, { $set: {
+                        hasPaid: false
+                    } }, { new: true })
+                        .then((updatedUser) => {
+                            console.log('user subscription expired ', updatedUser);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+            });
+            console.log('Done Checking user subscription.');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 conn.on('error', (err) => {
@@ -50,7 +76,8 @@ app.engine('.hbs', exphbs({
         lastPaid: require('./utils/lastPaid'),
         lastLogin: require('./utils/lastLogin'),
         searchResults: require('./utils/searchResults'),
-        formatJoinedDate: require('./utils/formatJoinedDate')
+        formatJoinedDate: require('./utils/formatJoinedDate'),
+        formatPrice: require('./utils/formatPrice')
     }
 }));
 app.set('view engine', '.hbs');
@@ -102,34 +129,6 @@ app.use('/admin', admin);
 app.use('/products', products);
 app.use('/services', services);
 app.use('/users', users);
-
-// Checking user subscription
-User.find({})
-    .then((users) => {
-        const today = new moment();
-        let dateCreated;
-        let expiryDate;
-        users.forEach((user) => {
-            dateCreated = new moment(user.createdAt);
-            expiryDate = dateCreated.add(1, 'month');
-            if (today >= expiryDate) {
-                User.findOneAndUpdate({ _id: user.id}, { $set: {
-                    hasPaid: false
-                } }, { new: true })
-                    .then((updatedUser) => {
-                        console.log('user sunscription expired ', updatedUser);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-        });
-        console.log('Done Checking user subscription.');
-
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT}...`);   
