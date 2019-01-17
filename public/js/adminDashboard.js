@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('.tooltipped').tooltip();
-    
+    const homeLinks = document.querySelectorAll('.active');
+
     const toggleSwitches = document.querySelectorAll('.toggleSwitch');
     const removeUser = document.querySelectorAll('.removeUser');
     const paidMarkers = document.querySelectorAll('.markAsPaid');
@@ -32,6 +33,10 @@ $(document).ready(function () {
             }
         });
     };
+
+    homeLinks.forEach((homeLink) => {
+        homeLink.classList.remove('active');
+    });
 
     toggleSwitches.forEach((toggleSwitch) => {
         let switchState = toggleSwitch.checked;
