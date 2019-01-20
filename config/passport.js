@@ -8,7 +8,7 @@ module.exports = function (passport) {
         usernameField: 'loginEmail',
         passwordField: 'loginPassword'
     }, (loginEmail, loginPassword, done) => {
-            User.findOne({ email: loginEmail })
+            User.findOne({ email: loginEmail.toLowerCase() })
                 .then(user => {
                     if (!user) {
                         return done(null, false, { msg: 'User not registered' })

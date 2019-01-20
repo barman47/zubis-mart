@@ -151,6 +151,8 @@ $(document).ready(function () {
         }
 
         if (isFormOkay === true) {
+            const presetEmail = signupForm.email.value;
+            const presetPassword = signupForm.password.value;
             signupLoader.style.visibility = 'visible';
             $('#signupForm :input').prop('disabled', true);
             $.ajax({
@@ -188,6 +190,10 @@ $(document).ready(function () {
                 $('#signup-form-container').css('display', 'none');
                 setTimeout(function () {
                     $('.modal').modal('open');
+                    loginEmail.value = presetEmail;
+                    loginPassword.value = presetPassword;
+                    loginEmail.focus();
+                    loginPassword.focus();
                 }, 3000);
             }).fail(function (jqXHR, textStatus) {
                 signupLoader.style.visibility = 'hidden';

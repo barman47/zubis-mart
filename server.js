@@ -46,7 +46,21 @@ conn.once('open', () => {
                         hasPaid: false
                     } }, { new: true })
                         .then((updatedUser) => {
-                            console.log('user subscription expired ', updatedUser);
+                            Product.updateMany({ userEmail: user.email }, { $set: {
+                                hasPaid: false
+                            } }, { new: true }, (err, updatedProducts) => {
+                                if (err) {
+                                    console.log(err);
+                                }
+                                Service.updateMany({ userEmail: user.email }, { $set: {
+                                    hasPaid: false
+                                } }, { new: true }, (err, updatedServices) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                    console.log('user subscription expired ', updatedUser);
+                                });
+                            });
                         })
                         .catch((err) => {
                             console.log(err);

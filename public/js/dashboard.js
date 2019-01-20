@@ -9,6 +9,13 @@ $(document).ready(function () {
     homeLink.classList.remove('active');
     accountLink.classList.add('active');
 
+    const closeMessageButtons = document.querySelectorAll('.close-message')
+    closeMessageButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.target.parentElement.remove();
+        });
+    });
+
     const serviceForm = document.addServiceForm;
     const itemForm = document.addItemForm;
     const editForm = document.editDataForm;
@@ -336,6 +343,9 @@ $(document).ready(function () {
             } else {
                 isOkay = true;
                 addItemLoader.style.visibility = 'visible';
+                setTimeout(() => {
+                    alert(window.statusbar);
+                }, 1500);
             }
         }
     });

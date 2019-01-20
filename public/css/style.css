@@ -5,6 +5,7 @@
 
 body {
     background-color: #efefef !important;
+    overflow-x: hidden !important;
 }
 
 .messages {
