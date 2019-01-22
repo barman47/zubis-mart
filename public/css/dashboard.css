@@ -55,6 +55,29 @@
     margin: 0.5rem 0 0 0.5rem !important;
 }
 
+#transferSection {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    text-align: center;
+    z-index: 5;
+}
+
+#transferSection .preloader-wrapper {
+    position: relative;
+    top: 40vh;
+}
+
+#transferSection h4 {
+    position: relative;
+    top: 45vh;
+}
+
 #right-section {
     background-color: transparent;
     padding: 20px 40px;

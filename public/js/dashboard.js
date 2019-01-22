@@ -59,6 +59,8 @@ $(document).ready(function () {
     const serviceDescriptionNumberOfCharacters = document.querySelector('#serviceDescriptionCharacters');
     const itemDescriptionNumberOfCharacters = document.querySelector('#itemDescriptionCharacters');
 
+    const activateAccount = document.getElementById('activateAccount');
+
     const emailRegExp = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
     const phoneRegExp = /^\d{11}$/;
     const passwordRegExp = /^[\w@-]{8,20}$/;
@@ -558,4 +560,34 @@ $(document).ready(function () {
 
     checkEditInputs();
     checkChangePasswordInputs();
+
+    activateAccount.addEventListener('click', function () {
+        var transferSection = document.getElementById('transferSection');
+        transferSection.style.display = 'block';
+        $.ajax({
+            method: 'PUT',
+            url: `/users/confirmPayment/${userId}`,
+            dataType: 'json',
+            data: {
+                id: userId
+            },
+        }).done (function (msg) {
+            transferSection.style.display = 'none';
+            M.toast({ 
+                html: msg.message,
+                classes: 'success-message',
+                completeCallback: function () {
+                    M.toast({ html: 'Account will be activated shortly.' });
+                }
+            });
+            document.getElementById('paymentRequestItem').remove();
+        }).fail (function (xhr) {
+            console.log('xhr ', xhr);
+            transferSection.style.display = 'none';
+            M.toast({ 
+                html: 'Request failed',
+                classes: 'error-message'
+            });
+        });
+    });
 });

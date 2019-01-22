@@ -51,7 +51,21 @@
         </div>
         <div id="numberOfUsers">
             <h5>Number of Users: <span id="users-number">{{numberOfUsers}}</span></h5>
-        </div>
+        </div><br>
+        {{#if usersPendingForActivation}}
+            <div class="container">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4>Users Peding for Activation</h4></li>
+                    {{#each usersPendingForActivation}}
+                        <li class="collection-item avatar">
+                            <span class="title"><span class="collection-title">Email:</span> {{this.email}}</span>
+                            <p><span class="collection-title">FirstName:</span> {{this.firstName}} <br><span class="collection-title">Lastname:</span> {{this.lastName}}</p>
+                            <span class="mdi mdi-account mdi-24px secondary-content"></span>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
     </div>
     <div>
         {{#if users}}

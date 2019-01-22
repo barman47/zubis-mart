@@ -106,11 +106,15 @@ router.post('/login', (req, res, next) => {
 router.get('/dashboard', ensureAdminAuthenticated, (req, res) => {
     User.find({})
         .then((users) => {
+            const usersPendingForActivation = users.filter((user) => {
+                return user.paymentRequest === true;
+            });
             res.render('adminDashboard', {
                 title: 'Zubismart - Admin',
                 style: 'adminDashboard.css',
                 script: 'adminDashboard.js',
                 users,
+                usersPendingForActivation,
                 numberOfUsers: users.length
             });
         })
@@ -186,7 +190,8 @@ router.put('/enableUser/:id', ensureAdminAuthenticated, (req, res) => {
                         let paidAt = moment();
                         User.findOneAndUpdate({ _id: req.params.id }, { $set: {
                             hasPaid: true,
-                            lastPaid: paidAt
+                            lastPaid: paidAt,
+                            paymentRequest: false
                         }}, { new: true }, (err, updatedUser) => {
                             if (err) {
                                 return console.log(err);

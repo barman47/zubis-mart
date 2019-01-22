@@ -273,6 +273,22 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
     });
 });
 
+router.put('/confirmPayment/:id', (req, res) => {
+    const id = req.body.id;
+    console.log(id);
+    User.findOneAndUpdate({_id: id}, {$set: {
+        paymentRequest: true
+    }}, {new: true}, (err, updatedUser) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.status(200).json({
+                message: 'Request Sent Successfully'
+            }).end();
+        }
+    });
+});
+
 router.delete('/removeUser/:id', (req, res) => {
     const password = req.body.removeAccountPassword;
     User.findOne({ _id: req.params.id })

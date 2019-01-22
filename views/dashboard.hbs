@@ -5,6 +5,9 @@
             <div id="profile-icon-div">
                 <i class="mdi mdi-account-circle  profile-icon"></i>
                 <h6 id="username" data-id="{{user._id}}" data-email="{{user.email}}" data-phone="{{user.phone}}">{{firstName}} {{lastName}}</h6>
+                {{#if user.lastPaid}}
+                    <span>Last Subscription: {{lastPaid user.lastPaid}}</span>
+                {{/if}}                
             </div>
             <ul class="collection with-header">
                 <li class="collection-header"><h4>Welcome back!</h4></li>
@@ -12,17 +15,24 @@
                 <li class="collection-item"><a class="modal-trigger" data-target="addServiceModal">Add Service</a></li>
                 <li class="collection-item"><a class="modal-trigger" data-target="editDataModal">Edit Data</a></li>
                 <li class="collection-item"><a class="modal-trigger" data-target="changePasswordModal">Change Password</a></li>
+                {{#if (paymentRequest user)}}
+                    <li id="paymentRequestItem" class="collection-item"><a id="activateAccount">Request Account Activation</a></li>
+                {{/if}}
                 <li class="collection-item"><a class="modal-trigger" data-target="removeAccountModal">Remove My Account</a></li>
             </ul>
             <div id="subscriptionSection" class="notification-message">
                 <span class="close-message" style="float: right;">&times;</span>
-                <p>Products and Services you add will not be visible to other people Until you the monthly pay subscription fee</p>
+                <p>
+                    Products and Services you add will not be visible to other people until account is activated.
+                    To activate your account, pay the monthly <i class="mdi mdi-currency-ngn">20,000</i> to the account below.
+                </p>
             </div>
             <div id="accountSection" class="notification-message">
                 <span class="close-message" style="float: right;">&times;</span>
                 <p><strong style="font-weight: bolder;">Account Name:</strong> Lorem, ipsum dolor.</p>
                 <p><strong style="font-weight: bolder;">Account Number:</strong> 0123456789</p>
                 <p><strong style="font-weight: bolder;">Bank:</strong> 0123456789</p>
+                <p>If payment is done via transfer, provide your name and email in the transfer memo to make confirmation faster.</p>
             </div>
         </div>
         <div id="right-section" class="col s12 l9">
@@ -106,6 +116,7 @@
     {{> addServiceModal}}
     {{> editDataModal}}
     {{> removeAccountModal}}
+    {{> activateAccountModal}}
     {{> changePasswordModal}}
     {{> fab}}
 </main>

@@ -47,16 +47,12 @@ body {
     width: 25%;
 }
 
-.error-message {
-    border-radius: 5px;
-    color: rgba(204, 75, 55, 0.8);
-    background-color: rgba(204, 75, 55, 0.5);
+.collection-title {
+    font-weight: bold;
 }
 
-.success-message {
-    border-radius: 10px;
-    color: #388e3c;
-    background-color: #a5d6a7;
+.secondary-content {
+    color: #ccc;
 }
 
 table {

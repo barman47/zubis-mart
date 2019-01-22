@@ -41,6 +41,11 @@ const UserSchema = mongoose.Schema({
         default: false
     },
 
+    paymentRequest: {
+        type: Boolean,
+        default: false
+    },
+
     lastPaid: {
         type: Date,
     },

@@ -8,6 +8,22 @@ $(document).ready(function () {
 
     const searchBox = document.getElementById('findUser');
 
+    const pendingUsers = document.querySelectorAll('.collection-item');
+
+    const removePendingUser = (user, pendingUsers) => {
+        pendingUsers.forEach((pendingUser) => {
+            console.log('pendingUser String ', pendingUser.toString());
+            console.log(user);
+            console.log(typeof user);
+            if (pendingUser.toString(contains(user.toString()))) {
+                pendingUser.remove();
+            }
+            // if (user.toString() === pendingUser.contains(user)) {
+            //     pendingUser.remove();
+            // }
+        });
+    };
+
     const showSpinner = () => {
         const spinnerContainer = document.getElementById('preloader-container');
         spinnerContainer.style.display = 'block';
@@ -41,7 +57,6 @@ $(document).ready(function () {
     toggleSwitches.forEach((toggleSwitch) => {
         let switchState = toggleSwitch.checked;
         toggleSwitch.addEventListener('click', (event) => {
-            console.log(event.target.parentElement.parentElement.parentElement.previousElementSibling);
             event.preventDefault();
             const id = event.target.dataset.id;
             let paymentSwitch = event.target;
@@ -70,6 +85,7 @@ $(document).ready(function () {
                                 if (msg.message === 'Password Incorrect') {
                                     toggleSwitch.checked = true;
                                     hideSpinner();
+                                    removePendingUser(user, pendingUsers);
                                     M.toast({
                                         html: msg.message,
                                         classes: 'error-message'
@@ -201,7 +217,7 @@ $(document).ready(function () {
         paidMarker.addEventListener('click', (event) => {
             const toggleSwitch = event.target.parentElement.previousElementSibling.firstElementChild.firstElementChild.firstElementChild;
             const user = event.target.parentElement.parentElement.children[1].innerHTML;
-            const userId = event.target.dataset.id
+            const userId = event.target.dataset.id;
 
             if (toggleSwitch.checked) {
                 M.toast({ html: 'User already active.' })
@@ -222,6 +238,7 @@ $(document).ready(function () {
                             },
                         }).done (function (msg) {
                             hideSpinner();
+                            removePendingUser(user, pendingUsers);
                             if (msg.message === 'Password Incorrect') {
                                 M.toast({
                                     html: msg.message,

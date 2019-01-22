@@ -91,7 +91,8 @@ app.engine('.hbs', exphbs({
         lastLogin: require('./utils/lastLogin'),
         searchResults: require('./utils/searchResults'),
         formatJoinedDate: require('./utils/formatJoinedDate'),
-        formatPrice: require('./utils/formatPrice')
+        formatPrice: require('./utils/formatPrice'),
+        paymentRequest: require('./utils/paymentRequest')
     }
 }));
 app.set('view engine', '.hbs');

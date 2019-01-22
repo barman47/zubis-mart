@@ -33,6 +33,16 @@ body {
     cursor: pointer;
 }
 
+.error-message {
+    color: #fff;
+    background-color: rgba(204, 75, 55);
+}
+
+.success-message {
+    color: #388e3c;
+    background-color: #a5d6a7;
+}
+
 #logo {
     max-width: 155px !important;
     max-height: 300px !important;
