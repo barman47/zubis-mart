@@ -52,4 +52,12 @@ router.post('/search', (req, res) => {
         });
 });
 
+router.get('/termsOfUse', (req, res) => {
+    res.render('termsOfUse', {
+        title: 'Zubismart - Terms of Use',
+        style: 'terms.css',
+        script: 'terms.js'
+    });
+});
+
 module.exports = router;
