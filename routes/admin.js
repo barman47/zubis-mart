@@ -191,7 +191,8 @@ router.put('/enableUser/:id', ensureAdminAuthenticated, (req, res) => {
                         User.findOneAndUpdate({ _id: req.params.id }, { $set: {
                             hasPaid: true,
                             lastPaid: paidAt,
-                            paymentRequest: false
+                            paymentRequest: false,
+                            justEnabled: true
                         }}, { new: true }, (err, updatedUser) => {
                             if (err) {
                                 return console.log(err);

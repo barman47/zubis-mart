@@ -188,16 +188,46 @@ router.get('/:id/account', (req, res) => {
                         if (err) {
                             return console.log(err);
                         } else {
-                            res.render('dashboard', {
-                                title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
-                                style: 'dashboard.css',
-                                script: 'dashboard.js',
-                                firstName: user.firstName.toLowerCase(),
-                                lastName: user.lastName.toLowerCase(),
-                                products,
-                                services,
-                                user
-                            });
+                            let total = 0;
+                                for (var i = 0; i < products.length; i++) {
+                                    total += parseInt(products[i].price);
+                                }
+                            if (user.justEnabled === true) {
+                                res.render('dashboard', {
+                                    title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
+                                    style: 'dashboard.css',
+                                    script: 'dashboard.js',
+                                    firstName: user.firstName.toLowerCase(),
+                                    lastName: user.lastName.toLowerCase(),
+                                    paymentMessageSuccess: true,
+                                    products,
+                                    services,
+                                    user,
+                                    total
+                                });
+                                User.updateOne({_id: req.params.id}, { $set: {
+                                    justEnabled: false,
+                                    stockTotal: total
+                                }}, { new: true }, (err, updatedUser) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } 
+                                });
+                                
+                            } else {
+                                res.render('dashboard', {
+                                    title: `Zubis Mart - ${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`,
+                                    style: 'dashboard.css',
+                                    script: 'dashboard.js',
+                                    firstName: user.firstName.toLowerCase(),
+                                    lastName: user.lastName.toLowerCase(),
+                                    products,
+                                    services,
+                                    user,
+                                    total
+                                });
+                            }
+                    
                         }
                     });
                 }

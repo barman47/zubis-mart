@@ -9,6 +9,11 @@ $(document).ready(function () {
     homeLink.classList.remove('active');
     accountLink.classList.add('active');
 
+    const closePaymentMessage = document.querySelector('.paymentMessageClose');
+    closePaymentMessage.addEventListener('click', function (event) {
+        event.target.parentElement.parentElement.remove();
+    });
+
     const closeMessageButtons = document.querySelectorAll('.close-message')
     closeMessageButtons.forEach(function (button) {
         button.addEventListener('click', function (event) {
@@ -561,33 +566,37 @@ $(document).ready(function () {
     checkEditInputs();
     checkChangePasswordInputs();
 
-    activateAccount.addEventListener('click', function () {
-        var transferSection = document.getElementById('transferSection');
-        transferSection.style.display = 'block';
-        $.ajax({
-            method: 'PUT',
-            url: `/users/confirmPayment/${userId}`,
-            dataType: 'json',
-            data: {
-                id: userId
-            },
-        }).done (function (msg) {
-            transferSection.style.display = 'none';
-            M.toast({ 
-                html: msg.message,
-                classes: 'success-message',
-                completeCallback: function () {
-                    M.toast({ html: 'Account will be activated shortly.' });
-                }
-            });
-            document.getElementById('paymentRequestItem').remove();
-        }).fail (function (xhr) {
-            console.log('xhr ', xhr);
-            transferSection.style.display = 'none';
-            M.toast({ 
-                html: 'Request failed',
-                classes: 'error-message'
+    try {
+        activateAccount.addEventListener('click', function () {
+            var transferSection = document.getElementById('transferSection');
+            transferSection.style.display = 'block';
+            $.ajax({
+                method: 'PUT',
+                url: `/users/confirmPayment/${userId}`,
+                dataType: 'json',
+                data: {
+                    id: userId
+                },
+            }).done (function (msg) {
+                transferSection.style.display = 'none';
+                M.toast({ 
+                    html: msg.message,
+                    classes: 'success-message',
+                    completeCallback: function () {
+                        M.toast({ html: 'Account will be activated shortly.' });
+                    }
+                });
+                document.getElementById('paymentRequestItem').remove();
+            }).fail (function (xhr) {
+                console.log('xhr ', xhr);
+                transferSection.style.display = 'none';
+                M.toast({ 
+                    html: 'Request failed',
+                    classes: 'error-message'
+                });
             });
         });
-    });
+    } catch (err) {
+
+    }
 });

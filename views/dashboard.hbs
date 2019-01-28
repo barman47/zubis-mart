@@ -6,7 +6,7 @@
                 <i class="mdi mdi-account-circle  profile-icon"></i>
                 <h6 id="username" data-id="{{user._id}}" data-email="{{user.email}}" data-phone="{{user.phone}}">{{firstName}} {{lastName}}</h6>
                 {{#if user.lastPaid}}
-                    <span>Last Subscription: {{lastPaid user.lastPaid}}</span>
+                    <span><span style="font-weight: bold;">Subscription Expires: </span>{{expires user.lastPaid}}.</span>
                 {{/if}}                
             </div>
             <ul class="collection with-header">
@@ -42,7 +42,7 @@
                     <div id="card1" class="card-panel hoverable">
                         <span class="mdi mdi-currency-sign card-icon"></span>
                         <h5>Stock Total</h5>
-                        <h6><span class="mdi mdi-currency-ngn left"></span>0</h6>
+                        <h6><span class="mdi mdi-currency-ngn left"></span>{{formatPrice total}}</h6>
                     </div>
                 </div>
 

@@ -87,7 +87,7 @@ app.engine('.hbs', exphbs({
     helpers: {
         base64ArrayBuffer: require('./utils/base64ArrayBuffer'),
         hasPaid: require('./utils/hasUserPaid'),
-        lastPaid: require('./utils/lastPaid'),
+        expires: require('./utils/expires'),
         lastLogin: require('./utils/lastLogin'),
         searchResults: require('./utils/searchResults'),
         formatJoinedDate: require('./utils/formatJoinedDate'),

@@ -46,6 +46,10 @@ const UserSchema = mongoose.Schema({
         default: false
     },
 
+    justEnabled: {
+        type: Boolean
+    },
+
     lastPaid: {
         type: Date,
     },
