@@ -55,11 +55,13 @@ const UserSchema = mongoose.Schema({
     },
 
     stockTotal: {
-        type: Number
+        type: Number,
+        default: 0
     },
 
-    totalProfit: {
-        type: Number
+    totalSales: {
+        type: Number,
+        default: 0
     }
 });
 

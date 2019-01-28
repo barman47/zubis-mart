@@ -6,7 +6,7 @@
                 <i class="mdi mdi-account-circle  profile-icon"></i>
                 <h6 id="username" data-id="{{user._id}}" data-email="{{user.email}}" data-phone="{{user.phone}}">{{firstName}} {{lastName}}</h6>
                 {{#if user.lastPaid}}
-                    <span><span style="font-weight: bold;">Subscription Expires: </span>{{expires user.lastPaid}}.</span>
+                    <span><span style="font-weight: bold;">Subscription Expires: </span>{{expiresAt user.lastPaid}}.</span>
                 {{/if}}                
             </div>
             <ul class="collection with-header">
@@ -42,7 +42,7 @@
                     <div id="card1" class="card-panel hoverable">
                         <span class="mdi mdi-currency-sign card-icon"></span>
                         <h5>Stock Total</h5>
-                        <h6><span class="mdi mdi-currency-ngn left"></span>{{formatPrice total}}</h6>
+                        <h6><span class="mdi mdi-currency-ngn left"></span><span id="stockTotal">{{formatPrice stockTotal}}</span></h6>
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                     <div id="card2" class="card-panel hoverable">
                         <span class="mdi mdi-database card-icon"></span>
                         <h5>Total Sales</h5>
-                        <h6><span class="mdi mdi-currency-ngn left"></span>0</h6>
+                        <h6><span class="mdi mdi-currency-ngn left"></span><span id="totalSales">{{formatPrice totalSales}}</span></h6>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,28 @@
                                     <tr>
                                         <td>{{this.name}}</td>
                                         <td>{{this.category}}</td>
-                                        <td><span class="mdi mdi-currency-ngn"></span>{{formatPrice this.price}}</td>
-                                        <td><span class="mdi mdi-delete-outline delete-products-icon" data-id="{{this._id}}"></td>
+                                        <td><span class="mdi mdi-currency-ngn"></span><span>{{formatPrice this.price}}</span></td>
+                                        <td><span class="mdi mdi-delete-outline delete-products-icon" data-id="{{this._id}}"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-decagram mark-product-as-sold-icon tooltiped modal-trigger" data-tooltip="Mark as sold" data-id="{{this._id}}" data-target="{{this.name}}"></span></td>
+                                        
+                                        <div id="{{this.name}}" class="modal">
+                                            <div class="modal-content">
+                                                <h4>Mark the {{this.name}} as sold?</h4>
+                                                <p>This will remove it from your account.</p>
+                                                <div class="col s12 input-field">
+                                                    <p>Sold the {{this.name}} for:</p>
+                                                    <input type="number" value="{{this.price}}" placeholder="Item Price...">
+                                                    <span class="helper-text" data-error="Please selling price.">Please provide the price this item was sold for if it is different from what is displayed above.</span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="col s12 l6 m6 input-field">
+                                                    <button class="btn button waves-effect waves-light sold-button" data-id="{{this._id}}"><span class="mdi mdi-check left prefix sold-modal-icon"></span>Sold</button>
+                                                </div>
+                                                <div class="col s12 l6 m6 input-field">
+                                                    <button class="btn button waves-effect waves-light cancel-sold-button modal-close"><span class="mdi mdi-close left prefix sold-modal-icon"></span>Cancel</button>
+                                                </div>
+                                            </div>        
+                                        </div>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -100,7 +120,7 @@
                                     <tr>
                                         <td>{{this.category}}</td>
                                         <td>{{this.description}}</td>
-                                        <td><span class="mdi mdi-delete-outline delete-services-icon" data-id="{{this._id}}"></td>
+                                        <td><span class="mdi mdi-delete-outline delete-services-icon" data-id="{{this._id}}"></span>&nbsp;&nbsp;&nbsp;<span class="mdi mdi-check-decagram mark-service-as-sold-icon tooltiped" data-tooltip="Mark as sold" data-id="{{this._id}}"></span></td>
                                     </tr>
                                 {{/each}}
                             </tbody>

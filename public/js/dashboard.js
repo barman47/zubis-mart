@@ -1,5 +1,58 @@
 $(document).ready(function () {
     $('select').formSelect();
+    $('.tooltiped').tooltip({ margin: 1 });
+
+    const markProductAsSold = document.querySelectorAll('.mark-product-as-sold-icon');
+    markProductAsSold.forEach(function(productMarker) {
+        productMarker.addEventListener('click', function (event) {
+            const price = parseInt(event.target.parentElement.previousElementSibling.childNodes[1].innerText.replace(/\D/g, ''));
+            // CONTINUE HERE
+        });
+    });
+
+    const markServiceAsSold = document.querySelectorAll('.mark-servce-as-sold-icon');
+    markServiceAsSold.forEach(function(serviceMarker) {
+        serviceMarker.addEventListener('click', function (event) {
+            const price = parseInt(event.target.parentElement.previousElementSibling.childNodes[1].innerText.replace(/\D/g, ''));
+            // CONTINUE HERE
+        });
+    });
+
+    const soldButtons = document.querySelectorAll('.sold-button');
+    soldButtons.forEach(function(soldButton) {
+        soldButton.addEventListener('click', function (event) {
+            const sellingPrice = parseInt(event.target.parentElement.parentElement.previousElementSibling.children[2].children[1].value);
+            const productId = event.target.dataset.id;
+            $.ajax({
+                method: 'DELETE',
+                url: `/products/markAsSold/${productId}`,
+                dataType: 'json',
+                data: {
+                    productId: productId,
+                    price: sellingPrice,
+                    userId: document.getElementById('username').getAttribute('data-id')
+                },
+            }).done (function (msg) {
+                M.toast({ 
+                    html: msg.message,
+                    classes: 'success-message' 
+                });
+                setTimeout(function () {
+                    window.location.reload();
+                }, 4000);
+                document.getElementById('totalSales').innerHTML = msg.updatedUser.totalSales;
+                document.getElementById('stockTotal').innerHTML = msg.updatedUser.stockTotal;
+                $('.modal').modal('close');
+                // event.target.parentElement.parentElement.parentElement.parentElement.remove();
+            }).fail (function (xhr) {
+                console.log('xhr ', xhr);
+                M.toast({
+                    html: 'Failed! Try again.',
+                    classes: 'error-message'
+                });
+            });
+        });
+    });
 
     const deleteProductIcon = document.querySelectorAll('.delete-products-icon');
     const deleteServiceIcon = document.querySelectorAll('.delete-services-icon');

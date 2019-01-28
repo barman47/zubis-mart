@@ -152,10 +152,19 @@ th {
     font-weight: 600;
 }
 
-.delete-services-icon, .delete-products-icon {
+.delete-services-icon, .delete-products-icon, .mark-product-as-sold-icon, .mark-service-as-sold-icon {
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1.5rem;
+}
+
+.delete-services-icon:hover, .delete-products-icon:hover {
+    color: #f44336;  
+}
+
+.mark-product-as-sold-icon:hover, .mark-service-as-sold-icon:hover {
+    /* color: #388e3c; */
+    color: #43a047;
 }
 
 .not-available {
@@ -165,10 +174,6 @@ th {
     font-weight: lighter;
     padding: 15px;
     text-align: center;
-}
-
-.delete-services-icon:hover, .delete-products-icon:hover {
-    color: #f44336;  
 }
 
 .collection h4 {
@@ -225,11 +230,11 @@ th {
     width: 100%;
 }
 
-#cancelButton {
+#cancelButton, .cancel-sold-button {
     background-color: #fa9609;
 }
 
-#cancelButton:hover {
+#cancelButton:hover, .cancel-sold-button:hover {
     background-color: #e28400;
     box-shadow: 2px 2px 3px #c5c5c5;
 }
@@ -243,12 +248,12 @@ th {
     box-shadow: 2px 2px 3px #c5c5c5;
 }
 
-#saveButton {
+#saveButton, .sold-button {
     background-color: #43a047; 
     box-shadow: none;
 }
 
-#saveButton:hover {
+#saveButton:hover, .sold-button:hover {
     background-color: #388e3c; 
     box-shadow: 2px 2px 3px #c5c5c5;
 }
@@ -257,4 +262,11 @@ th {
     position: relative;
     left: 10px;
     font-size: 20px;
+}
+
+.sold-modal-icon {
+    color: #fff !important;
+    position: relative;
+    top: -2px !important;
+    left: 0;
 }

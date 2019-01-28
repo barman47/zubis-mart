@@ -131,4 +131,32 @@ router.get('/others', (req, res) => {
     });
 });
 
+router.delete('/markAsSold/:id', (req, res) => {
+    User.findOne({ _id: req.body.userId })
+        .then((user) => {
+            Product.deleteOne({ _id: req.body.productId })
+                .then((deletedProduct) => {
+                    User.findOneAndUpdate({_id: req.body.userId}, {$set: {
+                        totalSales: parseInt(user.totalSales) + parseInt(req.body.price),
+                        stockTotal: user.stockTotal - req.body.price
+                    }}, {new: true}, (err, updatedUser) => {
+                        if (err) {
+                            return console.log(err);
+                        } else {
+                            res.status(200).json({
+                                message: 'Product Sold.',
+                                updatedUser
+                            }).end();
+                        }
+                    });
+                }).catch((err) => {
+                    return console.log(err);
+                });
+        }).catch((err) => {
+            if (err) {
+                return console.log(err)
+            }
+        });
+});
+
 module.exports = router

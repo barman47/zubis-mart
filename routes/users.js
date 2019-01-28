@@ -188,9 +188,9 @@ router.get('/:id/account', (req, res) => {
                         if (err) {
                             return console.log(err);
                         } else {
-                            let total = 0;
+                            let stockTotal = 0;
                                 for (var i = 0; i < products.length; i++) {
-                                    total += parseInt(products[i].price);
+                                    stockTotal += parseInt(products[i].price);
                                 }
                             if (user.justEnabled === true) {
                                 res.render('dashboard', {
@@ -203,7 +203,8 @@ router.get('/:id/account', (req, res) => {
                                     products,
                                     services,
                                     user,
-                                    total
+                                    stockTotal,
+                                    totalSales: user.totalSales
                                 });
                                 User.updateOne({_id: req.params.id}, { $set: {
                                     justEnabled: false,
@@ -224,7 +225,15 @@ router.get('/:id/account', (req, res) => {
                                     products,
                                     services,
                                     user,
-                                    total
+                                    stockTotal,
+                                    totalSales: user.totalSales
+                                });
+                                User.updateOne({_id: req.params.id}, { $set: {
+                                    stockTotal
+                                }}, { new: true }, (err, updatedUser) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } 
                                 });
                             }
                     
@@ -305,7 +314,6 @@ router.post('/:id/upload', upload.single('itemImage'), (req, res) => {
 
 router.put('/confirmPayment/:id', (req, res) => {
     const id = req.body.id;
-    console.log(id);
     User.findOneAndUpdate({_id: id}, {$set: {
         paymentRequest: true
     }}, {new: true}, (err, updatedUser) => {
@@ -439,7 +447,6 @@ router.put('/:id/changePassword', (req, res) => {
 });
 
 router.delete('/removeProduct', (req, res) => {
-    console.log(req.body);
     Product.findOneAndRemove({_id: req.body.id}, (err, removedProduct) => {
         if (err) {
             console.log(err);
@@ -452,7 +459,6 @@ router.delete('/removeProduct', (req, res) => {
 });
 
 router.delete('/removeService', (req, res) => {
-    console.log(req.body);
     Service.findOneAndRemove({_id: req.body.id}, (err, removedService) => {
         if (err) {
             console.log(err);
