@@ -9,10 +9,14 @@ $(document).ready(function () {
     homeLink.classList.remove('active');
     accountLink.classList.add('active');
 
-    const closePaymentMessage = document.querySelector('.paymentMessageClose');
-    closePaymentMessage.addEventListener('click', function (event) {
-        event.target.parentElement.parentElement.remove();
-    });
+    try {
+        const closePaymentMessage = document.querySelector('.paymentMessageClose');
+        closePaymentMessage.addEventListener('click', function (event) {
+            event.target.parentElement.parentElement.remove();
+        });
+    } catch(err) {
+
+    }
 
     const closeMessageButtons = document.querySelectorAll('.close-message')
     closeMessageButtons.forEach(function (button) {
@@ -350,9 +354,6 @@ $(document).ready(function () {
             } else {
                 isOkay = true;
                 addItemLoader.style.visibility = 'visible';
-                setTimeout(() => {
-                    alert(window.statusbar);
-                }, 1500);
             }
         }
     });
