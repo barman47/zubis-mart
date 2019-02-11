@@ -58,7 +58,7 @@ nav .nav-wrapper {
 
 #searchForm {
     display: inline-block;
-    position: relative ; 
+    position: relative ;
     left: 12rem !important;
 }
 
@@ -83,7 +83,7 @@ nav .nav-wrapper {
 
 #search:focus, #mobileSearch:focus {
     background-color: #fff;
-} 
+}
 
 #mobileSearch {
     margin-left: 1rem !important;
@@ -229,7 +229,7 @@ form .progress {
 .password-error-message {
     /* color: rgba(204, 75, 55, 0.8); */
     color: #fff;
-    background-color: rgba(204, 75, 55);
+    background-color: rgb(204, 75, 55);
 }
 
 .btn {
@@ -466,7 +466,7 @@ form .progress {
 @media (max-width: 1024px) {
     #searchForm {
         display: inline-block;
-        position: absolute !important; 
+        position: absolute !important;
         top: 100px !important;
         left: 35% !important;
         z-index: 3;
@@ -485,7 +485,7 @@ form .progress {
     .advert-header {
         border: 2px solid #e1e1e1 !important;
     }
-    
+
     .card-item {
         flex-basis: 100% !important;
     }
@@ -538,7 +538,7 @@ form .progress {
     .footer-copyright #left, .footer-copyright #right {
         width: 100%;
     }
-    
+
     .footer-copyright #right h5 {
         display: block;
     }
