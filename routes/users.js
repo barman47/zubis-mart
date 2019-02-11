@@ -208,7 +208,7 @@ router.get('/:id/account', (req, res) => {
                                 });
                                 User.updateOne({_id: req.params.id}, { $set: {
                                     justEnabled: false,
-                                    stockTotal: total
+                                    stockTotal
                                 }}, { new: true }, (err, updatedUser) => {
                                     if (err) {
                                         console.log(err);
